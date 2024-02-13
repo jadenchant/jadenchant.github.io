@@ -1,0 +1,12 @@
+---
+title: ""
+about:
+  id: intro
+  template: trestles
+---
+
+:::{#intro-heading}
+
+## Jaden Chant
+
+Student @ St. Olaf College
