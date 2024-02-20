@@ -1,12 +1,11 @@
 ---
-title: ""
-about:
-  id: intro
-  template: trestles
+title: "temp"
 ---
 
-:::{#intro-heading}
+This is a Quarto website.
 
-## Jaden Chant
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
-Student @ St. Olaf College
+```{r}
+1 + 1
+```
