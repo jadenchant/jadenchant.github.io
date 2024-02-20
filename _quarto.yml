@@ -1,19 +1,22 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "temp"
+  title: "Jaden Chant"
   navbar:
+    background: "#2e3f58"
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - projects.qmd
 
 format:
-  html:
-    theme: cosmo
-    css: styles.css
+  bookup-html:
+    theme: bookup-html+darkonly
     toc: true
+    toc-depth: 3
 
-editor: visual
+editor: source
 

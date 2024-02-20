@@ -1,11 +1,27 @@
 ---
-title: "temp"
+title: "Jaden Chant"
+format: 
+  bookup-html+darkonly:
+    embed-fonts: true
+about:
+  id: intro-heading
+  template: trestles
+  image: images/profilepic.jpg
+  image-shape: round
+  links:
+    - icon: linkedin
+      href: https://linkedin.com/in/jadenchant
+    - icon: github
+      href: https://github.com/jadenchant
 ---
 
-This is a Quarto website.
+:::{#intro-heading}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Jaden Chant
 
-```{r}
-1 + 1
-```
+Current CS and Math Student @ St. Olaf College
+
+:::
+
+
+

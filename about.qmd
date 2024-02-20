@@ -1,9 +1,8 @@
 ---
 title: "About"
+format: 
+  bookup-html+darkonly:
+    embed-fonts: true
 ---
 
 About this site
-
-```{r}
-1 + 1
-```
