@@ -6,7 +6,7 @@ format:
 about:
   id: intro-heading
   template: trestles
-  image: images/profilepic.jpg
+  image: img/jaden.jpg
   image-shape: round
   links:
     - icon: linkedin
