@@ -9,8 +9,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-      - projects.qmd
+      - pages/about.qmd
+      - pages/projects.qmd
 
 format:
   bookup-html:
