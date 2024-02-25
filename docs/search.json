@@ -39,6 +39,26 @@
     "href": "pages/about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "My name is Jaden Chant. I am a Computer Science and Math Student at St. Olaf College. I am a member of the St. Olaf swim team. I am interested in front-end development and data science."
+  },
+  {
+    "objectID": "pages/maps/wisconsin_districs.html",
+    "href": "pages/maps/wisconsin_districs.html",
+    "title": "Wisconsin Districts",
+    "section": "",
+    "text": "Wisconsin Districts",
+    "crumbs": [
+      "Wisconsin Districts"
+    ]
+  },
+  {
+    "objectID": "pages/maps/us_states.html",
+    "href": "pages/maps/us_states.html",
+    "title": "US States",
+    "section": "",
+    "text": "US States",
+    "crumbs": [
+      "US States"
+    ]
   }
 ]
