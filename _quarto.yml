@@ -11,6 +11,16 @@ website:
         text: Home
       - pages/about.qmd
       - pages/projects.qmd
+      - sidebar:maps
+
+  sidebar:
+  - id: maps
+      title: "Maps"
+      contents:
+        - file: pages/maps/us_states.qmd
+          text: "US States"
+        - file: pages/maps/wisconsin_districs.qmd
+          text: "Wisconsin Districts"
 
 format:
   bookup-html:

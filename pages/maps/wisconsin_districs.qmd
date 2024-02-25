@@ -1,0 +1,8 @@
+---
+title: "Wisconsin Districts"
+format: 
+  bookup-html+darkonly:
+    embed-fonts: true
+---
+
+# Wisconsin Districts

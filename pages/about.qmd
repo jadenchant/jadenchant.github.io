@@ -5,4 +5,5 @@ format:
     embed-fonts: true
 ---
 
-About this site
+My name is Jaden Chant. I am a Computer Science and Math Student at St. Olaf College. I am a member of the St. Olaf swim team. I am interested in front-end development and data science.
+
