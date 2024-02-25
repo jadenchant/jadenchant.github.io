@@ -3,6 +3,54 @@ title: "US States"
 format: 
   bookup-html+darkonly:
     embed-fonts: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 # US States
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(mdsr)
+library(maps)
+library(viridis)
+library(poliscidata)
+
+
+state_data <- as_tibble(poliscidata::states) |>
+  mutate(state_name = str_squish(str_to_lower(as.character(state)))) |>
+  select(-state)
+
+us_states <- map_data("state") |>
+  mutate(region = str_squish(str_to_lower(as.character(region)))) |>
+  mutate(region = gsub(" ", "", region))
+
+ 
+# state_data |>
+#   right_join(us_states, by = c("state_name" = "region")) |>
+#   ggplot(mapping = aes(x = long, y = lat,
+#                           group = group)) + 
+#   geom_polygon(aes(fill = prolife), color = "black") + 
+#   labs(fill = "Percent Pro-Life") +
+#   coord_map() +
+#   theme_void() +
+#   scale_fill_viridis(option = "C")
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+
+state_data |>
+  right_join(us_states, by = c("state_name" = "region")) |>
+  ggplot(mapping = aes(x = long, y = lat,
+                          group = group)) + 
+  geom_polygon(aes(fill = prolife), color = "black") + 
+  labs(fill = "Percent Pro-Life") +
+  coord_map() +
+  theme_void() +
+  scale_fill_viridis(option = "C")
+```
