@@ -1,22 +1,5 @@
 [
   {
-    "objectID": "pages/projects.html",
-    "href": "pages/projects.html",
-    "title": "Projects",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\nTest\n\n\n\ntest\n\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "pages/maps/wisconsin_districs.html",
-    "href": "pages/maps/wisconsin_districs.html",
-    "title": "Wisconsin Districts",
-    "section": "",
-    "text": "Wisconsin Districts",
-    "crumbs": [
-      "Wisconsin Districts"
-    ]
-  },
-  {
     "objectID": "pages/about.html",
     "href": "pages/about.html",
     "title": "About",
@@ -42,9 +25,16 @@
     "href": "pages/maps/us_states.html",
     "title": "US States",
     "section": "",
-    "text": "US States\n\nstate_data |&gt;\n  right_join(us_states, by = c(\"state_name\" = \"region\")) |&gt;\n  ggplot(mapping = aes(x = long, y = lat,\n                          group = group)) + \n  geom_polygon(aes(fill = prolife), color = \"black\") + \n  labs(fill = \"Percent Pro-Life\") +\n  coord_map() +\n  theme_void() +\n  scale_fill_viridis(option = \"C\")",
+    "text": "state_data |&gt;\n  right_join(us_states, by = c(\"state_name\" = \"region\")) |&gt;\n  ggplot(mapping = aes(x = long, y = lat,\n                          group = group)) + \n  geom_polygon(aes(fill = prolife), color = \"black\") + \n  labs(fill = \"Percent Pro-Life\") +\n  coord_map() +\n  theme_void() +\n  scale_fill_viridis(option = \"C\")",
     "crumbs": [
       "US States"
     ]
+  },
+  {
+    "objectID": "pages/projects.html",
+    "href": "pages/projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\nTest\n\n\n\ntest\n\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

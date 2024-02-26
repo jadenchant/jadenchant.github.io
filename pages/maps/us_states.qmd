@@ -16,7 +16,7 @@ library(maps)
 library(viridis)
 library(poliscidata)
 
-cancer_data <- read_csv("https://jadenchant.github.io/data/us_cancer_death.csv")
+# cancer_data <- read_csv("https://jadenchant.github.io/data/us_cancer_death.csv")
 
 
 state_data <- as_tibble(poliscidata::states) |>
