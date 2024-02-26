@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+  resources:
+    - "data/*.csv"
+    - "data/"
 
 website:
   title: "Jaden Chant"

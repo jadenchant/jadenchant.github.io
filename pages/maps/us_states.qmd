@@ -7,8 +7,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-# US States
-
 ```{r}
 #| include: false
 
@@ -17,6 +15,8 @@ library(mdsr)
 library(maps)
 library(viridis)
 library(poliscidata)
+
+cancer_data <- read_csv("https://jadenchant.github.io/data/us_cancer_death.csv")
 
 
 state_data <- as_tibble(poliscidata::states) |>
