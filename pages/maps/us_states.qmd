@@ -34,24 +34,9 @@ library(poliscidata)
 #   summarise(cancer_death = sum(avg_death))
 
 
-state_data <- as_tibble(poliscidata::states) |>
-  mutate(state_name = str_squish(str_to_lower(as.character(state)))) |>
-  select(-state)
-
 us_states <- map_data("state") |>
   mutate(region = str_squish(str_to_lower(as.character(region)))) |>
   mutate(region = gsub(" ", "", region))
-
- 
-# state_data |>
-#   right_join(us_states, by = c("state_name" = "region")) |>
-#   ggplot(mapping = aes(x = long, y = lat,
-#                           group = group)) + 
-#   geom_polygon(aes(fill = prolife), color = "black") + 
-#   labs(fill = "Percent Pro-Life") +
-#   coord_map() +
-#   theme_void() +
-#   scale_fill_viridis(option = "C")
 ```
 
 
@@ -61,51 +46,53 @@ us_states <- map_data("state") |>
 
 poverty_data <- read_csv("https://jadenchant.github.io/data/poverty_estimates.csv")
 
-
+poverty_data <- poverty_data |>
+  filter(FIPS_code %% 1000 == 0 & FIPS_code != 0) |>
+  mutate(state = str_squish(str_to_lower(as.character(area_name)))) |>
+  mutate(state = gsub(" ", "", state)) |>
+  select(state, everything(), -state_code, -area_name)
 
 ```
 
-POVALL_2021	Estimate of people of all ages in poverty 2021
-CI90LBALL_2021	90 percent confidence interval lower bound of estimate of people of all ages in poverty 2021
-CI90UBALL_2021	90 percent confidence interval upper bound of estimate of people of all ages in poverty 2021
-PCTPOVALL_2021	Estimated percent of people of all ages in poverty 2021
-CI90LBALLP_2021	90 percent confidence interval lower bound of estimate of percent of people of all ages in poverty 2021
-CI90UBALLP_2021	90 percent confidence interval upper bound of estimate of percent of people of all ages in poverty 2021
-POV017_2021	Estimate of people age 0-17 in poverty 2021
-CI90LB017_2021	90 percent confidence interval lower bound of estimate of people age 0-17 in poverty 2021
-CI90UB017_2021	90 percent confidence interval upper bound of estimate of people age 0-17 in poverty 2021
-PCTPOV017_2021	Estimated percent of people age 0-17 in poverty 2021
-CI90LB017P_2021	90 percent confidence interval lower bound of estimate of percent of people age 0-17 in poverty 2021
-CI90UB017P_2021	90 percent confidence interval upper bound of estimate of percent of people age 0-17 in poverty 2021
-POV517_2021	Estimate of related children age 5-17 in families in poverty 2021
-CI90LB517_2021	90 percent confidence interval lower bound of estimate of related children age 5-17 in families in poverty 2021
-CI90UB517_2021	90 percent confidence interval upper bound of estimate of related children age 5-17 in families in poverty 2021
-PCTPOV517_2021	Estimated percent of related children age 5-17 in families in poverty 2021
-CI90LB517P_2021	90 percent confidence interval lower bound of estimate of percent of related children age 5-17 in families in poverty 2021
-CI90UB517P_2021	90 percent confidence interval upper bound of estimate of percent of related children age 5-17 in families in poverty 2021
-MEDHHINC_2021	Estimate of median household income 2021
-CI90LBINC_2021	90 percent confidence interval lower bound of estimate of median household income 2021
-CI90UBINC_2021	90 percent confidence interval upper bound of estimate of median household income 2021
-POV04_2021	Estimate of children ages 0 to 4 in poverty 2021 (available for the U.S. and State total only)
-CI90LB04_2021	90 percent confidence interval lower bound of estimate of children ages 0 to 4 in poverty 2021 (available for the U.S. and State total only)
-CI90UB04_2021	90 percent confidence interval upper bound of estimate of children ages 0 to 4 in poverty 2021 (available for the U.S. and State total only)
-PCTPOV04_2021	Estimated percent of children ages 0 to 4 in poverty 2021 (available for the U.S. and State total only)
-CI90LB04P_2021	90 percent confidence interval lower bound of estimate of percent of children ages 0 to 4 in poverty 2021 (available for the U.S. and State total only)
-CI90UB04P_2021	90 percent confidence interval upper bound of estimate of percent of children ages 0 to 4 in poverty 2021 (available for the U.S. and State total only)
-
-
+The data is from the USDA's Economic Research Service and is from 2021. Cleaning the data yields a dataset that can be joined by the `us_states` dataset.
 
 ```{r}
 #| message: false
 #| warning: false
 
-state_data |>
-  right_join(us_states, by = c("state_name" = "region")) |>
+poverty_data |>
+  right_join(us_states, by = c("state" = "region")) |>
   ggplot(mapping = aes(x = long, y = lat,
-                          group = group)) + 
-  geom_polygon(aes(fill = prolife), color = "black") + 
-  labs(fill = "Percent Pro-Life") +
+                          group = group)) +
+  geom_polygon(aes(fill = PCTPOVALL_2021), color = "black") +
+  labs(fill = "Percent Poverty \nAll Ages") +
+  ggtitle("Percent Poverty by State") +
   coord_map() +
   theme_void() +
   scale_fill_viridis(option = "C")
+
+poverty_data |>
+  right_join(us_states, by = c("state" = "region")) |>
+  ggplot(mapping = aes(x = long, y = lat,
+                          group = group)) +
+  geom_polygon(aes(fill = PCTPOV017_2021), color = "black") +
+  labs(fill = "Percent Poverty \nAges 0-17") +
+  ggtitle("Percent Poverty Ages 0-17 by State") +
+  coord_map() +
+  theme_void() +
+  scale_fill_viridis(option = "C")
+
+poverty_data |>
+  right_join(us_states, by = c("state" = "region")) |>
+  ggplot(mapping = aes(x = long, y = lat,
+                          group = group)) +
+  geom_polygon(aes(fill = MEDHHINC_2021), color = "black") +
+  labs(fill = "Estimated Median \nHousehold Income") +
+  ggtitle("Estimated Median Household Income by State") +
+  coord_map() +
+  theme_void() +
+  scale_fill_viridis(option = "D", direction = -1)
 ```
+
+These maps show the percent poverty based on age by state level and show the estimated household income by state level. We can see the relationship between poverty and median household income. We also can see the relationship between region and poverty.
+
