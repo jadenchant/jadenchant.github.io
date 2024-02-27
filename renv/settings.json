@@ -1,6 +1,8 @@
 {
   "bioconductor.version": null,
-  "external.libraries": ["tidyverse"],
+  "external.libraries": [
+    "tidyverse"
+  ],
   "ignored.packages": [],
   "package.dependency.fields": [
     "Imports",
