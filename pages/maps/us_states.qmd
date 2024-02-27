@@ -73,7 +73,7 @@ poverty_data |>
   theme(
         axis.ticks = element_blank(), 
         axis.text = element_blank(), 
-        plot.margin = unit(c(1, 0, 1, 0), "cm"))
+        plot.margin = unit(c(3, 0, 3, 0), "cm"))
 
 poverty_data |>
   right_join(us_states, by = c("state" = "region")) |>
@@ -90,7 +90,7 @@ poverty_data |>
   theme(
         axis.ticks = element_blank(), 
         axis.text = element_blank(), 
-        plot.margin = unit(c(1, 0, 1, 0), "cm"))
+        plot.margin = unit(c(3, 0, 3, 0), "cm"))
 
 poverty_data |>
   right_join(us_states, by = c("state" = "region")) |>
@@ -107,7 +107,7 @@ poverty_data |>
   theme(
         axis.ticks = element_blank(), 
         axis.text = element_blank(), 
-        plot.margin = unit(c(1, 0, 1, 0), "cm"))
+        plot.margin = unit(c(3, 0, 3, 0), "cm"))
 ```
 
 These maps show the percent poverty based on age by state level and show the estimated household income by state level. We can see the relationship between poverty and median household income. We also can see the relationship between region and poverty.
