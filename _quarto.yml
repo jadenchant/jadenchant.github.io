@@ -30,8 +30,6 @@ website:
 format:
   bookup-html:
     theme: bookup-html+darkonly
-    toc: true
-    toc-depth: 3
 
 editor: source
 

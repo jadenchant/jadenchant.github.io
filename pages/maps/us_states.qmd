@@ -15,6 +15,7 @@ library(mdsr)
 library(maps)
 library(viridis)
 library(poliscidata)
+library(ggdark)
 
 # cancer_data <- read_csv("https://jadenchant.github.io/data/us_cancer_death.csv")
 # 
@@ -64,34 +65,37 @@ poverty_data |>
   right_join(us_states, by = c("state" = "region")) |>
   ggplot(mapping = aes(x = long, y = lat,
                           group = group)) +
-  geom_polygon(aes(fill = PCTPOVALL_2021), color = "black") +
+  geom_polygon(aes(fill = PCTPOVALL_2021), color = "#fefefe") +
   labs(fill = "Percent Poverty \nAll Ages") +
   ggtitle("Percent Poverty by State") +
   coord_map() +
   theme_void() +
-  scale_fill_viridis(option = "C")
+  scale_fill_viridis(option = "C")+
+  dark_theme_gray()
 
 poverty_data |>
   right_join(us_states, by = c("state" = "region")) |>
   ggplot(mapping = aes(x = long, y = lat,
                           group = group)) +
-  geom_polygon(aes(fill = PCTPOV017_2021), color = "black") +
+  geom_polygon(aes(fill = PCTPOV017_2021), color = "#fefefe") +
   labs(fill = "Percent Poverty \nAges 0-17") +
   ggtitle("Percent Poverty Ages 0-17 by State") +
   coord_map() +
   theme_void() +
-  scale_fill_viridis(option = "C")
+  scale_fill_viridis(option = "C")+
+  dark_theme_gray()
 
 poverty_data |>
   right_join(us_states, by = c("state" = "region")) |>
   ggplot(mapping = aes(x = long, y = lat,
                           group = group)) +
-  geom_polygon(aes(fill = MEDHHINC_2021), color = "black") +
+  geom_polygon(aes(fill = MEDHHINC_2021), color = "#fefefe") +
   labs(fill = "Estimated Median \nHousehold Income") +
   ggtitle("Estimated Median Household Income by State") +
   coord_map() +
   theme_void() +
-  scale_fill_viridis(option = "D", direction = -1)
+  scale_fill_viridis(option = "D", direction = -1)+
+  dark_theme_gray()
 ```
 
 These maps show the percent poverty based on age by state level and show the estimated household income by state level. We can see the relationship between poverty and median household income. We also can see the relationship between region and poverty.
