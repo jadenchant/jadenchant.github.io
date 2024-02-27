@@ -17,6 +17,21 @@ library(viridis)
 library(poliscidata)
 
 # cancer_data <- read_csv("https://jadenchant.github.io/data/us_cancer_death.csv")
+# 
+# cancer_data <- cancer_data |>
+#   mutate(state = gsub('.*,\\s*', '', County)) |>
+#   mutate(state = str_squish(str_to_lower(as.character(state)))) |>
+#   mutate(state = gsub(" ", "", state)) |>
+#   mutate(state = gsub("districtofcolumbia[(]state[)]", "districtofcolumbia", state)) |>
+#   mutate(state = gsub("<sup>3</sup>", "", state)) |>
+#   mutate(avg_death = `Average Deaths per Year`) |>
+#   filter(state != "unitedstates") |>
+#   filter(!is.na(avg_death)) |>
+#   mutate(avg_death = as.numeric(avg_death))
+# 
+# cancer <- cancer_data |>
+#   group_by(state) |>
+#   summarise(cancer_death = sum(avg_death))
 
 
 state_data <- as_tibble(poliscidata::states) |>
@@ -38,6 +53,19 @@ us_states <- map_data("state") |>
 #   theme_void() +
 #   scale_fill_viridis(option = "C")
 ```
+
+
+```{r}
+#| message: false
+#| warning: false
+
+# poverty_data <- read_csv("https://jadenchant.github.io/data/poverty_estimates.csv")
+
+
+
+```
+
+
 
 
 ```{r}
