@@ -10,7 +10,6 @@ project:
 website:
   title: "Jaden Chant"
   navbar:
-    background: "#2e3f58"
     left:
       - href: index.qmd
         text: Home
@@ -28,8 +27,8 @@ website:
           text: "Wisconsin Districts"
 
 format:
-  bookup-html:
-    theme: bookup-html+darkonly
+  html:
+    theme: cyborg
 
 editor: source
 

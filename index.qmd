@@ -1,8 +1,5 @@
 ---
 title: "Jaden Chant"
-format: 
-  bookup-html+darkonly:
-    embed-fonts: true
 about:
   id: intro-heading
   template: trestles
