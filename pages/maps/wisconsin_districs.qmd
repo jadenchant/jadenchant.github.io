@@ -15,6 +15,7 @@ library(maps)
 library(ggspatial)
 library(ggdark)
 library(prettymapr)
+library(raster)
 library(fec16)
 ```
 
