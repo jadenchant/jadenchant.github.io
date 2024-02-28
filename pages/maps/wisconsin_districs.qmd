@@ -4,3 +4,100 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r}
+#| include: false
+
+library(tidyverse)
+library(mdsr)
+library(sf)
+library(mapproj)
+library(maps)
+library(ggspatial)
+library(ggdark)
+library(fec16)
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+
+
+district_elect <- fec16::results_house |>
+  select(-runoff_votes, -runoff_percent, -footnotes) |>
+  mutate(district = parse_number(district_id)) |>
+  group_by(state, district) |>
+  summarize(
+    N = n(), 
+    total_votes = sum(general_votes, na.rm = TRUE),
+    d_votes = sum(ifelse(party == "DEM", general_votes, 0), na.rm = TRUE),
+    r_votes = sum(ifelse(party == "REP", general_votes, 0), na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    other_votes = total_votes - d_votes - r_votes,
+    r_prop = r_votes / total_votes,  
+    winner = ifelse(r_votes > d_votes, "Republican", "Democrat")
+  )
+wi_results <- district_elect |>
+  filter(state == "WI")
+wi_results |>                  
+  select(-state)
+
+wi_d3 <- fec16::results_house |>
+  select(-runoff_votes, -runoff_percent, -footnotes) |>
+  filter(state == "WI") |>
+  filter(district_id == "03")
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+src <- "http://cdmaps.polisci.ucla.edu/shp/districts113.zip"
+lcl_zip <- fs::path(tempdir(), "districts113.zip")
+download.file(src, destfile = lcl_zip)
+lcl_districts <- fs::path(tempdir(), "districts113")
+unzip(lcl_zip, exdir = lcl_districts)
+dsn_districts <- fs::path(lcl_districts, "districtShapes")
+
+districts <- st_read(dsn_districts, layer = "districts113") |>
+  mutate(DISTRICT = parse_number(as.character(DISTRICT)))
+head(districts, width = Inf)
+class(districts)
+
+wi_shp <- districts |>
+  filter(STATENAME == "Wisconsin")
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+
+wi_merged <- wi_shp |>
+  st_transform(4326) |>
+  inner_join(wi_results, by = c("DISTRICT" = "district"))
+
+wi <- ggplot(data = wi_merged, aes(fill = winner)) +
+  annotation_map_tile(zoom = 6, type = "osm", progress = "none") + 
+  geom_sf(alpha = 0.5) +
+  scale_fill_manual("Winner", values = c("blue", "red")) + 
+  geom_sf_label(aes(label = DISTRICT)) + 
+  ggtitle("Wisconsin House Winners by District") +
+  labs(x = element_blank(), y = element_blank())+
+  dark_theme_gray(base_size = 12) + 
+  theme(
+        axis.ticks = element_blank(), 
+        axis.text = element_blank(), 
+        plot.margin = unit(c(0.2, 0.5, 0, 1), "cm"))
+
+wi
+```
+
+
+
+
+
+
+
