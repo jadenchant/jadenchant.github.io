@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    container: ghcr.io/quarto-dev/base:latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
