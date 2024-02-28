@@ -7,7 +7,6 @@ editor_options:
 ```{r}
 #| include: false
 
-library(tidyverse)
 library(mdsr)
 library(sf)
 library(mapproj)
@@ -17,6 +16,11 @@ library(ggdark)
 library(prettymapr)
 library(raster)
 library(fec16)
+library(tidyverse)
+library(conflicted)
+
+conflict_prefer("filter","dplyr")
+conflict_prefer("select", "dplyr")
 ```
 
 ```{r}
@@ -45,6 +49,8 @@ wi_d3 <- fec16::results_house |>
   select(-runoff_votes, -runoff_percent, -footnotes) |>
   filter(state == "WI") |>
   filter(district_id == "03")
+
+wi_d3
 ```
 
 Wisconsin District 3 had 2 democrats running for the house seat.
