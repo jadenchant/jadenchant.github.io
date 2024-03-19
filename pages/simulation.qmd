@@ -1,0 +1,13 @@
+---
+title: "US States"
+editor_options: 
+  chunk_output_type: console
+---
+
+Simulated data, then can you pick the real data out of a crowd
+
+
+```{r}
+library(tidyverse)
+```
+

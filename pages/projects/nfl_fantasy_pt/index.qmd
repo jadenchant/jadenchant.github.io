@@ -1,0 +1,37 @@
+---
+title: "NFL Fantasy Point Prediction"
+description: "NFL WR & TE Fantasy Football Point Prediction"
+categories:
+  - Stats2
+about:
+  template: solana
+---
+
+```{r}
+#| include: false
+
+library(mosaic)
+library(ggResidpanel)
+library(car)
+library(GGally)
+library(leaps)
+library("ggrepel")
+library(corrplot)
+library(kableExtra)
+library(tidyverse)
+
+set.seed(12345)
+```
+
+
+
+```{r, include=FALSE}
+#| include: false
+
+nfl_2018 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2018.csv")
+nfl_2019 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2019.csv")
+nfl_2020 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2020.csv")
+nfl_2021 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2021.csv")
+nfl_2022 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2022.csv")
+```
+
