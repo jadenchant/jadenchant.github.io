@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jadenchant.github.io/pages/projects/Test/index.html</loc>
-    <lastmod>2024-02-28T03:16:06.635Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jadenchant.github.io/pages/maps/wisconsin_districs.html</loc>
-    <lastmod>2024-02-28T03:16:06.635Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jadenchant.github.io/pages/about.html</loc>
-    <lastmod>2024-02-28T03:16:06.635Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jadenchant.github.io/index.html</loc>
-    <lastmod>2024-02-28T03:16:06.631Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jadenchant.github.io/pages/maps/us_states.html</loc>
-    <lastmod>2024-02-28T03:16:06.635Z</lastmod>
+    <loc>https://jadenchant.github.io/pages/simulation.html</loc>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
   </url>
   <url>
     <loc>https://jadenchant.github.io/pages/projects.html</loc>
-    <lastmod>2024-02-28T03:16:06.635Z</lastmod>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jadenchant.github.io/pages/maps/us_states.html</loc>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jadenchant.github.io/index.html</loc>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jadenchant.github.io/pages/about.html</loc>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jadenchant.github.io/pages/maps/wisconsin_districs.html</loc>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jadenchant.github.io/pages/projects/nfl_fantasy_pt/index.html</loc>
+    <lastmod>2024-03-19T18:06:14.817Z</lastmod>
   </url>
 </urlset>
