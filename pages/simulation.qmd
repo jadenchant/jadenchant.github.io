@@ -8,6 +8,56 @@ Simulated data, then can you pick the real data out of a crowd
 
 
 ```{r}
+#| include: false
+
 library(tidyverse)
+library(ggdark)
 ```
+
+
+##Airbnb Data
+```{r}
+airbnb_raw <- read_csv("https://jadenchant.github.io/data/airbnb.csv")
+
+airbnb <- airbnb_raw |>
+  filter(reviews > 10) |>
+  filter(price < 500) |>
+  filter(district %in% c("Southwest", "North", "Northwest", "Central")) |>
+  mutate(district = as.factor(district)) |>
+  select(price, bedrooms, accommodates, district)
+```
+
+
+```{r}
+ggplot(airbnb, aes(x = price, y = bedrooms, color = district)) +
+  geom_point() +
+  labs(title = "Airbnb Prices by Bedrooms",
+       x = "Price",
+       y = "Bedrooms",
+       color = "District") +
+  dark_theme_gray(base_size = 12)
+
+ggplot(airbnb, aes(x = price, y = accommodates, color = district)) +
+  geom_point() +
+  labs(title = "Airbnb Prices by Accommodates",
+       x = "Price",
+       y = "Accommodates",
+       color = "District") +
+  dark_theme_gray(base_size = 12)
+
+ggplot(airbnb, aes(x = district, y = price, fill = district)) +
+  geom_boxplot() +
+  labs(title = "Airbnb Prices by District",
+       x = "District",
+       y = "Price",
+       fill = "District") +
+  dark_theme_gray(base_size = 12)
+```
+
+
+
+
+
+
+
 

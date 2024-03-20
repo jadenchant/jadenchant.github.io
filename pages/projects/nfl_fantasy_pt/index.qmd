@@ -5,20 +5,22 @@ categories:
   - Stats2
 about:
   template: solana
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
 #| include: false
 
-# library(mosaic)
-# library(ggResidpanel)
-# library(car)
-# library(GGally)
-# library(leaps)
-# library("ggrepel")
-# library(corrplot)
-# library(kableExtra)
-# library(tidyverse)
+library(mosaic)
+library(ggResidpanel)
+library(car)
+library(GGally)
+library(leaps)
+library("ggrepel")
+library(corrplot)
+library(kableExtra)
+library(tidyverse)
 
 set.seed(12345)
 ```
