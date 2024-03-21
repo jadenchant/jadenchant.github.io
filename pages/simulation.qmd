@@ -4,8 +4,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-Simulated data, then can you pick the real data out of a crowd
-
 
 ```{r}
 #| include: false
@@ -54,7 +52,7 @@ ggplot(airbnb, aes(x = district, y = price, fill = district)) +
   dark_theme_gray(base_size = 12)
 ```
 
-
+Simulated data, then can you pick the real data out of a crowd
 
 
 
