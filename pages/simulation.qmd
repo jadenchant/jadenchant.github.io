@@ -1,5 +1,5 @@
 ---
-title: "US States"
+title: "Simulation"
 editor_options: 
   chunk_output_type: console
 ---
@@ -29,26 +29,32 @@ airbnb <- airbnb_raw |>
 ```{r}
 ggplot(airbnb, aes(x = price, y = bedrooms, color = district)) +
   geom_point() +
-  labs(title = "Airbnb Prices by Bedrooms",
-       x = "Price",
-       y = "Bedrooms",
-       color = "District") +
+  labs(
+    title = "Airbnb Prices by Bedrooms",
+    x = "Price",
+    y = "Bedrooms",
+    color = "District"
+  ) +
   dark_theme_gray(base_size = 12)
 
 ggplot(airbnb, aes(x = price, y = accommodates, color = district)) +
   geom_point() +
-  labs(title = "Airbnb Prices by Accommodates",
-       x = "Price",
-       y = "Accommodates",
-       color = "District") +
+  labs(
+    title = "Airbnb Prices by Accommodates",
+    x = "Price",
+    y = "Accommodates",
+    color = "District"
+  ) +
   dark_theme_gray(base_size = 12)
 
 ggplot(airbnb, aes(x = district, y = price, fill = district)) +
   geom_boxplot() +
-  labs(title = "Airbnb Prices by District",
-       x = "District",
-       y = "Price",
-       fill = "District") +
+  labs(
+    title = "Airbnb Prices by District",
+    x = "District",
+    y = "Price",
+    fill = "District"
+  ) +
   dark_theme_gray(base_size = 12)
 ```
 
@@ -56,6 +62,49 @@ Simulated data, then can you pick the real data out of a crowd
 
 
 
+```{r}
+gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
+  table <- tibble(
+    district = factor(),
+    price = numeric(),
+    id = numeric()
+  )
+
+  for (i in 1:length(districts)) {
+    sample <- rnorm(num_in_district$n[i], mean = true_mean, sd = true_sd)
+    table <- bind_rows(table, tibble(district = rep(districts[i], num_in_district$n[i]), price = sample, id = rep(id, num_in_district$n[i])))
+  }
+
+  return(table)
+}
+```
 
 
 
+
+
+```{r}
+price_mean <- mean(airbnb$price)
+price_se <- sd(airbnb$price) / sqrt(length((airbnb$price)))
+price_sd <- sd(airbnb$price)
+
+num_in_district <- airbnb |>
+  group_by(district) |>
+  summarize(n = n())
+
+mean_num_in_district <- mean(num_in_district$n)
+
+generated_data <- gen_prices(price_mean, price_sd, districts = c("Southwest", "North", "Northwest", "Central"), num_in_district = num_in_district, id = 1)
+
+ggplot(generated_data, aes(x = district, y = price, fill = district)) +
+  geom_boxplot() +
+  labs(
+    title = "Simulated Prices by District",
+    x = "District",
+    y = "Price",
+    fill = "District"
+  ) +
+  scale_y_continuous(limits = c(0, max(generated_data$price) + 100)) +
+  dark_theme_gray(base_size = 12)
+
+```
