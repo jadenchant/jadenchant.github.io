@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">district =</span> <span class="fu">as.factor</span>(district)) <span class="sc">|&gt;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(price, bedrooms, accommodates, district)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We will be using the <a href="https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html">Airbnb dataset</a> (from data collected by St.&nbsp;Olaf Students) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over $300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).</p>
+<p>We will be using the <a href="https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html">Airbnb dataset</a> (from data collected by St.&nbsp;Olaf Students in 2016) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over $300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).</p>
 </section>
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
@@ -329,12 +329,12 @@ To change them back, use invert_geom_defaults().</code></pre>
 <div class="cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="simulation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img column-screen-inset-shaded" style="width:100.0%"></p>
+<p class="page-columns page-full"><img src="simulation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img column-page" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb’s could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism.</p>
+<p>We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb’s could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism. If we wanted to be sure of our findings, we could do a ANOVA statistical test.</p>
 
 
 </section>
