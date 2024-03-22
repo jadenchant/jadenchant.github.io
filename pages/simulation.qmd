@@ -4,19 +4,18 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 ```{r}
 #| include: false
 
 library(tidyverse)
 library(ggdark)
+
+airbnb_raw <- read_csv("https://jadenchant.github.io/data/airbnb.csv")
 ```
 
-
 ##Airbnb Data
-```{r}
-airbnb_raw <- read_csv("https://jadenchant.github.io/data/airbnb.csv")
 
+```{r}
 airbnb <- airbnb_raw |>
   filter(reviews > 10) |>
   filter(price < 300) |>
@@ -25,6 +24,9 @@ airbnb <- airbnb_raw |>
   select(price, bedrooms, accommodates, district)
 ```
 
+We will be using the [Airbnb dataset](https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html) (from data collected by St. Olaf Students) to simulate prices based on district. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over \$300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).
+
+##Exploratory Data Analysis
 
 ```{r}
 ggplot(airbnb, aes(x = price, y = bedrooms, color = district)) +
@@ -58,9 +60,9 @@ ggplot(airbnb, aes(x = district, y = price, fill = district)) +
   dark_theme_gray(base_size = 12)
 ```
 
-Simulated data, then can you pick the real data out of a crowd
+The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.
 
-
+##Generating Prices
 
 ```{r}
 gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
@@ -79,11 +81,12 @@ gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
 }
 ```
 
+This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.
 
 ##Defining Parameters
+
 ```{r}
 price_mean <- mean(airbnb$price)
-price_se <- sd(airbnb$price) / sqrt(length((airbnb$price)))
 price_sd <- sd(airbnb$price)
 
 num_in_district <- airbnb |>
@@ -94,15 +97,13 @@ mean_num_in_district <- mean(num_in_district$n)
 ```
 
 ##Simulating Data
-```{r}
-#| warning: false
 
+```{r}
 n_sims <- 8
 params <- tibble(
   sd = c(rep(price_sd, n_sims)),
   id = c(paste("Sample", 1:n_sims))
 )
-params
 
 simulation <- params %>%
   pmap_dfr(~ gen_prices(true_mean = price_mean, true_sd = ..1, districts = c("Southwest", "North", "Northwest", "Central"), num_in_district = num_in_district, id = ..2))
@@ -112,6 +113,13 @@ airbnb_format <- airbnb |>
   select(district, price, id)
 
 final_sim <- rbind(simulation, airbnb_format)
+```
+
+```{r}
+#| warning: false
+#| column: screen
+#| out-width: 100%
+#| fig-format: svg
 
 ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   geom_boxplot() +
