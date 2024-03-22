@@ -186,7 +186,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>##Airbnb Data</p>
+<section id="airbnb-data" class="level2">
+<h2 class="anchored" data-anchor-id="airbnb-data">Airbnb Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>airbnb <span class="ot">&lt;-</span> airbnb_raw <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(reviews <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
@@ -196,7 +197,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(price, bedrooms, accommodates, district)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will be using the <a href="https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html">Airbnb dataset</a> (from data collected by St.&nbsp;Olaf Students) to simulate prices based on district. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over $300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).</p>
-<p>##Exploratory Data Analysis</p>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airbnb, <span class="fu">aes</span>(<span class="at">x =</span> price, <span class="at">y =</span> bedrooms, <span class="at">color =</span> district)) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -252,7 +255,9 @@ To change them back, use invert_geom_defaults().</code></pre>
 </div>
 </div>
 <p>The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.</p>
-<p>##Generating Prices</p>
+</section>
+<section id="generating-prices" class="level2">
+<h2 class="anchored" data-anchor-id="generating-prices">Generating Prices</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gen_prices <span class="ot">&lt;-</span> <span class="cf">function</span>(true_mean, true_sd, districts, num_in_district, <span class="at">id =</span> <span class="dv">1</span>) {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -270,7 +275,9 @@ To change them back, use invert_geom_defaults().</code></pre>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.</p>
-<p>##Defining Parameters</p>
+</section>
+<section id="defining-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="defining-parameters">Defining Parameters</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>price_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(airbnb<span class="sc">$</span>price)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>price_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(airbnb<span class="sc">$</span>price)</span>
@@ -281,7 +288,9 @@ To change them back, use invert_geom_defaults().</code></pre>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>mean_num_in_district <span class="ot">&lt;-</span> <span class="fu">mean</span>(num_in_district<span class="sc">$</span>n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>##Simulating Data</p>
+</section>
+<section id="simulating-data" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="simulating-data">Simulating Data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">8</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -309,17 +318,19 @@ To change them back, use invert_geom_defaults().</code></pre>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(final_sim<span class="sc">$</span>price) <span class="sc">+</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dark_theme_gray</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">aspect.ratio=</span><span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="simulation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img column-screen" style="width:100.0%"></p>
+<p class="page-columns page-full"><img src="simulation_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img column-screen" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
