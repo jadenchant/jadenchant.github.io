@@ -2,6 +2,8 @@
 title: "Simulation"
 editor_options: 
   chunk_output_type: console
+execute:
+  warning: false
 ---
 
 ```{r}
@@ -125,7 +127,6 @@ final_sim <- rbind(simulation, airbnb_format)
 ```
 
 ```{r}
-#| warning: false
 #| column: page
 #| out-width: 100%
 #| fig-format: svg

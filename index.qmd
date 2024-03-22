@@ -7,7 +7,7 @@ about:
   image-shape: round
   links:
     - icon: linkedin
-      href: https://linkedin.com/in/jadenchant
+      href: https://www.linkedin.com/in/jaden-chant/
     - icon: github
       href: https://github.com/jadenchant
 ---
