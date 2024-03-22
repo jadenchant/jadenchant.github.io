@@ -20,11 +20,18 @@ airbnb <- airbnb_raw |>
   filter(reviews > 10) |>
   filter(price < 300) |>
   filter(district %in% c("Southwest", "North", "Northwest", "Central")) |>
+  
+  mutate(district = case_when(
+    district == "Southwest" ~ "SW",
+    district == "North" ~ "N",
+    district == "Northwest" ~ "NW",
+    district == "Central" ~ "C"
+  )) |>
   mutate(district = as.factor(district)) |>
   select(price, bedrooms, accommodates, district)
 ```
 
-We will be using the [Airbnb dataset](https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html) (from data collected by St. Olaf Students) to simulate prices based on district. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over \$300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).
+We will be using the [Airbnb dataset](https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html) (from data collected by St. Olaf Students) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over \$300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).
 
 ## Exploratory Data Analysis
 
@@ -102,11 +109,11 @@ mean_num_in_district <- mean(num_in_district$n)
 n_sims <- 8
 params <- tibble(
   sd = c(rep(price_sd, n_sims)),
-  id = c(paste("Sample", 1:n_sims))
+  id = c(paste("Sim", 1:n_sims))
 )
 
 simulation <- params %>%
-  pmap_dfr(~ gen_prices(true_mean = price_mean, true_sd = ..1, districts = c("Southwest", "North", "Northwest", "Central"), num_in_district = num_in_district, id = ..2))
+  pmap_dfr(~ gen_prices(true_mean = price_mean, true_sd = ..1, districts = c("SW", "N", "NW", "C"), num_in_district = num_in_district, id = ..2))
 
 airbnb_format <- airbnb |>
   mutate(id = "Truth") |>
@@ -120,6 +127,8 @@ final_sim <- rbind(simulation, airbnb_format)
 #| column: screen
 #| out-width: 80%
 #| fig-format: svg
+#| fig-align: center
+
 
 ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   geom_boxplot() +
@@ -131,6 +140,8 @@ ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   ) +
   scale_y_continuous(limits = c(0, max(final_sim$price) + 100)) +
   dark_theme_gray(base_size = 12) +
-  facet_wrap(~id) +
-  theme(aspect.ratio=1/3)
+  facet_wrap(~id) #+
+  #theme(aspect.ratio=1/3)
 ```
+
+We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago area, specifically on Central and Southwest Chicago. There are no 
