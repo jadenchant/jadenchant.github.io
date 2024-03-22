@@ -226,6 +226,7 @@ corrplot(corr, type="upper")
 ## Variable Selection
 ```{r}
 #| message: false
+#| output: false
 
 # Step model variable selection
 full_model <- lm(FanPtNextSeason ~ Age + GamesPlayed + BMI + NumTargets + NumReceptions + CatchPercent + GamesStarted + Weight + HeightInch, nfl)
@@ -256,6 +257,7 @@ Subsets %>%
 ## Extra Models
 ```{r}
 #| message: false
+#| output: false
 
 # Game Statistics Model
 FanStats_model <- lm(FanPtNextSeason ~ GamesPlayed + NumTargets + NumReceptions + CatchPercent + GamesStarted, nfl)
@@ -273,6 +275,7 @@ summary(step_model)
 ## Centered Models
 ```{r}
 #| message: false
+#| output: false
 
 # Stepwise Center Model
 full_center_model <- lm(FanPtNextSeason_Center ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
@@ -330,6 +333,7 @@ signif(vif(FanStats_center_model), digits = 3)
 ## Comparing Predicted Fantasy Points and Actual
 ```{r}
 #| message: false
+#| output: false
 
 # Changing centered FanPtNextSeason to not centered for easier graph interpretation
 full_center_model <- lm(FanPtNextSeason ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
