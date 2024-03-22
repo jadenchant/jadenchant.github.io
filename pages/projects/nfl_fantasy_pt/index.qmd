@@ -8,6 +8,8 @@ about:
   template: solana
 editor_options: 
   chunk_output_type: console
+execute:
+  warning: FALSE
 ---
 
 ```{r}
@@ -113,63 +115,63 @@ nfl <- read_csv("https://jadenchant.github.io/data/nfl.csv")
 # Age
 ggplot(nfl, aes(Age))+
   geom_histogram(bins = 15)
-favstats(~Age, data = nfl)
+# favstats(~Age, data = nfl)
 age_model <- lm(FanPt ~ Age, nfl)
 resid_panel(age_model)
 
 # Games Played
 ggplot(nfl, aes(GamesPlayed))+
   geom_histogram(bins = 15)
-favstats(~GamesPlayed, data = nfl)
+# favstats(~GamesPlayed, data = nfl)
 G_model <- lm(FanPt ~GamesPlayed, nfl)
 resid_panel(G_model)
 
 # BMI
 ggplot(nfl, aes(BMI))+
   geom_histogram(bins = 15)
-favstats(~BMI, data = nfl)
+# favstats(~BMI, data = nfl)
 BMI_model <- lm(FanPt ~ BMI, nfl)
 resid_panel(BMI_model)
 
 # Targets
 ggplot(nfl, aes(NumTargets))+
   geom_histogram(bins = 15)
-favstats(~NumTargets, data = nfl)
+# favstats(~NumTargets, data = nfl)
 Tgt_model <- lm(FanPt ~NumTargets, nfl)
 resid_panel(Tgt_model)
 
 # Receptions
 ggplot(nfl, aes(NumReceptions))+
   geom_histogram(bins = 15)
-favstats(~NumReceptions, data = nfl)
+# favstats(~NumReceptions, data = nfl)
 Rec_model <- lm(FanPt ~ NumReceptions, nfl)
 resid_panel(Rec_model)
 
 # Catch Percent
 ggplot(nfl, aes(CatchPercent))+
   geom_histogram(bins = 15)
-favstats(~CatchPercent, data = nfl)
+# favstats(~CatchPercent, data = nfl)
 CatchPercent_model <- lm(FanPt ~ CatchPercent, nfl)
 resid_panel(CatchPercent_model)
 
 # Games Started
 ggplot(nfl, aes(GamesStarted))+
   geom_histogram(bins = 15)
-favstats(~GamesStarted, data = nfl)
+# favstats(~GamesStarted, data = nfl)
 GS_model <- lm(FanPt ~ GamesStarted, nfl)
 resid_panel(GS_model)
 
 # Player Weight
 ggplot(nfl, aes(Weight))+
   geom_histogram(bins = 15)
-favstats(~Weight, data = nfl)
+# favstats(~Weight, data = nfl)
 Wt_model <- lm(FanPt ~Weight, nfl)
 resid_panel(Wt_model)
 
 # Player Height
 ggplot(nfl, aes(HeightInch))+
   geom_histogram(bins = 7)
-favstats(~HeightInch, data = nfl)
+# favstats(~HeightInch, data = nfl)
 HeightInch_model <- lm(FanPt ~ HeightInch, nfl)
 resid_panel(HeightInch_model)
 
@@ -184,7 +186,7 @@ ggplot(nfl, aes(FanPtNextSeason)) +
   geom_histogram()
 ggplot(nfl, aes(FanPtNextSeason)) +
   geom_boxplot()
-favstats(~FanPtNextSeason, data = nfl)
+# favstats(~FanPtNextSeason, data = nfl)
 ```
 
 ```{r}
@@ -223,6 +225,8 @@ corrplot(corr, type="upper")
 
 ## Variable Selection
 ```{r}
+#| message: false
+
 # Step model variable selection
 full_model <- lm(FanPtNextSeason ~ Age + GamesPlayed + BMI + NumTargets + NumReceptions + CatchPercent + GamesStarted + Weight + HeightInch, nfl)
 
@@ -251,6 +255,8 @@ Subsets %>%
 
 ## Extra Models
 ```{r}
+#| message: false
+
 # Game Statistics Model
 FanStats_model <- lm(FanPtNextSeason ~ GamesPlayed + NumTargets + NumReceptions + CatchPercent + GamesStarted, nfl)
 summary(FanStats_model)
@@ -266,6 +272,8 @@ summary(step_model)
 
 ## Centered Models
 ```{r}
+#| message: false
+
 # Stepwise Center Model
 full_center_model <- lm(FanPtNextSeason_Center ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
 summary(full_center_model)
@@ -320,7 +328,9 @@ signif(vif(FanStats_center_model), digits = 3)
 
 
 ## Comparing Predicted Fantasy Points and Actual
-```{r, warning=FALSE, message=FALSE}
+```{r}
+#| message: false
+
 # Changing centered FanPtNextSeason to not centered for easier graph interpretation
 full_center_model <- lm(FanPtNextSeason ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
 summary(full_center_model)
@@ -342,7 +352,9 @@ FanStats_center_model <- lm(FanPtNextSeason ~ GamesPlayed_Center + NumTargets_Ce
 
 FanStats_center_data <- nfl %>% 
   mutate(fitted = fitted(FanStats_center_model))
+```
 
+```{r}
 # Final Model
 ggplot(step_model_data, aes(x = fitted, y = FanPtNextSeason))+
   geom_point()+
