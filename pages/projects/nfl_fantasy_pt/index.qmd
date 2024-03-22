@@ -1,6 +1,7 @@
 ---
 title: "NFL Fantasy Point Prediction"
 description: "NFL WR & TE Fantasy Football Point Prediction"
+author: "Ben Gusdal and Jaden Chant"
 categories:
   - Stats2
 about:
@@ -101,7 +102,291 @@ set.seed(12345)
 ```
 
 
+```{r}
+#| include: false
 
+nfl <- read_csv("https://jadenchant.github.io/data/nfl.csv")
+```
+
+## EDA
+```{r}
+# Age
+ggplot(nfl, aes(Age))+
+  geom_histogram(bins = 15)
+favstats(~Age, data = nfl)
+age_model <- lm(FanPt ~ Age, nfl)
+resid_panel(age_model)
+
+# Games Played
+ggplot(nfl, aes(GamesPlayed))+
+  geom_histogram(bins = 15)
+favstats(~GamesPlayed, data = nfl)
+G_model <- lm(FanPt ~GamesPlayed, nfl)
+resid_panel(G_model)
+
+# BMI
+ggplot(nfl, aes(BMI))+
+  geom_histogram(bins = 15)
+favstats(~BMI, data = nfl)
+BMI_model <- lm(FanPt ~ BMI, nfl)
+resid_panel(BMI_model)
+
+# Targets
+ggplot(nfl, aes(NumTargets))+
+  geom_histogram(bins = 15)
+favstats(~NumTargets, data = nfl)
+Tgt_model <- lm(FanPt ~NumTargets, nfl)
+resid_panel(Tgt_model)
+
+# Receptions
+ggplot(nfl, aes(NumReceptions))+
+  geom_histogram(bins = 15)
+favstats(~NumReceptions, data = nfl)
+Rec_model <- lm(FanPt ~ NumReceptions, nfl)
+resid_panel(Rec_model)
+
+# Catch Percent
+ggplot(nfl, aes(CatchPercent))+
+  geom_histogram(bins = 15)
+favstats(~CatchPercent, data = nfl)
+CatchPercent_model <- lm(FanPt ~ CatchPercent, nfl)
+resid_panel(CatchPercent_model)
+
+# Games Started
+ggplot(nfl, aes(GamesStarted))+
+  geom_histogram(bins = 15)
+favstats(~GamesStarted, data = nfl)
+GS_model <- lm(FanPt ~ GamesStarted, nfl)
+resid_panel(GS_model)
+
+# Player Weight
+ggplot(nfl, aes(Weight))+
+  geom_histogram(bins = 15)
+favstats(~Weight, data = nfl)
+Wt_model <- lm(FanPt ~Weight, nfl)
+resid_panel(Wt_model)
+
+# Player Height
+ggplot(nfl, aes(HeightInch))+
+  geom_histogram(bins = 7)
+favstats(~HeightInch, data = nfl)
+HeightInch_model <- lm(FanPt ~ HeightInch, nfl)
+resid_panel(HeightInch_model)
+
+# Player Position
+ggplot(nfl, aes(Position))+
+  geom_bar()
+table(nfl$Position)
+prop.table(table(nfl$Position))
+
+# Fantasy Points
+ggplot(nfl, aes(FanPtNextSeason)) +
+  geom_histogram()
+ggplot(nfl, aes(FanPtNextSeason)) +
+  geom_boxplot()
+favstats(~FanPtNextSeason, data = nfl)
+```
+
+```{r}
+# Age and FanPtNextSeason
+ggplot(nfl, aes(Age, FanPtNextSeason))+
+  geom_smooth(method = "lm")+
+  geom_point()
+
+# BMI and FanPtNextSeason
+ggplot(nfl, aes(BMI, FanPtNextSeason))+
+  geom_smooth(method = "lm")+
+  geom_point()
+
+# Height and FanPtNextSeason
+ggplot(nfl, aes(HeightInch, FanPtNextSeason))+
+  geom_smooth(method = "lm")+
+  geom_point()
+
+# Position and Weight
+ggplot(nfl, aes(Position, Weight, fill = Position))+
+  geom_violin()+
+  geom_boxplot(width=0.1, fill="white") +
+  labs(title = "Player Weight vs Player Position")
+```
+
+
+## Correlational plot
+```{r}
+corr <- nfl %>%
+  select(Age, BMI, Weight, HeightInch, GamesPlayed, GamesStarted, NumTargets, NumReceptions,  CatchPercent, FanPtNextSeason) %>%
+  cor()
+
+corrplot(corr, type="upper")
+```
+
+
+## Variable Selection
+```{r}
+# Step model variable selection
+full_model <- lm(FanPtNextSeason ~ Age + GamesPlayed + BMI + NumTargets + NumReceptions + CatchPercent + GamesStarted + Weight + HeightInch, nfl)
+
+zero_model <- lm(FanPtNextSeason ~ 1, nfl)
+
+step_model <- step(zero_model, direction = "both", scope = formula(full_model))
+summary(step_model)
+
+# Best Subset variable selection
+best3 <- regsubsets(scale(FanPtNextSeason,scale=F) ~ scale(Age,scale=F) + scale(GamesPlayed,scale=F) + scale(BMI,scale=F) + scale(NumTargets,scale=F) + scale(NumReceptions,scale=F) + scale(CatchPercent,scale=F) + scale(GamesStarted,scale=F) + scale(Weight,scale=F) + scale(HeightInch,scale=F), data=nfl, nbest = 3)
+
+out <- summary(best3)
+
+Subsets <- as_tibble(out$which) %>%
+  mutate(R2 = round(out$rsq, 3),          
+         R2adj = round(out$adjr2, 3),
+         Cp = round(out$cp,1)) %>%
+  select(-1)
+
+# Select the highest R2adj value
+Subsets %>%
+  arrange(desc(R2adj)) %>%
+  print(width = Inf, n=4)
+```
+
+
+## Extra Models
+```{r}
+# Game Statistics Model
+FanStats_model <- lm(FanPtNextSeason ~ GamesPlayed + NumTargets + NumReceptions + CatchPercent + GamesStarted, nfl)
+summary(FanStats_model)
+
+# Physical Player Model
+body_model <- lm(FanPtNextSeason ~ Age + BMI + Weight + HeightInch, nfl)
+summary(body_model)
+
+# Stepwise Model
+summary(step_model)
+```
+
+
+## Centered Models
+```{r}
+# Stepwise Center Model
+full_center_model <- lm(FanPtNextSeason_Center ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
+summary(full_center_model)
+
+zero_center_model <- lm(FanPtNextSeason_Center ~ 1, nfl)
+
+step_center_model <- step(zero_center_model, direction = "both", scope = formula(full_center_model))
+summary(step_center_model)
+
+
+# Physical Player Center Model
+body_center_model <- lm(FanPtNextSeason_Center ~ Age_Center + BMI_Center + Weight_Center + HeightInch_Center, nfl)
+summary(body_center_model)
+
+
+# Game Statistics Center Model
+FanStats_center_model <- lm(FanPtNextSeason_Center ~ GamesPlayed_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center, nfl)
+summary(FanStats_center_model)
+```
+
+
+## Confidence intervals
+```{r}
+# Game Statistics
+signif(confint(FanStats_center_model), digits = 3)
+summary(FanStats_center_model)
+
+# Physical Player Statistics
+signif(confint(body_center_model), digits = 3)
+summary(body_center_model)
+
+# Full
+signif(confint(full_center_model), digits = 3)
+summary(full_center_model)
+
+# Stepwise
+signif(confint(step_center_model), digits = 3)
+summary(step_center_model)
+```
+
+
+## Multicollinearity
+```{r}
+signif(vif(full_center_model), digits = 3)
+
+signif(vif(step_center_model), digits = 3)
+
+signif(vif(body_center_model), digits = 3)
+
+signif(vif(FanStats_center_model), digits = 3)
+```
+
+
+## Comparing Predicted Fantasy Points and Actual
+```{r, warning=FALSE, message=FALSE}
+# Changing centered FanPtNextSeason to not centered for easier graph interpretation
+full_center_model <- lm(FanPtNextSeason ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
+summary(full_center_model)
+
+zero_center_model <- lm(FanPtNextSeason ~ 1, nfl)
+
+step_center_model <- step(zero_center_model, direction = "both", scope = formula(full_center_model))
+
+# Add fitted data to step model data
+step_model_data <- nfl %>%
+  mutate(fitted = fitted(step_center_model))
+
+body_center_model <- lm(FanPtNextSeason ~ Age_Center + BMI_Center + Weight_Center + HeightInch_Center, nfl)
+
+body_center_data <- nfl %>%
+  mutate(fitted = fitted(body_center_model))
+
+FanStats_center_model <- lm(FanPtNextSeason ~ GamesPlayed_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center, nfl)
+
+FanStats_center_data <- nfl %>% 
+  mutate(fitted = fitted(FanStats_center_model))
+
+# Final Model
+ggplot(step_model_data, aes(x = fitted, y = FanPtNextSeason))+
+  geom_point()+
+  geom_abline(intercept = 0, slope = 1, color="red")+
+  labs(title="Predicted vs. Actual Fantasy Points Next Season", x="Predicted Fantasy Points Next Season", y="Fantasy Points Next Season")
+
+# Player Measurables
+ggplot(body_center_data, aes(x = fitted, y = FanPtNextSeason))+
+  geom_point()+
+  geom_abline(intercept = 0, slope = 1, color="red")+
+  labs(title="Predicted vs. Actual Fantasy Points Next Season (Player Measurables)", x="Predicted Fantasy Points Next Season", y="Fantasy Points Next Season")
+
+# Onfield Stats
+ggplot(FanStats_center_data, aes(x = fitted, y = FanPtNextSeason))+
+  geom_point()+
+  geom_abline(intercept = 0, slope = 1, color="red")+
+  labs(title="Predicted vs. Actual Fantasy Points Next Season (Onfield Statistics)", x="Predicted Fantasy Points Next Season", y="Fantasy Points Next Season")
+
+# Final with point labels
+ggplot(step_model_data, aes(x = fitted, y = FanPtNextSeason))+
+  geom_point()+
+  geom_abline(intercept = 0, slope = 1, color="red")+
+  labs(title="Predicted vs. Actual Fantasy Points Next Season", x="Predicted Fantasy Points Next Season", y="Fantasy Points Next Season")+
+  geom_text_repel(aes(fitted, FanPtNextSeason, label = paste(Player, Season + 1)))    
+```
+
+
+## Outliers (Cook's Distance)
+```{r}
+diag_step_model <- ls.diag(step_center_model)
+
+step_model_data <- nfl %>%
+  mutate(cooks = diag_step_model$cooks) %>%
+  mutate(PredictedFanPtNextSeason = fitted(step_center_model))
+
+step_model_data %>%
+  filter(cooks > 4/(290 - 5 - 1)) %>%
+  mutate(NumTarg = NumTargets_Center, NumRec = NumReceptions_Center, GamesStarted = GamesStarted_Center, Age = Age_Center) %>%
+  select(Player, Season, FanPtNextSeason, PredictedFanPtNextSeason, NumTarg, NumRec, GamesStarted, Age, Position, cooks) %>%
+  arrange(desc(cooks)) %>%
+  # Creating a table
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+```
 
 
 
