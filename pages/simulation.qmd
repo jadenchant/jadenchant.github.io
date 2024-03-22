@@ -13,7 +13,7 @@ library(ggdark)
 airbnb_raw <- read_csv("https://jadenchant.github.io/data/airbnb.csv")
 ```
 
-##Airbnb Data
+## Airbnb Data
 
 ```{r}
 airbnb <- airbnb_raw |>
@@ -26,7 +26,7 @@ airbnb <- airbnb_raw |>
 
 We will be using the [Airbnb dataset](https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html) (from data collected by St. Olaf Students) to simulate prices based on district. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over \$300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).
 
-##Exploratory Data Analysis
+## Exploratory Data Analysis
 
 ```{r}
 ggplot(airbnb, aes(x = price, y = bedrooms, color = district)) +
@@ -62,7 +62,7 @@ ggplot(airbnb, aes(x = district, y = price, fill = district)) +
 
 The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.
 
-##Generating Prices
+## Generating Prices
 
 ```{r}
 gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
@@ -83,7 +83,7 @@ gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
 
 This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.
 
-##Defining Parameters
+## Defining Parameters
 
 ```{r}
 price_mean <- mean(airbnb$price)
@@ -96,7 +96,7 @@ num_in_district <- airbnb |>
 mean_num_in_district <- mean(num_in_district$n)
 ```
 
-##Simulating Data
+## Simulating Data
 
 ```{r}
 n_sims <- 8
@@ -118,7 +118,7 @@ final_sim <- rbind(simulation, airbnb_format)
 ```{r}
 #| warning: false
 #| column: screen
-#| out-width: 100%
+#| out-width: 80%
 #| fig-format: svg
 
 ggplot(final_sim, aes(x = district, y = price, fill = district)) +
@@ -131,5 +131,6 @@ ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   ) +
   scale_y_continuous(limits = c(0, max(final_sim$price) + 100)) +
   dark_theme_gray(base_size = 12) +
-  facet_wrap(~id)
+  facet_wrap(~id) +
+  theme(aspect.ratio=1/3)
 ```
