@@ -126,7 +126,7 @@ final_sim <- rbind(simulation, airbnb_format)
 
 ```{r}
 #| warning: false
-#| column: screen
+#| column: screen-inset-shaded
 #| out-width: 100%
 #| fig-format: svg
 
@@ -144,4 +144,4 @@ ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   facet_wrap(~id) 
 ```
 
-We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots.
+We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb's could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism.
