@@ -19,7 +19,7 @@ airbnb_raw <- read_csv("https://jadenchant.github.io/data/airbnb.csv")
 
 airbnb <- airbnb_raw |>
   filter(reviews > 10) |>
-  filter(price < 500) |>
+  filter(price < 300) |>
   filter(district %in% c("Southwest", "North", "Northwest", "Central")) |>
   mutate(district = as.factor(district)) |>
   select(price, bedrooms, accommodates, district)
@@ -67,7 +67,7 @@ gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
   table <- tibble(
     district = factor(),
     price = numeric(),
-    id = numeric()
+    id = character()
   )
 
   for (i in 1:length(districts)) {
@@ -80,9 +80,7 @@ gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
 ```
 
 
-
-
-
+##Defining Parameters
 ```{r}
 price_mean <- mean(airbnb$price)
 price_se <- sd(airbnb$price) / sqrt(length((airbnb$price)))
@@ -93,10 +91,29 @@ num_in_district <- airbnb |>
   summarize(n = n())
 
 mean_num_in_district <- mean(num_in_district$n)
+```
 
-generated_data <- gen_prices(price_mean, price_sd, districts = c("Southwest", "North", "Northwest", "Central"), num_in_district = num_in_district, id = 1)
+##Simulating Data
+```{r}
+#| warning: false
 
-ggplot(generated_data, aes(x = district, y = price, fill = district)) +
+n_sims <- 8
+params <- tibble(
+  sd = c(rep(price_sd, n_sims)),
+  id = c(paste("Sample", 1:n_sims))
+)
+params
+
+simulation <- params %>%
+  pmap_dfr(~ gen_prices(true_mean = price_mean, true_sd = ..1, districts = c("Southwest", "North", "Northwest", "Central"), num_in_district = num_in_district, id = ..2))
+
+airbnb_format <- airbnb |>
+  mutate(id = "Truth") |>
+  select(district, price, id)
+
+final_sim <- rbind(simulation, airbnb_format)
+
+ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   geom_boxplot() +
   labs(
     title = "Simulated Prices by District",
@@ -104,7 +121,7 @@ ggplot(generated_data, aes(x = district, y = price, fill = district)) +
     y = "Price",
     fill = "District"
   ) +
-  scale_y_continuous(limits = c(0, max(generated_data$price) + 100)) +
-  dark_theme_gray(base_size = 12)
-
+  scale_y_continuous(limits = c(0, max(final_sim$price) + 100)) +
+  dark_theme_gray(base_size = 12) +
+  facet_wrap(~id)
 ```
