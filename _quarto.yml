@@ -17,6 +17,7 @@ website:
       - pages/projects.qmd
       - sidebar:maps
       - pages/simulation.qmd
+      - pages/str.qmd
 
   sidebar:
     - id: maps
