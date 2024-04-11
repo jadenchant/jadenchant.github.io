@@ -19,6 +19,8 @@ airbnb_raw <- read_csv("https://jadenchant.github.io/data/airbnb.csv")
 
 ## Airbnb Data
 
+We will be using the [Airbnb dataset](https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html) (from data collected by St. Olaf Students in 2016) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over \$300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).
+
 ```{r}
 airbnb <- airbnb_raw |>
   filter(reviews > 10) |>
@@ -35,9 +37,10 @@ airbnb <- airbnb_raw |>
   select(price, bedrooms, accommodates, district)
 ```
 
-We will be using the [Airbnb dataset](https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html) (from data collected by St. Olaf Students in 2016) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over \$300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).
 
 ## Exploratory Data Analysis
+
+The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.
 
 ```{r}
 ggplot(airbnb, aes(x = price, y = bedrooms, color = district)) +
@@ -71,9 +74,9 @@ ggplot(airbnb, aes(x = district, y = price, fill = district)) +
   dark_theme_gray(base_size = 12)
 ```
 
-The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.
-
 ## Generating Prices
+
+This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.
 
 ```{r}
 gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
@@ -92,7 +95,6 @@ gen_prices <- function(true_mean, true_sd, districts, num_in_district, id = 1) {
 }
 ```
 
-This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.
 
 ## Defining Parameters
 
@@ -126,6 +128,8 @@ airbnb_format <- airbnb |>
 final_sim <- rbind(simulation, airbnb_format)
 ```
 
+We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb's could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism. If we wanted to be sure of our findings, we could do a ANOVA statistical test.
+
 ```{r}
 #| column: page
 #| out-width: 100%
@@ -143,5 +147,3 @@ ggplot(final_sim, aes(x = district, y = price, fill = district)) +
   dark_theme_gray(base_size = 12) +
   facet_wrap(~id) 
 ```
-
-We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb's could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism. If we wanted to be sure of our findings, we could do a ANOVA statistical test.

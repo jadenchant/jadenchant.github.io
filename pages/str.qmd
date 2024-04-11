@@ -1,5 +1,5 @@
 ---
-title: "Strings and Regular Expressions"
+title: "RegEx"
 editor_options: 
   chunk_output_type: console
 execute:
@@ -15,14 +15,15 @@ library(tidytext)
 imdb <- read_csv("https://jadenchant.github.io/data/imdb.csv")
 ```
 
-The dataset IMDB Reviews contains reviews from the IMDB website and the sentiment towards that specific movie review. There is an exacly 50/50 split between positive sentiment and negative sentiment. I previously used this dataset for a Machine learning project using Long Short Term Memory. Using ML I was able to get a 88.8% accuracy in correctly identifying the sentiment. One major flaw with this dataset is the accuracy of the data. There are many examples where it says that the review has negative sentiment, but is actually a positive review. A better dataset would have their actual star rating system which the user would input and would not be up for interpretation. 
+We as humans can easily determine if someone is saying something positive or negative, but computers and algorithms have struggled with this for decades. The context and sarcasm is not easily discernible to a computer. I will be attempting to predict the sentiment from movie reviews on IMDB. 
+
+The dataset IMDB Reviews contains reviews from the IMDB website and the sentiment towards that specific movie review. There is an exactly 50/50 split between positive sentiment and negative sentiment. I previously used this dataset for a Machine learning project using Long Short Term Memory. Using ML I was able to get a 88.8% accuracy in correctly identifying the sentiment. One major flaw with this dataset is the accuracy of the data. There are many examples where it says that the review has negative sentiment, but is actually a positive review. A better dataset would have their actual star rating system which the user would input and would not be up for interpretation. 
 
 ```{r}
-# Convert gsub to str function
 imdb_clean <- imdb |>
-  mutate(review = gsub("https?://.+", "", review)) |>
-  mutate(review = gsub("<.*?>", "", review)) |>
-  mutate(review = gsub("[^\x01-\x7F]", "", review)) |>
+  mutate(review = str_replace_all(review, "https?://.+", "")) |>
+  mutate(review = str_replace_all(review, "<.*?>", "")) |>
+  mutate(review = str_replace_all(review, "[^\x01-\x7F]", "")) |>
   mutate(sentiment = as.factor(sentiment)) |>
   mutate(sentiment = as.integer(sentiment)) |>
   mutate(sentiment = sentiment - 1) |>
