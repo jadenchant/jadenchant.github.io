@@ -10,21 +10,44 @@ execute:
 #| include: false
 
 library(tidyverse)
+library(tidytext)
 
-# imdb <- read_csv("https://jadenchant.github.io/data/IMDB%20Dataset.csv")
+imdb <- read_csv("https://jadenchant.github.io/data/imdb.csv")
 ```
 
 The dataset IMDB Reviews contains reviews from the IMDB website and the sentiment towards that specific movie review. There is an exacly 50/50 split between positive sentiment and negative sentiment. I previously used this dataset for a Machine learning project using Long Short Term Memory. Using ML I was able to get a 88.8% accuracy in correctly identifying the sentiment. One major flaw with this dataset is the accuracy of the data. There are many examples where it says that the review has negative sentiment, but is actually a positive review. A better dataset would have their actual star rating system which the user would input and would not be up for interpretation. 
 
 ```{r}
-# imdb |>
-#   filter(str_detect(review, "positive")) |>
-#   group_by(sentiment) |>
-#   summarize(n = n())
-# 
-# imdb |>
-#   filter(str_detect(review, "negative")) |>
-#   group_by(sentiment) |>
-#   summarize(n = n())
+# Convert gsub to str function
+imdb_clean <- imdb |>
+  mutate(review = gsub("https?://.+", "", review)) |>
+  mutate(review = gsub("<.*?>", "", review)) |>
+  mutate(review = gsub("[^\x01-\x7F]", "", review)) |>
+  mutate(sentiment = as.factor(sentiment)) |>
+  mutate(sentiment = as.integer(sentiment)) |>
+  mutate(sentiment = sentiment - 1) |>
+  filter(tokenizers::count_words(review) < 500) |>
+  filter(tokenizers::count_words(review) > 20)
 ```
+
+
+```{r}
+imdb |>
+  filter(str_detect(review, "positive")) |>
+  group_by(sentiment) |>
+  summarize(n = n())
+
+imdb |>
+  filter(str_detect(review, "negative")) |>
+  group_by(sentiment) |>
+  summarize(n = n())
+
+get_sentiments("bing")
+```
+
+
+
+
+
+
 
