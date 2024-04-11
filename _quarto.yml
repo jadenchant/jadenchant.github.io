@@ -19,6 +19,13 @@ website:
       - sidebar:maps
 
   sidebar:
+      - id: maps
+      title: "Maps"
+      contents:
+        - file: pages/maps/us_states.qmd
+          text: "US States"
+        - file: pages/maps/wisconsin_districs.qmd
+          text: "Wisconsin Districts"
     - id: miniproj
       title: "Mini Projects"
       contents:
@@ -28,14 +35,8 @@ website:
         - href: pages/str.qmd
           text: RegEx
 
-  sidebar:
-    - id: maps
-      title: "Maps"
-      contents:
-        - file: pages/maps/us_states.qmd
-          text: "US States"
-        - file: pages/maps/wisconsin_districs.qmd
-          text: "Wisconsin Districts"
+
+    
 
 format:
   html:
