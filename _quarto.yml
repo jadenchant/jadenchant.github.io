@@ -13,11 +13,20 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - pages/about.qmd
-      - pages/projects.qmd
+      - href: pages/projects.qmd
+        text: Projects
+      - sidebar:miniproj
       - sidebar:maps
-      - pages/simulation.qmd
-      - pages/str.qmd
+
+  sidebar:
+    - id: miniproj
+      title: "Mini Projects"
+      contents:
+        - sidebar:maps
+        - href: pages/simulation.qmd
+          text: Simulation
+        - href: pages/str.qmd
+          text: RegEx
 
   sidebar:
     - id: maps
