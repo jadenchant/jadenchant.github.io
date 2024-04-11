@@ -19,7 +19,7 @@ website:
       - sidebar:maps
 
   sidebar:
-      - id: maps
+    - id: maps
       title: "Maps"
       contents:
         - file: pages/maps/us_states.qmd
