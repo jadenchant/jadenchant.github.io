@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../pages/str.html"> 
-<span class="menu-text">Strings and Regular Expressions</span></a>
+<span class="menu-text">RegEx</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -192,6 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="airbnb-data" class="level2">
 <h2 class="anchored" data-anchor-id="airbnb-data">Airbnb Data</h2>
+<p>We will be using the <a href="https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html">Airbnb dataset</a> (from data collected by St.&nbsp;Olaf Students in 2016) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over $300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>airbnb <span class="ot">&lt;-</span> airbnb_raw <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(reviews <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
@@ -207,10 +208,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">district =</span> <span class="fu">as.factor</span>(district)) <span class="sc">|&gt;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(price, bedrooms, accommodates, district)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We will be using the <a href="https://search.r-project.org/CRAN/refmans/bayesrules/html/airbnb.html">Airbnb dataset</a> (from data collected by St.&nbsp;Olaf Students in 2016) to simulate prices based on the district in Chicago. We will be using the Central, Northwest, North, and Southwest districts since these districts have the highest amount of listings. We will be filtering out any listings with less than 10 reviews in order to remove any new listings that may not have accurate prices. We will also be filtering out any prices over $300 in order to level the playing field with all districts (the central district has considerably higher price extremes than the other districts).</p>
 </section>
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<p>The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airbnb, <span class="fu">aes</span>(<span class="at">x =</span> price, <span class="at">y =</span> bedrooms, <span class="at">color =</span> district)) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -261,10 +262,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The prices by bedrooms and accommodates show a positive correlation. However, there does not seem to be any relationship between district and either bedrooms or accommodates. We can see that prices are considerably higher in the Central district compared to the other districts. While the Southwest district has the lowest prices.</p>
 </section>
 <section id="generating-prices" class="level2">
 <h2 class="anchored" data-anchor-id="generating-prices">Generating Prices</h2>
+<p>This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gen_prices <span class="ot">&lt;-</span> <span class="cf">function</span>(true_mean, true_sd, districts, num_in_district, <span class="at">id =</span> <span class="dv">1</span>) {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -281,7 +282,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(table)</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This function generates prices based on the true mean and standard deviation. It also takes in the districts and the number of listings in each district. This function will be used later to simulate data for the Central, Northwest, North, and Southwest districts.</p>
 </section>
 <section id="defining-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="defining-parameters">Defining Parameters</h2>
@@ -314,6 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>final_sim <span class="ot">&lt;-</span> <span class="fu">rbind</span>(simulation, airbnb_format)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb’s could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism. If we wanted to be sure of our findings, we could do a ANOVA statistical test.</p>
 <div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(final_sim, <span class="fu">aes</span>(<span class="at">x =</span> district, <span class="at">y =</span> price, <span class="at">fill =</span> district)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -334,7 +335,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>We can determine from the simulated samples that there is a large difference from the total mean price of Airbnbs in the Chicago areas, specifically on Central and Southwest Chicago. For the North and Northwest regions, they appear to be consistent with the simulated box plots. The higher prices that we see with the central Airbnb’s could be related to its close proximity to downtown Chicago which would have a higher cost of living. Furthermore, Southwest Chicago might have fewer things to do and may not be as desirable for tourism. If we wanted to be sure of our findings, we could do a ANOVA statistical test.</p>
 
 
 </section>
