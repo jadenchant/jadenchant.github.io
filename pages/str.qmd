@@ -43,7 +43,7 @@ imdb |>
   group_by(sentiment) |>
   summarize(n = n())
 
-sample()
+# sample()
 
 get_sentiments("bing")
 ```
