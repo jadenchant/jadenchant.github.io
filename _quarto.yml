@@ -15,11 +15,19 @@ website:
         text: Home
       - href: pages/projects.qmd
         text: Projects
-      - sidebar:miniproj
+      - sidebar:miniprojnav
 
   sidebar:
-    - id: miniproj
+    - id: miniprojnav
       title: "Mini Projects"
+      contents:
+        - href: pages/maps/us_states.qmd
+          text: "Maps"
+        - href: pages/simulation.qmd
+          text: "Simulation"
+        - href: pages/str.qmd
+          text: "RegEx"
+    - id: miniproj
       contents:
         - section: "Maps"
           contents:
@@ -28,20 +36,18 @@ website:
           - href: pages/maps/wisconsin_districs.qmd
             text: "Wisconsin Districts"
         - href: pages/simulation.qmd
-          text: Simulation
+          text: "Simulation"
         - href: pages/str.qmd
-          text: RegEx
+          text: "RegEx"
 
   page-footer: 
-    left: "Jaden Chant"
-    right: 
+    center:
+      - text: "Jaden Chant"
       - icon: github
         href: https://github.com/jadenchant/jadenchant.github.io
-
 
 format:
   html:
     theme: cyborg
 
 editor: source
-
