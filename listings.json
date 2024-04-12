@@ -2,7 +2,8 @@
   {
     "listing": "/pages/projects.html",
     "items": [
-      "/pages/projects/nfl_fantasy_pt/index.html"
+      "/pages/projects/nfl_fantasy_pt/index.html",
+      "/pages/projects/lstm/index.html"
     ]
   }
 ]
