@@ -214,7 +214,9 @@ val_history <- lstm_mod %>%
 plot(val_history)
 ```
 
-![Epoch](epoc.pdf)
+![Epoch](epoc.pdf){width=700}
+
+
 
 ```{r}
 #| eval: false
@@ -226,6 +228,8 @@ val_res
 This is the Accuracy and Loss of the LSTM model on the training dataset. Loss represents the distance between the true sentiment and predicted sentiment by the model.
 
 ## Predict on Testing Data
+
+The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be.
 
 ```{r}
 #| eval: false
@@ -242,7 +246,10 @@ imdb_predict_raw %>%
   labs(title = "ROC Curve")
 ```
 
-The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be.
+![ROC](roc.pdf){width=700}
+
+
+
 
 ```{r}
 #| eval: false
@@ -257,6 +264,8 @@ imdb_test_pred <- imdb_test %>%
 ```
 
 ## Confusion Matrix and Accuracy
+
+The heat map shows the false positives and negatives that our model predicts on the testing dataset. The accuracy of this model is relatively high, however, with further tweaking or cross validation of many parameters, this could be much better. Ideally more epochs and increasing the max words would increase the accuracy of the model.
 
 ```{r}
 #| eval: false
@@ -279,7 +288,9 @@ imdb_test_pred %>%
   sensitivity(sentiment, pred)
 ```
 
-The heat map shows the false positives and negatives that our model predicts on the testing dataset. The accuracy of this model is relatively high, however, with further tweaking or cross validation of many parameters, this could be much better. Ideally more epochs and increasing the max words would increase the accuracy of the model.
+![ConfMat](confmat.pdf){width=700}
+
+![SensitivitySpecificity](sens_spec.pdf){width=700}
 
 ```{r}
 #| eval: false
@@ -310,6 +321,8 @@ The start of the review appears to be positive which the model understands. Howe
 Another main issue with this model is that it does not understand sarcasm. Sarcasm is difficult to train for; more complex models today have difficulty understanding it.
 
 
+## Testing Custom Reviews
+
 ```{r}
 #| eval: false
 
@@ -328,6 +341,19 @@ custom_predict <- tibble(pred = lstm_mod %>% predict(custom_token)) %>%
   mutate(review = custom_test$review) %>%
   mutate(pred = as.numeric(pred))
 ```
+
+The 
+
+Correctly classified positive sentiment
+	(pred = 0.887)
+
+
+Correctly classified negative sentiment
+	(pred = 0.28)
+
+
+Misclassified negative sentiment
+	(pred = 0.75)
 
 
 
