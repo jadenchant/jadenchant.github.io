@@ -9,7 +9,7 @@
 <meta name="author" content="Jaden Chant">
 <meta name="description" content="Machine Learning Long Short Term Memory on IMDB Reviews and Sentiment">
 
-<title>Jaden Chant - ML: Long Short Term Memory on IMDB Reviews</title>
+<title>Jaden Chant - Long Short Term Memory on IMDB Reviews</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -166,12 +166,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-solana content page-columns page-full">
-  <div class="about-entity page-columns page-full">
-    <div class="entity-contents page-columns page-full">
+<div class="quarto-about-solana column-body content">
+  <div class="about-entity">
+    <div class="entity-contents">
       <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ML: Long Short Term Memory on IMDB Reviews</h1>
+<h1 class="title">Long Short Term Memory on IMDB Reviews</h1>
   <div class="quarto-categories">
     <div class="quarto-category">ADM</div>
   </div>
@@ -190,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   </div>
 </header> 
-      <div class="about-contents page-columns page-full"><main class="content page-columns page-full" id="quarto-document-content">
+      <div class="about-contents"><main class="content" id="quarto-document-content">
 <p>The goal of this model is to classify whether or not a IMDB review has positive or negative sentiment towards the movie it is reviewing. The Long Short Term Memory Model will be used for binary classification of positive and negative sentiment.</p>
 <section id="dataset-description" class="level2">
 <h2 data-anchor-id="dataset-description">Dataset Description</h2>
@@ -219,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="cleaning-data" class="level2 page-columns page-full">
+<section id="cleaning-data" class="level2">
 <h2 data-anchor-id="cleaning-data">Cleaning Data</h2>
 <p>This text filtering will remove any links, html formatting, and emojis. We are also converting the sentiment to an integer so the model can use it properly. We also remove reviews that have more than 500 words and less than 20 words. We are removing any reviews that have more than 500 words since more words will slow down our model. We are also remove any reviews with less than 20 words since it is difficult to get sentiment based off of few words even for a human let alone a neural network.</p>
 <div class="cell">
@@ -240,16 +240,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>, <span class="st">" "</span>, review))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We use the tokenizer to view the average number of words per review. The average number of words per review is a right skew distribution. The sentiment is close to evenly split among both positive and negative sentiment.</p>
-<div class="cell page-columns page-full">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>imdb_tbl <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> tokenizers<span class="sc">::</span><span class="fu">count_words</span>(review)))<span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)<span class="sc">+</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Number of Words per Review"</span>, </span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Words"</span>, <span class="at">y=</span><span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img column-body" width="672"></p>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -294,6 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installing-keras-w-tensorflow" class="level2">
 <h2 data-anchor-id="installing-keras-w-tensorflow">Installing Keras w/ Tensorflow</h2>
+<p>From now on I have switched eval to false due to the compute intensive nature of Machine Learning. However, all of this code has been run on my personal machine.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(keras)</span>
@@ -368,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="epoc.pdf" class="img-fluid" width="700"></p>
+<p><img src="epoc.png" class="img-fluid figure-img" width="700"></p>
 <figcaption>Epoch</figcaption>
 </figure>
 </div>
@@ -380,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="predict-on-testing-data" class="level2">
 <h2 data-anchor-id="predict-on-testing-data">Predict on Testing Data</h2>
-<p>The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be.</p>
+<p>The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be. I don’t know exactly what is going on here.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>imdb_test_assess <span class="ot">&lt;-</span> <span class="fu">bake</span>(imdb_prep, <span class="at">new_data =</span> imdb_test, <span class="at">composition =</span> <span class="st">"matrix"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -395,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="roc.pdf" class="img-fluid" width="700"></p>
+<p><img src="roc.png" class="img-fluid figure-img" width="700"></p>
 <figcaption>ROC</figcaption>
 </figure>
 </div>
@@ -432,13 +433,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="confmat.pdf" class="img-fluid" width="700"></p>
+<p><img src="confmat.png" class="img-fluid figure-img" width="700"></p>
 <figcaption>ConfMat</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="sens_spec.pdf" class="img-fluid" width="700"></p>
+<p><img src="sens_spec.png" class="img-fluid figure-img" width="700"></p>
 <figcaption>SensitivitySpecificity</figcaption>
 </figure>
 </div>
@@ -479,9 +480,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> custom_test<span class="sc">$</span>review) <span class="sc">%&gt;%</span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred =</span> <span class="fu">as.numeric</span>(pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The</p>
-<p>Correctly classified positive sentiment (pred = 0.887)</p>
-<p>Correctly classified negative sentiment (pred = 0.28)</p>
+<p>Here are some custom reviews:</p>
+<ul>
+<li><div class="line-block">“One of the best movies I have ever seen. The plot is terrific and the actors are flawless.”</div></li>
+</ul>
+<p>The first custom review is obviously a positive review and the model correctly identifies it as positive sentiment. (pred = 0.887)</p>
+<ul>
+<li><div class="line-block">“How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly.”</div></li>
+</ul>
+<p>The second custom review is also pretty obviously a negative review and the model correctly identifies it as negative sentiment. (pred = 0.28)</p>
+<ul>
+<li><div class="line-block">“The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed.”</div></li>
+</ul>
+<p>This final review is significantly more difficult and does not correctly identify the negative sentiment.</p>
 <p>Misclassified negative sentiment (pred = 0.75)</p>
 
 
