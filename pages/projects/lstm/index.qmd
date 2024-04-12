@@ -145,14 +145,15 @@ Set up for validation in the training dataset. We are also tokenizing the entire
 set.seed(1234)
 imdb_value <- validation_split(imdb_train, strata = sentiment)
 
-imdb_analysis <- bake(imdb_prep, new_data = analysis(imdb_value$splits[[1]]), composition = "matrix")
+imdb_analysis <- bake(imdb_prep, new_data = 
+                        analysis(imdb_value$splits[[1]]), composition = "matrix")
 
 
 imdb_assess <- bake(imdb_prep, new_data = assessment(imdb_value$splits[[1]]),
                     composition = "matrix")
 
-sentiment_analysis <- analysis(imdb_value$splits[[1]]) %>% pull(sentiment)
-sentiment_assess <- assessment(imdb_value$splits[[1]]) %>% pull(sentiment)
+sentiment_analysis <- analysis(imdb_value$splits[[1]]) |> pull(sentiment)
+sentiment_assess <- assessment(imdb_value$splits[[1]]) |> pull(sentiment)
 ```
 
 ## Classification Model
@@ -179,12 +180,12 @@ The sigmoid activation moves the range of the previous layer to a value between 
 ```{r}
 #| eval: false
 
-lstm_mod <- keras_model_sequential() %>%
-  layer_embedding(input_dim = max_words + 1, output_dim = 32) %>%
-  layer_lstm(units = 32, dropout = 0.4, recurrent_dropout = 0.4) %>%
+lstm_mod <- keras_model_sequential() |>
+  layer_embedding(input_dim = max_words + 1, output_dim = 32) |>
+  layer_lstm(units = 32, dropout = 0.4, recurrent_dropout = 0.4) |>
   layer_dense(units = 1, activation = "sigmoid")
 
-lstm_mod %>%
+lstm_mod |>
   compile(
     optimizer = "adam",
     loss = "binary_crossentropy",
@@ -199,7 +200,7 @@ This plot details the training and validation results after each epoch. An epoch
 ```{r}
 #| eval: false
 
-val_history <- lstm_mod %>%
+val_history <- lstm_mod |>
   fit(
     imdb_analysis,
     sentiment_analysis,
@@ -232,12 +233,13 @@ The ROC Curve in the lower right corner of the graph which means that our model 
 
 imdb_test_assess <- bake(imdb_prep, new_data = imdb_test, composition = "matrix")
 
-imdb_predict_raw <- tibble(pred = lstm_mod %>% predict(imdb_test_assess)) %>%
-  mutate(pred = as.numeric(pred))
+imdb_predict_raw <- tibble(pred = lstm_mod |> 
+                              predict(imdb_test_assess)) |>
+                              mutate(pred = as.numeric(pred))
 
-imdb_predict_raw %>%
-  mutate(sentiment = as.factor(imdb_test$sentiment)) %>%
-  roc_curve(sentiment, pred) %>%
+imdb_predict_raw |>
+  mutate(sentiment = as.factor(imdb_test$sentiment)) |>
+  roc_curve(sentiment, pred) |>
   autoplot()+
   labs(title = "ROC Curve")
 ```
@@ -248,12 +250,15 @@ imdb_predict_raw %>%
 ```{r}
 #| eval: false
 
-imdb_predict_tensor <- lstm_mod %>% predict(imdb_test_assess) %>% `>`(0.5) %>% k_cast("int32")
+imdb_predict_tensor <- lstm_mod |> 
+                          predict(imdb_test_assess) |> 
+                          `>`(0.5) |> 
+                          k_cast("int32")
 
 imdb_predict <- tibble(pred = as.array(imdb_predict_tensor))
 
-imdb_test_pred <- imdb_test %>%
-  mutate(sentiment = as.factor(sentiment)) %>%
+imdb_test_pred <- imdb_test |>
+  mutate(sentiment = as.factor(sentiment)) |>
   mutate(pred = as.factor(imdb_predict$pred))
 ```
 
@@ -264,21 +269,21 @@ The heat map shows the false positives and negatives that our model predicts on 
 ```{r}
 #| eval: false
 
-imdb_test_pred %>%
-  conf_mat(sentiment, pred) %>%
+imdb_test_pred |>
+  conf_mat(sentiment, pred) |>
   autoplot(type = "heatmap")
 
-imdb_test_pred %>%
-  mutate(pred = as.numeric(pred) - 1) %>%
-  roc_curve(sentiment, pred) %>%
+imdb_test_pred |>
+  mutate(pred = as.numeric(pred) - 1) |>
+  roc_curve(sentiment, pred) |>
   autoplot()
 
-imdb_test_pred %>%
+imdb_test_pred |>
   accuracy(sentiment, pred)
 
-imdb_test_pred %>%
+imdb_test_pred |>
   specificity(sentiment, pred)
-imdb_test_pred %>%
+imdb_test_pred |>
   sensitivity(sentiment, pred)
 ```
 
@@ -290,13 +295,13 @@ imdb_test_pred %>%
 #| eval: false
 
 # False Positive, Sentiment Negative, Predict Positive
-error_positive <- imdb_test_pred %>%
-  filter(sentiment == 0) %>%
+error_positive <- imdb_test_pred |>
+  filter(sentiment == 0) |>
   filter(pred == 1)
 
 # False Negative, Sentiment Positive, Predict Negative
-error_negative <- imdb_test_pred %>%
-  filter(sentiment == 1) %>%
+error_negative <- imdb_test_pred |>
+  filter(sentiment == 1) |>
   filter(pred == 0)
 ```
 
@@ -320,19 +325,23 @@ Another main issue with this model is that it does not understand sarcasm. Sarca
 ```{r}
 #| eval: false
 
-custom_test <- tibble(review = "One of the best movies I have ever seen. The plot is terrific and the actors are flawless.")
-custom_test <- custom_test %>%
-  add_row(review = "How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly.") %>%
-  add_row(review = "The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed.") %>%
-  mutate(review = tolower(review)) %>%
-  mutate(review = gsub("[@#$%^&*()_+=\\|<>/~`<>]", "", review)) %>%
-  mutate(review = gsub("[!;:,.?]", " ", review)) %>%
+custom_test <- tibble(review = "One of the best movies I have ever seen. 
+                      The plot is terrific and the actors are flawless.")
+custom_test <- custom_test |>
+  add_row(review = "How could Christopher Nolan make such a terrible film. 
+          I thought he was one of the best directors of our time, but he failed horribly.") |>
+  add_row(review = "The film started as a cinematic masterpiece, but ended as a flop. 
+          It started out as stunning and beautiful film, but ended as a dumpster fire. 
+          Genuinely disappointed.") |>
+  mutate(review = tolower(review)) |>
+  mutate(review = gsub("[@#$%^&*()_+=\\|<>/~`<>]", "", review)) |>
+  mutate(review = gsub("[!;:,.?]", " ", review)) |>
   mutate(review = gsub("\\s+", " ", review))
 
 custom_token <- bake(imdb_prep, new_data = custom_test, composition = "matrix")
 
-custom_predict <- tibble(pred = lstm_mod %>% predict(custom_token)) %>%
-  mutate(review = custom_test$review) %>%
+custom_predict <- tibble(pred = lstm_mod |> predict(custom_token)) |>
+  mutate(review = custom_test$review) |>
   mutate(pred = as.numeric(pred))
 ```
 
