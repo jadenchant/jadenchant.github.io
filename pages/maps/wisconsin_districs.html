@@ -134,9 +134,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Mini Projects</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-mini-projects">    
+        <li class="dropdown-header">Maps</li>
         <li>
     <a class="dropdown-item" href="../../pages/maps/us_states.html">
- <span class="dropdown-text">Maps</span></a>
+ <span class="dropdown-text">US States</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../pages/maps/wisconsin_districs.html">
+ <span class="dropdown-text">Wisconsin Districts</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../pages/simulation.html">
@@ -145,21 +150,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../pages/str.html">
  <span class="dropdown-text">RegEx</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-maps" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Maps</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-maps">    
-        <li>
-    <a class="dropdown-item" href="../../pages/maps/us_states.html">
- <span class="dropdown-text">US States</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../pages/maps/wisconsin_districs.html">
- <span class="dropdown-text">Wisconsin Districts</span></a>
   </li>  
     </ul>
   </li>
@@ -174,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/maps/wisconsin_districs.html">Wisconsin Districts</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/maps/us_states.html">Maps</a></li><li class="breadcrumb-item"><a href="../../pages/maps/wisconsin_districs.html">Wisconsin Districts</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -186,16 +176,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Maps</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/maps/us_states.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">US States</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/maps/wisconsin_districs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Wisconsin Districts</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/str.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RegEx</span></a>
   </div>
 </li>
     </ul>
@@ -207,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/maps/us_states.html">Maps</a></li><li class="breadcrumb-item"><a href="../../pages/maps/wisconsin_districs.html">Wisconsin Districts</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Wisconsin Districts</h1>
 </div>
@@ -274,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DISTRICT =</span> <span class="fu">parse_number</span>(<span class="fu">as.character</span>(DISTRICT)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `districts113' from data source 
-  `/tmp/Rtmph2h0lv/districts113/districtShapes' using driver `ESRI Shapefile'
+  `/tmp/RtmpXcxx7t/districts113/districtShapes' using driver `ESRI Shapefile'
 Simple feature collection with 436 features and 15 fields (with 1 geometry empty)
 Geometry type: MULTIPOLYGON
 Dimension:     XY
@@ -741,6 +754,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Jaden Chant</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jadenchant/jadenchant.github.io">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 
