@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="epoc.pdf" class="img-fluid"></p>
+<p><embed src="epoc.pdf" class="img-fluid" width="700"></p>
 <figcaption>Epoch</figcaption>
 </figure>
 </div>
@@ -380,6 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="predict-on-testing-data" class="level2">
 <h2 data-anchor-id="predict-on-testing-data">Predict on Testing Data</h2>
+<p>The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>imdb_test_assess <span class="ot">&lt;-</span> <span class="fu">bake</span>(imdb_prep, <span class="at">new_data =</span> imdb_test, <span class="at">composition =</span> <span class="st">"matrix"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -392,7 +393,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()<span class="sc">+</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"ROC Curve"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="roc.pdf" class="img-fluid" width="700"></p>
+<figcaption>ROC</figcaption>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>imdb_predict_tensor <span class="ot">&lt;-</span> lstm_mod <span class="sc">%&gt;%</span> <span class="fu">predict</span>(imdb_test_assess) <span class="sc">%&gt;%</span> <span class="st">`</span><span class="at">&gt;</span><span class="st">`</span>(<span class="fl">0.5</span>) <span class="sc">%&gt;%</span> <span class="fu">k_cast</span>(<span class="st">"int32"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -405,6 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="confusion-matrix-and-accuracy" class="level2">
 <h2 data-anchor-id="confusion-matrix-and-accuracy">Confusion Matrix and Accuracy</h2>
+<p>The heat map shows the false positives and negatives that our model predicts on the testing dataset. The accuracy of this model is relatively high, however, with further tweaking or cross validation of many parameters, this could be much better. Ideally more epochs and increasing the max words would increase the accuracy of the model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>imdb_test_pred <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(sentiment, pred) <span class="sc">%&gt;%</span></span>
@@ -423,7 +430,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>imdb_test_pred <span class="sc">%&gt;%</span></span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sensitivity</span>(sentiment, pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The heat map shows the false positives and negatives that our model predicts on the testing dataset. The accuracy of this model is relatively high, however, with further tweaking or cross validation of many parameters, this could be much better. Ideally more epochs and increasing the max words would increase the accuracy of the model.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="confmat.pdf" class="img-fluid" width="700"></p>
+<figcaption>ConfMat</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><embed src="sens_spec.pdf" class="img-fluid" width="700"></p>
+<figcaption>SensitivitySpecificity</figcaption>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># False Positive, Sentiment Negative, Predict Positive</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>error_positive <span class="ot">&lt;-</span> imdb_test_pred <span class="sc">%&gt;%</span></span>
@@ -442,6 +460,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="line-block">a lovely little b picture with all the usual joe lewis touches people ripping up pillows and auras of lurking fear also alas an ending that comes out of nowhere because apparently the auteur has lost interest in the movie or perhaps because as a b picture it has to fit into a slot</div>
 <p>The start of the review appears to be positive which the model understands. However at the end of the review, the tone shifts to be negative sentiment. This is one issue with this dataset is that some of the reviews can be difficult to understand if a review is positive or not. In this case the individual who labeled this data had the opinion that it had positive sentiment towards the movie. In my opinion, I believe that the review has negative sentiment towards the movie due to the last line of the review.</p>
 <p>Another main issue with this model is that it does not understand sarcasm. Sarcasm is difficult to train for; more complex models today have difficulty understanding it.</p>
+</section>
+<section id="testing-custom-reviews" class="level2">
+<h2 data-anchor-id="testing-custom-reviews">Testing Custom Reviews</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>custom_test <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">review =</span> <span class="st">"One of the best movies I have ever seen. The plot is terrific and the actors are flawless."</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>custom_test <span class="ot">&lt;-</span> custom_test <span class="sc">%&gt;%</span></span>
@@ -458,6 +479,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> custom_test<span class="sc">$</span>review) <span class="sc">%&gt;%</span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred =</span> <span class="fu">as.numeric</span>(pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The</p>
+<p>Correctly classified positive sentiment (pred = 0.887)</p>
+<p>Correctly classified negative sentiment (pred = 0.28)</p>
+<p>Misclassified negative sentiment (pred = 0.75)</p>
 
 
 </section>
