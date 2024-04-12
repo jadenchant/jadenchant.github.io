@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -132,9 +166,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-solana column-body content">
-  <div class="about-entity">
-    <div class="entity-contents">
+<div class="quarto-about-solana content page-columns page-full">
+  <div class="about-entity page-columns page-full">
+    <div class="entity-contents page-columns page-full">
       <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">ML: Long Short Term Memory on IMDB Reviews</h1>
@@ -156,11 +190,107 @@ ul.task-list li input[type="checkbox"] {
   </div>
   </div>
 </header> 
-      <div class="about-contents"><main class="content" id="quarto-document-content">
+      <div class="about-contents page-columns page-full"><main class="content page-columns page-full" id="quarto-document-content">
 <p>The goal of this model is to classify whether or not a IMDB review has positive or negative sentiment towards the movie it is reviewing. The Long Short Term Memory Model will be used for binary classification of positive and negative sentiment.</p>
 <section id="dataset-description" class="level2">
 <h2 data-anchor-id="dataset-description">Dataset Description</h2>
 <p>IMDB dataset with 50,000 movie reviews with sentiment intended for binary sentiment classification. The sentiment is either positive or negative. When put through the neural network, sentiment 0 is negative and 1 is positive. The review is raw text data from the IMDB website which needs to be cleaned. The data was uploaded to Kaggle in 2019, <a href="https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews">IMDB Dataset of 50K Movie Reviews</a>. The data was most than likely scraped from the <a href="https://www.imdb.com/">IMDB Website</a>. Then the data was manually labeled as having positive or negative sentiment.</p>
+</section>
+<section id="what-is-lstm" class="level2">
+<h2 data-anchor-id="what-is-lstm">What is LSTM?</h2>
+<p>Long Short Term Memory is neural network that is ideal for processing and predicting data. LSTM is a recurrent neural network that uses context neurons for short term memory. These context neurons have their value updated when going through the current layer of the model. The neuron then resets at the end of the layer to zero. The purpose of the context neuron is to provide the recurrence of information back to previous neurons.</p>
+<p>LSTM uses gradient descent for the cost function of the neuron weights. Training a neural neural network uses backwards propagation between layers in the model.</p>
+<p>LSTM is also faster at learning and more successful than other models like Recurrent Neural Networks (RNNs). In order to use a neural network, the model needs lots of data to train the model. However, in the long run the model is be better than using a linear regression model where each variable is every word.</p>
+<section id="lstm-models-use-three-gates-in-this-order" class="level3">
+<h3 data-anchor-id="lstm-models-use-three-gates-in-this-order">LSTM Models use Three Gates (in this order):</h3>
+<ul>
+<li><p>Forget Gate</p>
+<ul>
+<li>This gate determines what data is forgotten based on previous hidden neural network layers and the new data being inputted.</li>
+</ul></li>
+<li><p>Input Gate</p>
+<ul>
+<li>This gate determines what data should be added to the long-term memory based on previous hidden layers and new data. This gate uses tanh activation [-1,1] for long term memory portion and sigmoid activation [0,1] for the filtering portion. Then these outputs are multiplied together and then added to the layer neuron.</li>
+</ul></li>
+<li><p>Output Gate</p>
+<ul>
+<li>This gate determines what data should be passed through to the next neural network layer. The gate uses tanh activation for outputting to a new layer.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="cleaning-data" class="level2 page-columns page-full">
+<h2 data-anchor-id="cleaning-data">Cleaning Data</h2>
+<p>This text filtering will remove any links, html formatting, and emojis. We are also converting the sentiment to an integer so the model can use it properly. We also remove reviews that have more than 500 words and less than 20 words. We are removing any reviews that have more than 500 words since more words will slow down our model. We are also remove any reviews with less than 20 words since it is difficult to get sentiment based off of few words even for a human let alone a neural network.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>imdb_tbl_view <span class="ot">&lt;-</span> imdb_raw_tbl <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"https?://.+"</span>, <span class="st">""</span>, review)) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"&lt;.*?&gt;"</span>, <span class="st">""</span>, review)) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"[^</span><span class="sc">\x01</span><span class="st">-</span><span class="sc">\x7F</span><span class="st">]"</span>, <span class="st">""</span>, review)) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">as.factor</span>(sentiment)) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">as.integer</span>(sentiment)) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment =</span> sentiment <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tokenizers<span class="sc">::</span><span class="fu">count_words</span>(review) <span class="sc">&lt;</span> <span class="dv">500</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tokenizers<span class="sc">::</span><span class="fu">count_words</span>(review) <span class="sc">&gt;</span> <span class="dv">20</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>imdb_tbl <span class="ot">&lt;-</span> imdb_tbl_view <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">tolower</span>(review)) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"[@#$%^&amp;*()_+=</span><span class="sc">\\</span><span class="st">|&lt;&gt;/~`&lt;&gt;]"</span>, <span class="st">""</span>, review)) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"[!;:,.?]"</span>, <span class="st">" "</span>, review)) <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">review =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>, <span class="st">" "</span>, review))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We use the tokenizer to view the average number of words per review. The average number of words per review is a right skew distribution. The sentiment is close to evenly split among both positive and negative sentiment.</p>
+<div class="cell page-columns page-full">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>imdb_tbl <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> tokenizers<span class="sc">::</span><span class="fu">count_words</span>(review)))<span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>)<span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Number of Words per Review"</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Words"</span>, <span class="at">y=</span><span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img column-body" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>imdb_tbl <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  sentiment     n
+      &lt;dbl&gt; &lt;int&gt;
+1         0 23220
+2         1 22902</code></pre>
+</div>
+</div>
+</section>
+<section id="data-split" class="level2">
+<h2 data-anchor-id="data-split">Data Split</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>imdb_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(imdb_tbl)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>imdb_train <span class="ot">&lt;-</span> <span class="fu">training</span>(imdb_split)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>imdb_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(imdb_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tokenize" class="level2">
+<h2 data-anchor-id="tokenize">Tokenize</h2>
+<p>We must tokenize the reviews in order for the LSTM model to interpret each token individually instead of using the entire review as one input. The tokenizer also converts the entire dataset into integer id values which the neural network model can use. We are only considering reviews with a maximum review word length of 500 words and maximum number of words the model will use is 20,000. Ideally, we would increase the max_words and max_length values, but this would require more computational power and time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>max_words <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>max_length <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>imdb_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(<span class="sc">~</span>review, imdb_train) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_tokenize</span>(review) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_tokenfilter</span>(review, <span class="at">max_tokens =</span> max_words) <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_sequence_onehot</span>(review, <span class="at">sequence_length =</span> max_length)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>imdb_prep <span class="ot">&lt;-</span> <span class="fu">prep</span>(imdb_recipe)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>imdb_train_token <span class="ot">&lt;-</span> <span class="fu">bake</span>(imdb_prep, <span class="at">new_data =</span> <span class="cn">NULL</span>, <span class="at">composition =</span> <span class="st">"matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
