@@ -211,7 +211,7 @@ val_history <- lstm_mod %>%
 plot(val_history)
 ```
 
-![Epoch](epoc.png){width=700}
+![Epoch](epoc.png)
 
 
 ```{r}
@@ -242,7 +242,7 @@ imdb_predict_raw %>%
   labs(title = "ROC Curve")
 ```
 
-![ROC](roc.png){width=700}
+![ROC](roc.png)
 
 
 ```{r}
@@ -282,9 +282,9 @@ imdb_test_pred %>%
   sensitivity(sentiment, pred)
 ```
 
-![ConfMat](confmat.png){width=700}
+![ConfMat](confmat.png)
 
-![SensitivitySpecificity](sens_spec.png){width=700}
+![SensitivitySpecificity](sens_spec.png)
 
 ```{r}
 #| eval: false
@@ -302,13 +302,13 @@ error_negative <- imdb_test_pred %>%
 
 Let's first take a look at one of the false positives:
 
-| once in a while a movie will sweep along that stuns you draws you in awes you and in the end leaves you with a renewed belief in the human race from the artistry form this is not it this is an action movie that lacks convincing action it stinks rent something else
+-   once in a while a movie will sweep along that stuns you draws you in awes you and in the end leaves you with a renewed belief in the human race from the artistry form this is not it this is an action movie that lacks convincing action it stinks rent something else
 
 The start of the review appears to be positive and the model predicts that. The ending of the review is what is important for the overall sentiment of the text. The model struggles with understanding the sentiment throughout the entire review. The important section of the review is the ending which contradicts the initial positive review.
 
 Now let's look at one of the false negatives:
 
-| a lovely little b picture with all the usual joe lewis touches people ripping up pillows and auras of lurking fear also alas an ending that comes out of nowhere because apparently the auteur has lost interest in the movie or perhaps because as a b picture it has to fit into a slot
+-   a lovely little b picture with all the usual joe lewis touches people ripping up pillows and auras of lurking fear also alas an ending that comes out of nowhere because apparently the auteur has lost interest in the movie or perhaps because as a b picture it has to fit into a slot
 
 The start of the review appears to be positive which the model understands. However at the end of the review, the tone shifts to be negative sentiment. This is one issue with this dataset is that some of the reviews can be difficult to understand if a review is positive or not. In this case the individual who labeled this data had the opinion that it had positive sentiment towards the movie. In my opinion, I believe that the review has negative sentiment towards the movie due to the last line of the review.
 
@@ -338,20 +338,29 @@ custom_predict <- tibble(pred = lstm_mod %>% predict(custom_token)) %>%
 
 Here are some custom reviews:
 
-- | "One of the best movies I have ever seen. The plot is terrific and the actors are flawless."
+-   "One of the best movies I have ever seen. The plot is terrific and the actors are flawless."
 
 The first custom review is obviously a positive review and the model correctly identifies it as positive sentiment. (pred = 0.887)
 	
-- | "How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly."
+-   "How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly."
 
 The second custom review is also pretty obviously a negative review and the model correctly identifies it as negative sentiment. (pred = 0.28)
 
-- | "The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed."
+-   "The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed."
 
-This final review is significantly more difficult and does not correctly identify the negative sentiment. 
+This final review is significantly more difficult and does not correctly identify the negative sentiment. The model struggles with contradicting sentiment. The seems to be a lot more positive sentiment, but the last two words illustrates the critique's stance on that specific movie. (pred = 0.75)
 
-Misclassified negative sentiment
-	(pred = 0.75)
+The model does a great job with correctly identifying obvious sentiment reviews, but struggles with complicated wording and sarcasm. 
+
+
+## Model Changes
+
+- Cross validation for parameters such as max words, epoch, batch size, or dropout
+- Adding more layers to the LSTM model
+- Using different model like the Gated Recurrent Unit Model (GRU)
+- Not removing capitals and some forms of punctuation (definitely messed with the model)
+
+
 
 
 
