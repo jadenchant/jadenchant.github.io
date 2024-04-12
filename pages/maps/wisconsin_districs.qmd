@@ -1,8 +1,5 @@
 ---
 title: "Wisconsin Districts"
-website:
-  sidebar:
-    id: miniproj
 editor_options: 
   chunk_output_type: console
 ---
