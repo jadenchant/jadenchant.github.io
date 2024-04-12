@@ -1,0 +1,19 @@
+---
+title: "ML: Long Short Term Memory on IMDB Reviews"
+description: "Machine Learning Long Short Term Memory on IMDB Reviews and Sentiment"
+author: "Jaden Chant"
+categories:
+  - ADM
+about:
+  template: solana
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: FALSE
+---
+
+The goal of this model is to classify whether or not a IMDB review has positive or negative sentiment towards the movie it is reviewing. The Long Short Term Memory Model will be used for binary classification of positive and negative sentiment.
+
+## Dataset Description
+
+IMDB dataset with 50,000 movie reviews with sentiment intended for binary sentiment classification. The sentiment is either positive or negative. When put through the neural network, sentiment 0 is negative and 1 is positive. The review is raw text data from the IMDB website which needs to be cleaned. The data was uploaded to Kaggle in 2019, [IMDB Dataset of 50K Movie Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews). The data was most than likely scraped from the [IMDB Website](https://www.imdb.com/). Then the data was manually labeled as having positive or negative sentiment.

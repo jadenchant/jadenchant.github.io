@@ -19,6 +19,7 @@ website:
 
   sidebar:
     - id: miniproj
+      title: "Mini Project"
       contents:
         - href: pages/maps/us_states.qmd
           text: "Maps: US States"
