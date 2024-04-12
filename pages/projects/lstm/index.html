@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="epoc.png" class="img-fluid figure-img" width="700"></p>
+<p><img src="epoc.png" class="img-fluid figure-img"></p>
 <figcaption>Epoch</figcaption>
 </figure>
 </div>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="roc.png" class="img-fluid figure-img" width="700"></p>
+<p><img src="roc.png" class="img-fluid figure-img"></p>
 <figcaption>ROC</figcaption>
 </figure>
 </div>
@@ -433,13 +433,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="confmat.png" class="img-fluid figure-img" width="700"></p>
+<p><img src="confmat.png" class="img-fluid figure-img"></p>
 <figcaption>ConfMat</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="sens_spec.png" class="img-fluid figure-img" width="700"></p>
+<p><img src="sens_spec.png" class="img-fluid figure-img"></p>
 <figcaption>SensitivitySpecificity</figcaption>
 </figure>
 </div>
@@ -455,10 +455,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pred <span class="sc">==</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s first take a look at one of the false positives:</p>
-<div class="line-block">once in a while a movie will sweep along that stuns you draws you in awes you and in the end leaves you with a renewed belief in the human race from the artistry form this is not it this is an action movie that lacks convincing action it stinks rent something else</div>
+<ul>
+<li>once in a while a movie will sweep along that stuns you draws you in awes you and in the end leaves you with a renewed belief in the human race from the artistry form this is not it this is an action movie that lacks convincing action it stinks rent something else</li>
+</ul>
 <p>The start of the review appears to be positive and the model predicts that. The ending of the review is what is important for the overall sentiment of the text. The model struggles with understanding the sentiment throughout the entire review. The important section of the review is the ending which contradicts the initial positive review.</p>
 <p>Now let’s look at one of the false negatives:</p>
-<div class="line-block">a lovely little b picture with all the usual joe lewis touches people ripping up pillows and auras of lurking fear also alas an ending that comes out of nowhere because apparently the auteur has lost interest in the movie or perhaps because as a b picture it has to fit into a slot</div>
+<ul>
+<li>a lovely little b picture with all the usual joe lewis touches people ripping up pillows and auras of lurking fear also alas an ending that comes out of nowhere because apparently the auteur has lost interest in the movie or perhaps because as a b picture it has to fit into a slot</li>
+</ul>
 <p>The start of the review appears to be positive which the model understands. However at the end of the review, the tone shifts to be negative sentiment. This is one issue with this dataset is that some of the reviews can be difficult to understand if a review is positive or not. In this case the individual who labeled this data had the opinion that it had positive sentiment towards the movie. In my opinion, I believe that the review has negative sentiment towards the movie due to the last line of the review.</p>
 <p>Another main issue with this model is that it does not understand sarcasm. Sarcasm is difficult to train for; more complex models today have difficulty understanding it.</p>
 </section>
@@ -482,18 +486,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Here are some custom reviews:</p>
 <ul>
-<li><div class="line-block">“One of the best movies I have ever seen. The plot is terrific and the actors are flawless.”</div></li>
+<li>“One of the best movies I have ever seen. The plot is terrific and the actors are flawless.”</li>
 </ul>
 <p>The first custom review is obviously a positive review and the model correctly identifies it as positive sentiment. (pred = 0.887)</p>
 <ul>
-<li><div class="line-block">“How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly.”</div></li>
+<li>“How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly.”</li>
 </ul>
 <p>The second custom review is also pretty obviously a negative review and the model correctly identifies it as negative sentiment. (pred = 0.28)</p>
 <ul>
-<li><div class="line-block">“The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed.”</div></li>
+<li>“The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed.”</li>
 </ul>
-<p>This final review is significantly more difficult and does not correctly identify the negative sentiment.</p>
-<p>Misclassified negative sentiment (pred = 0.75)</p>
+<p>This final review is significantly more difficult and does not correctly identify the negative sentiment. The model struggles with contradicting sentiment. The seems to be a lot more positive sentiment, but the last two words illustrates the critique’s stance on that specific movie. (pred = 0.75)</p>
+<p>The model does a great job with correctly identifying obvious sentiment reviews, but struggles with complicated wording and sarcasm.</p>
+</section>
+<section id="model-changes" class="level2">
+<h2 data-anchor-id="model-changes">Model Changes</h2>
+<ul>
+<li>Cross validation for parameters such as max words, epoch, batch size, or dropout</li>
+<li>Adding more layers to the LSTM model</li>
+<li>Using different model like the Gated Recurrent Unit Model (GRU)</li>
+<li>Not removing capitals and some forms of punctuation (definitely messed with the model)</li>
+</ul>
 
 
 </section>
