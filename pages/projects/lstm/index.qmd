@@ -1,5 +1,5 @@
 ---
-title: "ML: Long Short Term Memory on IMDB Reviews"
+title: "Long Short Term Memory on IMDB Reviews"
 description: "Machine Learning Long Short Term Memory on IMDB Reviews and Sentiment"
 author: "Jaden Chant"
 categories:
@@ -122,12 +122,9 @@ imdb_train_token <- bake(imdb_prep, new_data = NULL, composition = "matrix")
 ```
 
 
-
-
-
-
-
 ## Installing Keras w/ Tensorflow
+
+From now on I have switched eval to false due to the compute intensive nature of Machine Learning. However, all of this code has been run on my personal machine.
 
 ```{r}
 #| eval: false
@@ -214,8 +211,7 @@ val_history <- lstm_mod %>%
 plot(val_history)
 ```
 
-![Epoch](epoc.pdf){width=700}
-
+![Epoch](epoc.png){width=700}
 
 
 ```{r}
@@ -229,7 +225,7 @@ This is the Accuracy and Loss of the LSTM model on the training dataset. Loss re
 
 ## Predict on Testing Data
 
-The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be.
+The ROC Curve in the lower right corner of the graph which means that our model is extremely good at predicting the inverse of what the sentiment should be. I don't know exactly what is going on here.
 
 ```{r}
 #| eval: false
@@ -246,9 +242,7 @@ imdb_predict_raw %>%
   labs(title = "ROC Curve")
 ```
 
-![ROC](roc.pdf){width=700}
-
-
+![ROC](roc.png){width=700}
 
 
 ```{r}
@@ -288,9 +282,9 @@ imdb_test_pred %>%
   sensitivity(sentiment, pred)
 ```
 
-![ConfMat](confmat.pdf){width=700}
+![ConfMat](confmat.png){width=700}
 
-![SensitivitySpecificity](sens_spec.pdf){width=700}
+![SensitivitySpecificity](sens_spec.png){width=700}
 
 ```{r}
 #| eval: false
@@ -342,15 +336,19 @@ custom_predict <- tibble(pred = lstm_mod %>% predict(custom_token)) %>%
   mutate(pred = as.numeric(pred))
 ```
 
-The 
+Here are some custom reviews:
 
-Correctly classified positive sentiment
-	(pred = 0.887)
+- | "One of the best movies I have ever seen. The plot is terrific and the actors are flawless."
 
+The first custom review is obviously a positive review and the model correctly identifies it as positive sentiment. (pred = 0.887)
+	
+- | "How could Christopher Nolan make such a terrible film. I thought he was one of the best directors of our time, but he failed horribly."
 
-Correctly classified negative sentiment
-	(pred = 0.28)
+The second custom review is also pretty obviously a negative review and the model correctly identifies it as negative sentiment. (pred = 0.28)
 
+- | "The film started as a cinematic masterpiece, but ended as a flop. It started out as stunning and beautiful film, but ended as a dumpster fire. Genuinely disappointed."
+
+This final review is significantly more difficult and does not correctly identify the negative sentiment. 
 
 Misclassified negative sentiment
 	(pred = 0.75)
