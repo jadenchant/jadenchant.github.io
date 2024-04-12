@@ -17,3 +17,119 @@ The goal of this model is to classify whether or not a IMDB review has positive 
 ## Dataset Description
 
 IMDB dataset with 50,000 movie reviews with sentiment intended for binary sentiment classification. The sentiment is either positive or negative. When put through the neural network, sentiment 0 is negative and 1 is positive. The review is raw text data from the IMDB website which needs to be cleaned. The data was uploaded to Kaggle in 2019, [IMDB Dataset of 50K Movie Reviews](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews). The data was most than likely scraped from the [IMDB Website](https://www.imdb.com/). Then the data was manually labeled as having positive or negative sentiment.
+
+## What is LSTM?
+
+Long Short Term Memory is neural network that is ideal for processing and predicting data. LSTM is a recurrent neural network that uses context neurons for short term memory. These context neurons have their value updated when going through the current layer of the model. The neuron then resets at the end of the layer to zero. The purpose of the context neuron is to provide the recurrence of information back to previous neurons.
+
+LSTM uses gradient descent for the cost function of the neuron weights. Training a neural neural network uses backwards propagation between layers in the model.
+
+LSTM is also faster at learning and more successful than other models like Recurrent Neural Networks (RNNs). In order to use a neural network, the model needs lots of data to train the model. However, in the long run the model is be better than using a linear regression model where each variable is every word.
+
+### LSTM Models use Three Gates (in this order):
+
+-   Forget Gate
+
+    -   This gate determines what data is forgotten based on previous hidden neural network layers and the new data being inputted.
+
+-   Input Gate
+
+    -   This gate determines what data should be added to the long-term memory based on previous hidden layers and new data. This gate uses tanh activation [-1,1] for long term memory portion and sigmoid activation [0,1] for the filtering portion. Then these outputs are multiplied together and then added to the layer neuron.
+
+-   Output Gate
+
+    -   This gate determines what data should be passed through to the next neural network layer. The gate uses tanh activation for outputting to a new layer.
+
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(tidymodels)
+library(conflicted)
+library(textrecipes)
+tidymodels_prefer(quiet=TRUE)
+conflict_prefer("spec", "yardstick")
+conflict_prefer("sensitivity", "yardstick")
+conflict_prefer("specificity", "yardstick")
+conflict_prefer("filter", "dplyr")
+
+imdb_raw_tbl <- read_csv("https://jadenchant.github.io/data/imdb.csv")
+```
+
+## Cleaning Data
+
+This text filtering will remove any links, html formatting, and emojis. We are also converting the sentiment to an integer so the model can use it properly. We also remove reviews that have more than 500 words and less than 20 words. We are removing any reviews that have more than 500 words since more words will slow down our model. We are also remove any reviews with less than 20 words since it is difficult to get sentiment based off of few words even for a human let alone a neural network.
+
+```{r}
+imdb_tbl_view <- imdb_raw_tbl |>
+  mutate(review = gsub("https?://.+", "", review)) |>
+  mutate(review = gsub("<.*?>", "", review)) |>
+  mutate(review = gsub("[^\x01-\x7F]", "", review)) |>
+  mutate(sentiment = as.factor(sentiment)) |>
+  mutate(sentiment = as.integer(sentiment)) |>
+  mutate(sentiment = sentiment - 1) |>
+  filter(tokenizers::count_words(review) < 500) |>
+  filter(tokenizers::count_words(review) > 20)
+
+imdb_tbl <- imdb_tbl_view |>
+  mutate(review = tolower(review)) |>
+  mutate(review = gsub("[@#$%^&*()_+=\\|<>/~`<>]", "", review)) |>
+  mutate(review = gsub("[!;:,.?]", " ", review)) |>
+  mutate(review = gsub("\\s+", " ", review))
+```
+
+We use the tokenizer to view the average number of words per review. The average number of words per review is a right skew distribution. The sentiment is close to evenly split among both positive and negative sentiment.
+
+```{r}
+imdb_tbl |>
+  ggplot(aes(x = tokenizers::count_words(review)))+
+  geom_histogram(bins = 30)+
+  labs(title="Number of Words per Review", 
+       x="Words", y="Count")
+
+imdb_tbl |>
+  reframe(sentiment) |>
+  count(sentiment)
+```
+
+## Data Split
+
+```{r}
+set.seed(12345)
+
+imdb_split <- initial_split(imdb_tbl)
+
+imdb_train <- training(imdb_split)
+imdb_test <- testing(imdb_split)
+```
+
+## Tokenize
+
+We must tokenize the reviews in order for the LSTM model to interpret each token individually instead of using the entire review as one input. The tokenizer also converts the entire dataset into integer id values which the neural network model can use. We are only considering reviews with a maximum review word length of 500 words and maximum number of words the model will use is 20,000. Ideally, we would increase the max_words and max_length values, but this would require more computational power and time.
+
+```{r}
+max_words <- 1e4
+max_length <- 500
+
+imdb_recipe <- recipe(~review, imdb_train) |>
+  step_tokenize(review) |>
+  step_tokenfilter(review, max_tokens = max_words) |>
+  step_sequence_onehot(review, sequence_length = max_length)
+
+imdb_prep <- prep(imdb_recipe)
+imdb_train_token <- bake(imdb_prep, new_data = NULL, composition = "matrix")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
