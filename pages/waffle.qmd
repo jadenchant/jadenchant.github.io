@@ -1,0 +1,15 @@
+---
+title: "Waffle"
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(waffle)
+
+```

@@ -29,6 +29,8 @@ website:
           text: "Simulation"
         - href: pages/str.qmd
           text: "RegEx"
+        - href: pages/waffle.qmd
+          text: "Waffle"
 
   page-footer: 
     center:
