@@ -66,7 +66,8 @@ sentiment_count <- tokenized |>
 
 result <- left_join(imdb_small, sentiment_count, by = "id") |>
   mutate(pred_sentiment = as.factor(ifelse(positive > negative, "positive", "negative"))) |>
-  select(review, true_sentiment, pred_sentiment, positive, negative)
+  mutate(pred_val = positive / (positive + negative)) |>
+  select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
 
 result |>
   group_by(true_sentiment, pred_sentiment) |>
@@ -92,6 +93,11 @@ result |>
   sensitivity(true_sentiment, pred_sentiment) |>
   pull(.estimate) |>
   cat("sensitivity")
+
+result |>
+  roc_curve(true_sentiment, pred_val) |>
+  autoplot()+
+  labs(title = "ROC Curve")
 ```
 
 This code is the same as `imdb_small`, except for the filtering of na values at the end. I am assume this would be where there are no words in the review that match any of the `bing_sentiment` words. 
@@ -111,8 +117,10 @@ sentiment_count <- tokenized |>
 
 result_full <- left_join(imdb_clean, sentiment_count, by = "id") |>
   mutate(pred_sentiment = as.factor(ifelse(positive > negative, "positive", "negative"))) |>
-  select(review, true_sentiment, pred_sentiment, positive, negative) |>
-  filter(!is.na(pred_sentiment))
+  filter(!is.na(pred_sentiment)) |>
+  mutate(pred_val = positive / (positive + negative)) |>
+  select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
+  
 
 result_full |>
   group_by(true_sentiment, pred_sentiment) |>
@@ -138,6 +146,11 @@ result_full |>
   sensitivity(true_sentiment, pred_sentiment) |>
   pull(.estimate) |>
   cat("sensitivity")
+
+result_full |>
+  roc_curve(true_sentiment, pred_val) |>
+  autoplot()+
+  labs(title = "ROC Curve")
 ```
 
 
