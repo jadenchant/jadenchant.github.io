@@ -46,8 +46,7 @@ imdb_small |>
   summarize(n = n())
 ```
 
-
-
+The Bing Sentiments include a tibble of 6,786 words with sentiment associated with them. These words will be joined with the reviews and 
 
 ```{r}
 bing_sentiment <- get_sentiments("bing")
@@ -68,10 +67,6 @@ result <- left_join(imdb_small, sentiment_count, by = "id") |>
   mutate(pred_sentiment = as.factor(ifelse(positive > negative, "positive", "negative"))) |>
   mutate(pred_val = positive / (positive + negative)) |>
   select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
-
-result |>
-  group_by(true_sentiment, pred_sentiment) |>
-  count()
 ```
 
 The results will vary due to the sampling of `imdb_clean` rows. However, most of the time we can see that this model performs slightly better than just guessing what the sentiment is. 
@@ -120,11 +115,6 @@ result_full <- left_join(imdb_clean, sentiment_count, by = "id") |>
   filter(!is.na(pred_sentiment)) |>
   mutate(pred_val = positive / (positive + negative)) |>
   select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
-  
-
-result_full |>
-  group_by(true_sentiment, pred_sentiment) |>
-  count()
 ```
 
 As we can see from the confusion matrix and the accuracy, the model is not very good at predicting the sentiment of the reviews. The accuracy is 0.5 which is the same as a coin flip. It would be the same as guessing. This is to be expected since context matters much more than the individual words. This is why Machine Learning Models do better with text data that linear models or just counting words. 
@@ -152,5 +142,17 @@ result_full |>
   autoplot()+
   labs(title = "ROC Curve")
 ```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
