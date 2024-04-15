@@ -69,6 +69,24 @@ result <- left_join(imdb_small, sentiment_count, by = "id") |>
   select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
 ```
 
+The histogram shows .......
+
+```{r}
+ggplot(result, aes(x = positive, fill = true_sentiment))+
+  geom_histogram(binwidth = 3)+
+  facet_wrap(~true_sentiment)+
+  scale_fill_manual(values = c("positive" = "#0a821e", "negative" = "#8c160e"))
+
+ggplot(result, aes(x = negative, fill = true_sentiment))+
+  geom_histogram(binwidth = 3)+
+  facet_wrap(~true_sentiment)+
+  scale_fill_manual(values = c("positive" = "#0a821e", "negative" = "#8c160e"))
+```
+
+
+
+
+
 The results will vary due to the sampling of `imdb_clean` rows. However, most of the time we can see that this model performs slightly better than just guessing what the sentiment is. 
 
 ```{r}
@@ -88,7 +106,11 @@ result |>
   sensitivity(true_sentiment, pred_sentiment) |>
   pull(.estimate) |>
   cat("sensitivity")
+```
 
+The ROC curve shows us the relationship between specificity and sensitivity. The ideal situation is to have the highest sensitivity and specificity. 
+
+```{r}
 result |>
   roc_curve(true_sentiment, pred_val) |>
   autoplot()+
@@ -117,6 +139,20 @@ result_full <- left_join(imdb_clean, sentiment_count, by = "id") |>
   select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
 ```
 
+The histogram shows ........
+
+```{r}
+ggplot(result_full, aes(x = positive, fill = true_sentiment))+
+  geom_histogram(binwidth = 5)+
+  facet_wrap(~true_sentiment)+
+  scale_fill_manual(values = c("positive" = "#0a821e", "negative" = "#8c160e"))
+
+ggplot(result_full, aes(x = negative, fill = true_sentiment))+
+  geom_histogram(binwidth = 5)+
+  facet_wrap(~true_sentiment)+
+  scale_fill_manual(values = c("positive" = "#0a821e", "negative" = "#8c160e"))
+```
+
 As we can see from the confusion matrix and the accuracy, the model is not very good at predicting the sentiment of the reviews. The accuracy is 0.5 which is the same as a coin flip. It would be the same as guessing. This is to be expected since context matters much more than the individual words. This is why Machine Learning Models do better with text data that linear models or just counting words. 
 
 ```{r}
@@ -136,7 +172,11 @@ result_full |>
   sensitivity(true_sentiment, pred_sentiment) |>
   pull(.estimate) |>
   cat("sensitivity")
+```
 
+The ROC curve also confirms how terrible this model is for classification of sentiment in a large dataset setting. The sensitivity and specificity are both around 50%, which is why we are see a straight line for the ROC curve.
+
+```{r}
 result_full |>
   roc_curve(true_sentiment, pred_val) |>
   autoplot()+
