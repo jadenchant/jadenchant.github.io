@@ -11,46 +11,120 @@ execute:
 
 library(tidyverse)
 library(tidytext)
+library(yardstick)
 
 imdb <- read_csv("https://jadenchant.github.io/data/imdb.csv")
 ```
 
 We as humans can easily determine if someone is saying something positive or negative, but computers and algorithms have struggled with this for decades. The context and sarcasm is not easily discernible to a computer. I will be attempting to predict the sentiment from movie reviews on IMDB. 
 
-The dataset IMDB Reviews contains reviews from the IMDB website and the sentiment towards that specific movie review. There is an exactly 50/50 split between positive sentiment and negative sentiment. I previously used this dataset for a Machine learning project using Long Short Term Memory. Using ML I was able to get a 88.8% accuracy in correctly identifying the sentiment. One major flaw with this dataset is the accuracy of the data. There are many examples where it says that the review has negative sentiment, but is actually a positive review. A better dataset would have their actual star rating system which the user would input and would not be up for interpretation. 
+The dataset IMDB Reviews contains reviews from the IMDB website and the sentiment towards that specific movie review. There is an exactly 50/50 split between positive sentiment and negative sentiment. I previously used this dataset for a [Machine learning project](https://jadenchant.github.io/pages/projects/lstm/) using Long Short Term Memory. Using ML I was able to get a 88.8% accuracy in correctly identifying the sentiment. One major flaw with this dataset is the accuracy of the data. There are many examples where it says that the review has negative sentiment, but is actually a positive review. A better dataset would have their actual star rating system which the user would input and would not be up for interpretation. 
 
 ```{r}
 imdb_clean <- imdb |>
+  mutate(id = row_number()) |>
   mutate(review = str_replace_all(review, "https?://.+", "")) |>
   mutate(review = str_replace_all(review, "<.*?>", "")) |>
   mutate(review = str_replace_all(review, "[^\x01-\x7F]", "")) |>
-  mutate(sentiment = as.factor(sentiment)) |>
-  mutate(sentiment = as.integer(sentiment)) |>
-  mutate(sentiment = sentiment - 1) |>
+  mutate(true_sentiment = as.factor(sentiment)) |>
+  select(-sentiment) |>
   filter(tokenizers::count_words(review) < 500) |>
   filter(tokenizers::count_words(review) > 20)
 ```
 
 
 ```{r}
-imdb |>
-  filter(str_detect(review, "positive")) |>
-  group_by(sentiment) |>
+imdb_small <- slice_sample(imdb_clean, n = 250) |>
+  mutate(id = row_number()) |>
+  select(id, review, true_sentiment)
+
+imdb_small |>
+  group_by(true_sentiment) |>
   summarize(n = n())
+```
 
-imdb |>
-  filter(str_detect(review, "negative")) |>
-  group_by(sentiment) |>
-  summarize(n = n())
 
-# sample()
 
-get_sentiments("bing")
+
+```{r}
+bing_sentiment <- get_sentiments("bing")
+
+tokenized <- imdb_small |>
+  select(-true_sentiment) |>
+  mutate(id = row_number(), 
+         review = as.character(review)) |>
+  unnest_tokens(word, review)
+
+sentiment_count <- tokenized |>
+  inner_join(bing_sentiment, by = "word") |>
+  group_by(id, sentiment) |>
+  summarize(count = n()) |>
+  pivot_wider(names_from = sentiment, values_from = count, values_fill = 0)
+
+result <- left_join(imdb_small, sentiment_count, by = "id") |>
+  mutate(pred_sentiment = as.factor(ifelse(positive > negative, "positive", "negative"))) |>
+  select(review, true_sentiment, pred_sentiment, positive, negative)
+
+result |>
+  group_by(true_sentiment, pred_sentiment) |>
+  count()
 ```
 
 
 
 
 
+```{r}
+result |>
+  conf_mat(true_sentiment, pred_sentiment) |>
+  autoplot(type = "heatmap")
+
+result |>
+  accuracy(true_sentiment, pred_sentiment)
+result |>
+  specificity(true_sentiment, pred_sentiment)
+result |>
+  sensitivity(true_sentiment, pred_sentiment)
+```
+
+
+```{r}
+tokenized <- imdb_clean |>
+  select(-true_sentiment) |>
+  mutate(id = row_number(), 
+         review = as.character(review)) |>
+  unnest_tokens(word, review)
+
+sentiment_count <- tokenized |>
+  inner_join(bing_sentiment, by = "word") |>
+  group_by(id, sentiment) |>
+  summarize(count = n()) |>
+  pivot_wider(names_from = sentiment, values_from = count, values_fill = 0)
+
+result_full <- left_join(imdb_clean, sentiment_count, by = "id") |>
+  mutate(pred_sentiment = as.factor(ifelse(positive > negative, "positive", "negative"))) |>
+  select(review, true_sentiment, pred_sentiment, positive, negative) |>
+  filter(!is.na(pred_sentiment))
+
+result_full |>
+  group_by(true_sentiment, pred_sentiment) |>
+  count()
+```
+
+
+
+```{r}
+result_full |>
+  conf_mat(true_sentiment, pred_sentiment) |>
+  autoplot(type = "heatmap")
+
+result_full |>
+  accuracy(true_sentiment, pred_sentiment)
+result_full |>
+  specificity(true_sentiment, pred_sentiment)
+result_full |>
+  sensitivity(true_sentiment, pred_sentiment)
+```
+```
 
 
