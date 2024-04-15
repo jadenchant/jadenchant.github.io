@@ -239,6 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>We as humans can easily determine if someone is saying something positive or negative, but computers and algorithms have struggled with this for decades. The context and sarcasm is not easily discernible to a computer. I will be attempting to predict the sentiment from movie reviews on IMDB.</p>
 <p>The dataset IMDB Reviews contains reviews from the IMDB website and the sentiment towards that specific movie review. There is an exactly 50/50 split between positive sentiment and negative sentiment. I previously used this dataset for a <a href="https://jadenchant.github.io/pages/projects/lstm/">Machine learning project</a> using Long Short Term Memory. Using ML I was able to get a 88.8% accuracy in correctly identifying the sentiment. One major flaw with this dataset is the accuracy of the data. There are many examples where it says that the review has negative sentiment, but is actually a positive review. A better dataset would have their actual star rating system which the user would input and would not be up for interpretation.</p>
+<p>Cleaning the <code>imdb</code> dataset includes removing links, html tags, and special characters. We will also filter out reviews with more than 500 words and less than 20 words. It is only filtering out around 4000 reviews which is not a significant portion of the whole dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>imdb_clean <span class="ot">&lt;-</span> imdb <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
@@ -250,6 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tokenizers<span class="sc">::</span><span class="fu">count_words</span>(review) <span class="sc">&lt;</span> <span class="dv">500</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tokenizers<span class="sc">::</span><span class="fu">count_words</span>(review) <span class="sc">&gt;</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>First we will take a smaller sample from the entire <code>imdb_clean</code> which will be easier to determine if the code will function correctly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>imdb_small <span class="ot">&lt;-</span> <span class="fu">slice_sample</span>(imdb_clean, <span class="at">n =</span> <span class="dv">250</span>) <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="sc">|&gt;</span></span>
@@ -262,8 +264,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 2 × 2
   true_sentiment     n
   &lt;fct&gt;          &lt;int&gt;
-1 negative         118
-2 positive         132</code></pre>
+1 negative         113
+2 positive         137</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -289,14 +291,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 3
-# Groups:   true_sentiment, pred_sentiment [4]
+<pre><code># A tibble: 5 × 3
+# Groups:   true_sentiment, pred_sentiment [5]
   true_sentiment pred_sentiment     n
   &lt;fct&gt;          &lt;fct&gt;          &lt;int&gt;
-1 negative       negative          82
-2 negative       positive          36
-3 positive       negative          38
-4 positive       positive          94</code></pre>
+1 negative       negative          89
+2 negative       positive          24
+3 positive       negative          28
+4 positive       positive         108
+5 positive       &lt;NA&gt;               1</code></pre>
 </div>
 </div>
 <p>The results will vary due to the sampling of <code>imdb_clean</code> rows. However, most of the time we can see that this model performs slightly better than just guessing what the sentiment is.</p>
@@ -312,28 +315,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(.estimate) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric  .estimator .estimate
-  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-1 accuracy binary         0.704</code></pre>
+<pre><code>0.7911647 accuracy</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specificity</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specificity</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(.estimate) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"specificity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric     .estimator .estimate
-  &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 specificity binary         0.712</code></pre>
+<pre><code>0.7941176 specificity</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sensitivity</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sensitivity</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(.estimate) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"sensitivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric     .estimator .estimate
-  &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 sensitivity binary         0.695</code></pre>
+<pre><code>0.7876106 sensitivity</code></pre>
 </div>
 </div>
 <p>This code is the same as <code>imdb_small</code>, except for the filtering of na values at the end. I am assume this would be where there are no words in the review that match any of the <code>bing_sentiment</code> words.</p>
@@ -382,28 +382,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>result_full <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">accuracy</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(.estimate) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"accuracy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric  .estimator .estimate
-  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-1 accuracy binary         0.500</code></pre>
+<pre><code>0.4998 accuracy</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>result_full <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specificity</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specificity</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(.estimate) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"specificity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric     .estimator .estimate
-  &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 specificity binary         0.519</code></pre>
+<pre><code>0.5188657 specificity</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>result_full <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sensitivity</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sensitivity</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(.estimate) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"sensitivity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  .metric     .estimator .estimate
-  &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 sensitivity binary         0.481</code></pre>
+<pre><code>0.4809617 sensitivity</code></pre>
 </div>
 </div>
 
