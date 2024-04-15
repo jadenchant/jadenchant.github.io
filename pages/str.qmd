@@ -125,6 +125,5 @@ result_full |>
 result_full |>
   sensitivity(true_sentiment, pred_sentiment)
 ```
-```
 
 
