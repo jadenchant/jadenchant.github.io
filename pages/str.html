@@ -262,8 +262,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 2 × 2
   true_sentiment     n
   &lt;fct&gt;          &lt;int&gt;
-1 negative         126
-2 positive         124</code></pre>
+1 negative         118
+2 positive         132</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -293,12 +293,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # Groups:   true_sentiment, pred_sentiment [4]
   true_sentiment pred_sentiment     n
   &lt;fct&gt;          &lt;fct&gt;          &lt;int&gt;
-1 negative       negative          83
-2 negative       positive          43
-3 positive       negative          26
-4 positive       positive          98</code></pre>
+1 negative       negative          82
+2 negative       positive          36
+3 positive       negative          38
+4 positive       positive          94</code></pre>
 </div>
 </div>
+<p>The results will vary due to the sampling of <code>imdb_clean</code> rows. However, most of the time we can see that this model performs slightly better than just guessing what the sentiment is.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
@@ -316,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 3
   .metric  .estimator .estimate
   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-1 accuracy binary         0.724</code></pre>
+1 accuracy binary         0.704</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specificity</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -324,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 3
   .metric     .estimator .estimate
   &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 specificity binary         0.790</code></pre>
+1 specificity binary         0.712</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sensitivity</span>(true_sentiment, pred_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -332,9 +333,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 3
   .metric     .estimator .estimate
   &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 sensitivity binary         0.659</code></pre>
+1 sensitivity binary         0.695</code></pre>
 </div>
 </div>
+<p>This code is the same as <code>imdb_small</code>, except for the filtering of na values at the end. I am assume this would be where there are no words in the review that match any of the <code>bing_sentiment</code> words.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tokenized <span class="ot">&lt;-</span> imdb_clean <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>true_sentiment) <span class="sc">|&gt;</span></span>
@@ -367,6 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4 positive       positive       10960</code></pre>
 </div>
 </div>
+<p>As we can see from the confusion matrix and the accuracy, the model is not very good at predicting the sentiment of the reviews. The accuracy is 0.5 which is the same as a coin flip. It would be the same as guessing. This is to be expected since context matters much more than the individual words. This is why Machine Learning Models do better with text data that linear models or just counting words.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>result_full <span class="sc">|&gt;</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(true_sentiment, pred_sentiment) <span class="sc">|&gt;</span></span>
