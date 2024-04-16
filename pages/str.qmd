@@ -69,7 +69,7 @@ result <- left_join(imdb_small, sentiment_count, by = "id") |>
   select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
 ```
 
-The histogram shows .......
+The first histogram shows the true positive and true negative sentiments and their distribution of positive sentiment words. The second histogram shows the true positive and true negative sentiments and their distribution of negative sentiment words. All of the distributions look relatively the same.
 
 ```{r}
 ggplot(result, aes(x = positive, fill = true_sentiment))+
@@ -82,10 +82,6 @@ ggplot(result, aes(x = negative, fill = true_sentiment))+
   facet_wrap(~true_sentiment)+
   scale_fill_manual(values = c("positive" = "#0a821e", "negative" = "#8c160e"))
 ```
-
-
-
-
 
 The results will vary due to the sampling of `imdb_clean` rows. However, most of the time we can see that this model performs slightly better than just guessing what the sentiment is. 
 
@@ -139,7 +135,7 @@ result_full <- left_join(imdb_clean, sentiment_count, by = "id") |>
   select(review, true_sentiment, pred_sentiment, pred_val, positive, negative)
 ```
 
-The histogram shows ........
+The histograms show the same outcomes as the `imdb_small` version, but the distributions look even closer to being the same.
 
 ```{r}
 ggplot(result_full, aes(x = positive, fill = true_sentiment))+
@@ -183,9 +179,7 @@ result_full |>
   labs(title = "ROC Curve")
 ```
 
-
-
-
+Overall this method of sentiment binary classification is not a good method. The Machine Learning Model performs significantly better than purly counting the number of positive and negative sentimental words. 
 
 
 
