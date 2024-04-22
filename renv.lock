@@ -1897,6 +1897,28 @@
       ],
       "Hash": "26f391e42073877818f2d4f0470dca24"
     },
+    "janitor": {
+      "Package": "janitor",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "hms",
+        "lifecycle",
+        "lubridate",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "snakecase",
+        "stringi",
+        "stringr",
+        "tidyr",
+        "tidyselect"
+      ],
+      "Hash": "5baae149f1082f466df9d1442ba7aa65"
+    },
     "jomo": {
       "Package": "jomo",
       "Version": "2.7-6",
@@ -3426,6 +3448,18 @@
         "warp"
       ],
       "Hash": "a584625e2b9e4fad4be135c8ea5c99aa"
+    },
+    "snakecase": {
+      "Package": "snakecase",
+      "Version": "0.11.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "stringi",
+        "stringr"
+      ],
+      "Hash": "58767e44739b76965332e8a4fe3f91f1"
     },
     "sp": {
       "Package": "sp",

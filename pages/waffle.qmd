@@ -11,25 +11,28 @@ execute:
 
 library(waffle)
 library(magrittr)
-library(ggplot2)
-library(dplyr)
-library(waffle)
+library(janitor)
+library(tidyverse)
+
+mn_eco_industry_raw <- read_csv("https://jadenchant.github.io/data/mn_eco_industry2017.csv") |>
+  clean_names()
+
+mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
+  select(naics2017, naics2017_label, sector, estab, napcsdol)
+
+# sector = NAICS economic sector 
+# estab =	Number of establishments
+# napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
 ```
 
 
 ```{r}
-data.frame(
+example <- tibble(
   parts = factor(rep(month.abb[1:3], 3), levels=month.abb[1:3]),
   vals = c(10, 20, 30, 6, 14, 40, 30, 20, 10),
-  col = rep(c("navy", "black", "maroon"), 3),
-  fct = c(
-    rep("Thing 1", 3),
-    rep("Thing 2", 3),
-    rep("Thing 3", 3)
-  )
-) -> xdf
+)
 
-xdf |>
+example |>
   count(parts, wt = vals) |>
   ggplot(
     aes(fill = parts, values = n)
@@ -42,8 +45,8 @@ xdf |>
   ) +
   scale_fill_manual(
     name = NULL,
-    values = c("#a40000", "#c68958", "#ae6056"),
-    labels = c("Fruit", "Shake", "Pizza")
+    values = c("#a40000", "#169948", "#ae6056"),
+    labels = c("Fruit", "Salad", "Pizza")
   ) +
   coord_equal() +
   theme_minimal()+
