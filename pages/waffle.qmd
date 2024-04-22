@@ -29,8 +29,8 @@ data.frame(
   )
 ) -> xdf
 
-xdf %>%
-  count(parts, wt = vals) %>%
+xdf |>
+  count(parts, wt = vals) |>
   ggplot(
     aes(fill = parts, values = n)
   ) +
@@ -43,7 +43,7 @@ xdf %>%
   scale_fill_manual(
     name = NULL,
     values = c("#a40000", "#c68958", "#ae6056"),
-    labels = c("Fruit", "Sammich", "Pizza")
+    labels = c("Fruit", "Shake", "Pizza")
   ) +
   coord_equal() +
   theme_minimal()+
@@ -51,11 +51,46 @@ xdf %>%
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```{r}
 #| eval: false
+#| include: false
 
-xdf %>%
-  count(parts, wt = vals) %>%
+xdf |>
+  count(parts, wt = vals) |>
   ggplot(
     aes(label = parts, values = n)
   ) +
@@ -85,17 +120,16 @@ xdf %>%
   )
 ```
 
-
-
 ```{r}
 #| eval: false
+#| include: false
 
 waffle(c(50, 30, 15, 5), rows = 5, use_glyph = "music", glyph_size = 6)
 ```
 
-
 ```{r}
 #| eval: false
+#| include: false
 
 library(ggplot2)
 library(waffle)
@@ -142,40 +176,28 @@ ggplot(mydf, aes(label = food_group,
   theme(legend.text = element_text(size = 10, hjust = 0, vjust = 0.75))
 ```
 
-
-
-
-
-
-
-
 ```{r}
 #| eval: false
+#| include: false
 
-# Install and load the extrafont package
+# DOES NOT WORK
+
 install.packages("extrafont")
 library(extrafont)
 
-# Set the source directory where the Font Awesome TTF files are located
 source_font_dir <- "C:/Users/jaden/AppData/Local/R/cache/R/renv/cache/v5/R-4.3/x86_64-w64-mingw32/waffle/1.0.2/b4a5d1a3036a7e6a63439b16b3ad39fc/waffle/fonts"
 
-# Set the destination directory where extrafont will store the fonts
 destination_font_dir <- file.path(Sys.getenv("windir"), "Fonts")
 
-# Copy Font Awesome TTF files to the system font directory
 file.copy(from = list.files(source_font_dir, pattern = "*.ttf", full.names = TRUE), 
           to = destination_font_dir, 
           overwrite = TRUE)
 
-# Register Font Awesome fonts
 font_import(paths = destination_font_dir, prompt = FALSE)
 
-# Load the Font Awesome fonts
 loadfonts()
 
-# Test the Font Awesome icons
 plot.new()
 text(x = 0.5, y = 0.5, labels = "\uf083", family = "FontAwesome", cex = 5, col = "darkblue")
-
 ```
 

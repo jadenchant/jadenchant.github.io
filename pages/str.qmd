@@ -52,8 +52,6 @@ The Bing Sentiments include a tibble of 6,786 words with sentiment associated wi
 ```{r}
 bing_sentiment <- get_sentiments("bing")
 
-afinn_sentiment <- get_sentiments("afinn")
-
 tokenized <- imdb_small |>
   select(-true_sentiment) |>
   mutate(id = row_number(), 
