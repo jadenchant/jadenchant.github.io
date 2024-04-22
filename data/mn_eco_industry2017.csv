@@ -1,0 +1,461 @@
+﻿NAME,YEAR,NAICS2017,NAICS2017_LABEL,INDGROUP,SUBSECTOR,SECTOR,INDLEVEL,NAPCS2017,NAPCS2017_LABEL,TYPOP,TYPOP_LABEL,UNITS,UNITS_LABEL,ESTAB,TVALLN,NAPCSQPRD,NAPCSQSHP,NAPCSDOL,LINEALL_PCT,LINE_PCT,ESTAB_PCT,NAPCSDOL_IMP,NAPCSDOL_S
+Minnesota,2017,44-45,Retail trade,null,null,44,2,0,Total,0,All establishments,X,X,18827,X,X,X,91993636,100,X,X,X,0
+Minnesota,2017,441,Motor vehicle and parts dealers,null,441,44,3,0,Total,0,All establishments,X,X,2262,X,X,X,21265315,100,X,X,X,0
+Minnesota,2017,4411,Automobile dealers,4411,441,44,4,0,Total,0,All establishments,X,X,785,X,X,X,17657726,100,X,X,X,0
+Minnesota,2017,44111,New car dealers,4411,441,44,5,0,Total,0,All establishments,X,X,408,X,X,X,16511693,100,X,X,X,0
+Minnesota,2017,441110,New car dealers,4411,441,44,6,0,Total,0,All establishments,X,X,408,X,X,X,16511693,100,X,X,X,0
+Minnesota,2017,44112,Used car dealers,4411,441,44,5,0,Total,0,All establishments,X,X,377,X,X,X,1146033,100,X,X,X,0
+Minnesota,2017,441120,Used car dealers,4411,441,44,6,0,Total,0,All establishments,X,X,377,X,X,X,1146033,100,X,X,X,0
+Minnesota,2017,4412,Other motor vehicle dealers,4412,441,44,4,0,Total,0,All establishments,X,X,399,X,X,X,1984930,100,X,X,X,0
+Minnesota,2017,44121,Recreational vehicle dealers,4412,441,44,5,0,Total,0,All establishments,X,X,74,X,X,X,615041,100,X,X,X,0
+Minnesota,2017,441210,Recreational vehicle dealers,4412,441,44,6,0,Total,0,All establishments,X,X,74,X,X,X,615041,100,X,X,X,0
+Minnesota,2017,44122,"Motorcycle, boat, and other motor vehicle dealers",4412,441,44,5,0,Total,0,All establishments,X,X,325,X,X,X,1369889,100,X,X,X,0
+Minnesota,2017,441222,Boat dealers,4412,441,44,6,0,Total,0,All establishments,X,X,137,X,X,X,550460,100,X,X,X,0
+Minnesota,2017,441228,"Motorcycle, ATV, and all other motor vehicle dealers",4412,441,44,6,0,Total,0,All establishments,X,X,188,X,X,X,819429,100,X,X,X,0
+Minnesota,2017,4413,"Automotive parts, accessories, and tire stores",4413,441,44,4,0,Total,0,All establishments,X,X,1078,X,X,X,1622659,100,X,X,X,0
+Minnesota,2017,44131,Automotive parts and accessories stores,4413,441,44,5,0,Total,0,All establishments,X,X,762,X,X,X,1049427,100,X,X,X,0
+Minnesota,2017,441310,Automotive parts and accessories stores,4413,441,44,6,0,Total,0,All establishments,X,X,762,X,X,X,1049427,100,X,X,X,0
+Minnesota,2017,44132,Tire dealers,4413,441,44,5,0,Total,0,All establishments,X,X,316,X,X,X,573232,100,X,X,X,0
+Minnesota,2017,441320,Tire dealers,4413,441,44,6,0,Total,0,All establishments,X,X,316,X,X,X,573232,100,X,X,X,0
+Minnesota,2017,442,Furniture and home furnishings stores,null,442,44,3,0,Total,0,All establishments,X,X,867,X,X,X,2032226,100,X,X,X,0
+Minnesota,2017,4421,Furniture stores,4421,442,44,4,0,Total,0,All establishments,X,X,371,X,X,X,1197846,100,X,X,X,0
+Minnesota,2017,44211,Furniture stores,4421,442,44,5,0,Total,0,All establishments,X,X,371,X,X,X,1197846,100,X,X,X,0
+Minnesota,2017,442110,Furniture stores,4421,442,44,6,0,Total,0,All establishments,X,X,371,X,X,X,1197846,100,X,X,X,0
+Minnesota,2017,4422,Home furnishings stores,4422,442,44,4,0,Total,0,All establishments,X,X,496,X,X,X,834380,100,X,X,X,0
+Minnesota,2017,44221,Floor covering stores,4422,442,44,5,0,Total,0,All establishments,X,X,224,X,X,X,381356,100,X,X,X,0
+Minnesota,2017,442210,Floor covering stores,4422,442,44,6,0,Total,0,All establishments,X,X,224,X,X,X,381356,100,X,X,X,0
+Minnesota,2017,44229,Other home furnishings stores,4422,442,44,5,0,Total,0,All establishments,X,X,272,X,X,X,453024,100,X,X,X,0
+Minnesota,2017,442291,Window treatment stores,4422,442,44,6,0,Total,0,All establishments,X,X,22,X,X,X,20443,100,X,X,X,0
+Minnesota,2017,442299,All other home furnishings stores,4422,442,44,6,0,Total,0,All establishments,X,X,250,X,X,X,432581,100,X,X,X,0
+Minnesota,2017,443,Electronics and appliance stores,null,443,44,3,0,Total,0,All establishments,X,X,537,X,X,X,1728575,100,X,X,X,0
+Minnesota,2017,4431,Electronics and appliance stores,4431,443,44,4,0,Total,0,All establishments,X,X,537,X,X,X,1728575,100,X,X,X,0
+Minnesota,2017,44314,Electronics and appliance stores,4431,443,44,5,0,Total,0,All establishments,X,X,537,X,X,X,1728575,100,X,X,X,0
+Minnesota,2017,443141,Household appliance stores,4431,443,44,6,0,Total,0,All establishments,X,X,194,X,X,X,386455,100,X,X,X,0
+Minnesota,2017,443142,Electronics stores,4431,443,44,6,0,Total,0,All establishments,X,X,343,X,X,X,1342120,100,X,X,X,0
+Minnesota,2017,444,Building material and garden equipment and supplies dealers,null,444,44,3,0,Total,0,All establishments,X,X,1699,X,X,X,7603525,100,X,X,X,0
+Minnesota,2017,4441,Building material and supplies dealers,4441,444,44,4,0,Total,0,All establishments,X,X,1328,X,X,X,6347761,100,X,X,X,0
+Minnesota,2017,44411,Home centers,4441,444,44,5,0,Total,0,All establishments,X,X,131,X,X,X,3500604,100,X,X,X,0
+Minnesota,2017,444110,Home centers,4441,444,44,6,0,Total,0,All establishments,X,X,131,X,X,X,3500604,100,X,X,X,0
+Minnesota,2017,44412,Paint and wallpaper stores,4441,444,44,5,0,Total,0,All establishments,X,X,110,X,X,X,207150,100,X,X,X,0
+Minnesota,2017,444120,Paint and wallpaper stores,4441,444,44,6,0,Total,0,All establishments,X,X,110,X,X,X,207150,100,X,X,X,0
+Minnesota,2017,44413,Hardware stores,4441,444,44,5,0,Total,0,All establishments,X,X,467,X,X,X,736803,100,X,X,X,0
+Minnesota,2017,444130,Hardware stores,4441,444,44,6,0,Total,0,All establishments,X,X,467,X,X,X,736803,100,X,X,X,0
+Minnesota,2017,44419,Other building material dealers,4441,444,44,5,0,Total,0,All establishments,X,X,620,X,X,X,1903204,100,X,X,X,0
+Minnesota,2017,444190,Other building material dealers,4441,444,44,6,0,Total,0,All establishments,X,X,620,X,X,X,1903204,100,X,X,X,0
+Minnesota,2017,4442,Lawn and garden equipment and supplies stores,4442,444,44,4,0,Total,0,All establishments,X,X,371,X,X,X,1255764,100,X,X,X,0
+Minnesota,2017,44421,Outdoor power equipment stores,4442,444,44,5,0,Total,0,All establishments,X,X,77,X,X,X,186344,100,X,X,X,0
+Minnesota,2017,444210,Outdoor power equipment stores,4442,444,44,6,0,Total,0,All establishments,X,X,77,X,X,X,186344,100,X,X,X,0
+Minnesota,2017,44422,"Nursery, garden center, and farm supply stores",4442,444,44,5,0,Total,0,All establishments,X,X,294,X,X,X,1069420,100,X,X,X,0
+Minnesota,2017,444220,"Nursery, garden center, and farm supply stores",4442,444,44,6,0,Total,0,All establishments,X,X,294,X,X,X,1069420,100,X,X,X,0
+Minnesota,2017,445,Food and beverage stores,null,445,44,3,0,Total,0,All establishments,X,X,2440,X,X,X,10559911,100,X,X,X,0
+Minnesota,2017,4451,Grocery stores,4451,445,44,4,0,Total,0,All establishments,X,X,1139,X,X,X,8676856,100,X,X,X,0
+Minnesota,2017,44511,Supermarkets and other grocery (except convenience) stores,4451,445,44,5,0,Total,0,All establishments,X,X,979,X,X,X,8574991,100,X,X,X,0
+Minnesota,2017,445110,Supermarkets and other grocery (except convenience) stores,4451,445,44,6,0,Total,0,All establishments,X,X,979,X,X,X,8574991,100,X,X,X,0
+Minnesota,2017,44512,Convenience stores,4451,445,44,5,0,Total,0,All establishments,X,X,160,X,X,X,101865,100,X,X,X,0
+Minnesota,2017,445120,Convenience stores,4451,445,44,6,0,Total,0,All establishments,X,X,160,X,X,X,101865,100,X,X,X,0
+Minnesota,2017,4452,Specialty food stores,4452,445,44,4,0,Total,0,All establishments,X,X,423,X,X,X,310533,100,X,X,X,0
+Minnesota,2017,44521,Meat markets,4452,445,44,5,0,Total,0,All establishments,X,X,142,X,X,X,129702,100,X,X,X,0
+Minnesota,2017,445210,Meat markets,4452,445,44,6,0,Total,0,All establishments,X,X,142,X,X,X,129702,100,X,X,X,0
+Minnesota,2017,44522,Fish and seafood markets,4452,445,44,5,0,Total,0,All establishments,X,X,7,X,X,X,19713,100,X,X,X,0
+Minnesota,2017,445220,Fish and seafood markets,4452,445,44,6,0,Total,0,All establishments,X,X,7,X,X,X,19713,100,X,X,X,0
+Minnesota,2017,44523,Fruit and vegetable markets,4452,445,44,5,0,Total,0,All establishments,X,X,9,X,X,X,10737,100,X,X,X,0
+Minnesota,2017,445230,Fruit and vegetable markets,4452,445,44,6,0,Total,0,All establishments,X,X,9,X,X,X,10737,100,X,X,X,0
+Minnesota,2017,44529,Other specialty food stores,4452,445,44,5,0,Total,0,All establishments,X,X,265,X,X,X,150381,100,X,X,X,0
+Minnesota,2017,445291,Baked goods stores,4452,445,44,6,0,Total,0,All establishments,X,X,49,X,X,X,32020,100,X,X,X,0
+Minnesota,2017,445292,Confectionery and nut stores,4452,445,44,6,0,Total,0,All establishments,X,X,50,X,X,X,30969,100,X,X,X,0
+Minnesota,2017,445299,All other specialty food stores,4452,445,44,6,0,Total,0,All establishments,X,X,166,X,X,X,87392,100,X,X,X,0
+Minnesota,2017,4453,"Beer, wine, and liquor stores",4453,445,44,4,0,Total,0,All establishments,X,X,878,X,X,X,1572522,100,X,X,X,0
+Minnesota,2017,44531,"Beer, wine, and liquor stores",4453,445,44,5,0,Total,0,All establishments,X,X,878,X,X,X,1572522,100,X,X,X,0
+Minnesota,2017,445310,"Beer, wine, and liquor stores",4453,445,44,6,0,Total,0,All establishments,X,X,878,X,X,X,1572522,100,X,X,X,0
+Minnesota,2017,446,Health and personal care stores,null,446,44,3,0,Total,0,All establishments,X,X,1350,X,X,X,4057736,100,X,X,X,0
+Minnesota,2017,4461,Health and personal care stores,4461,446,44,4,0,Total,0,All establishments,X,X,1350,X,X,X,4057736,100,X,X,X,0
+Minnesota,2017,44611,Pharmacies and drug stores,4461,446,44,5,0,Total,0,All establishments,X,X,581,X,X,X,3232429,100,X,X,X,0
+Minnesota,2017,446110,Pharmacies and drug stores,4461,446,44,6,0,Total,0,All establishments,X,X,581,X,X,X,3232429,100,X,X,X,0
+Minnesota,2017,44612,"Cosmetics, beauty supplies, and perfume stores",4461,446,44,5,0,Total,0,All establishments,X,X,194,X,X,X,281149,100,X,X,X,0
+Minnesota,2017,446120,"Cosmetics, beauty supplies, and perfume stores",4461,446,44,6,0,Total,0,All establishments,X,X,194,X,X,X,281149,100,X,X,X,0
+Minnesota,2017,44613,Optical goods stores,4461,446,44,5,0,Total,0,All establishments,X,X,252,X,X,X,226983,100,X,X,X,0
+Minnesota,2017,446130,Optical goods stores,4461,446,44,6,0,Total,0,All establishments,X,X,252,X,X,X,226983,100,X,X,X,0
+Minnesota,2017,44619,Other health and personal care stores,4461,446,44,5,0,Total,0,All establishments,X,X,323,X,X,X,317175,100,X,X,X,0
+Minnesota,2017,446191,Food (health) supplement stores,4461,446,44,6,0,Total,0,All establishments,X,X,144,X,X,X,68896,100,X,X,X,0
+Minnesota,2017,446199,All other health and personal care stores,4461,446,44,6,0,Total,0,All establishments,X,X,179,X,X,X,248279,100,X,X,X,0
+Minnesota,2017,447,Gasoline stations,null,447,44,3,0,Total,0,All establishments,X,X,2161,X,X,X,9724871,100,X,X,X,0
+Minnesota,2017,4471,Gasoline stations,4471,447,44,4,0,Total,0,All establishments,X,X,2161,X,X,X,9724871,100,X,X,X,0
+Minnesota,2017,44711,Gasoline stations with convenience stores,4471,447,44,5,0,Total,0,All establishments,X,X,1912,X,X,X,8507511,100,X,X,X,0
+Minnesota,2017,447110,Gasoline stations with convenience stores,4471,447,44,6,0,Total,0,All establishments,X,X,1912,X,X,X,8507511,100,X,X,X,0
+Minnesota,2017,44719,Other gasoline stations,4471,447,44,5,0,Total,0,All establishments,X,X,249,X,X,X,1217360,100,X,X,X,0
+Minnesota,2017,447190,Other gasoline stations,4471,447,44,6,0,Total,0,All establishments,X,X,249,X,X,X,1217360,100,X,X,X,0
+Minnesota,2017,448,Clothing and clothing accessories stores,null,448,44,3,0,Total,0,All establishments,X,X,2255,X,X,X,3289328,100,X,X,X,0
+Minnesota,2017,4481,Clothing stores,4481,448,44,4,0,Total,0,All establishments,X,X,1540,X,X,X,2343842,100,X,X,X,0
+Minnesota,2017,44811,Men's clothing stores,4481,448,44,5,0,Total,0,All establishments,X,X,96,X,X,X,127455,100,X,X,X,0
+Minnesota,2017,448110,Men's clothing stores,4481,448,44,6,0,Total,0,All establishments,X,X,96,X,X,X,127455,100,X,X,X,0
+Minnesota,2017,44812,Women's clothing stores,4481,448,44,5,0,Total,0,All establishments,X,X,600,X,X,X,526361,100,X,X,X,0
+Minnesota,2017,448120,Women's clothing stores,4481,448,44,6,0,Total,0,All establishments,X,X,600,X,X,X,526361,100,X,X,X,0
+Minnesota,2017,44813,Children's and infants' clothing stores,4481,448,44,5,0,Total,0,All establishments,X,X,102,X,X,X,92885,100,X,X,X,0
+Minnesota,2017,448130,Children's and infants' clothing stores,4481,448,44,6,0,Total,0,All establishments,X,X,102,X,X,X,92885,100,X,X,X,0
+Minnesota,2017,44814,Family clothing stores,4481,448,44,5,0,Total,0,All establishments,X,X,414,X,X,X,1214057,100,X,X,X,0
+Minnesota,2017,448140,Family clothing stores,4481,448,44,6,0,Total,0,All establishments,X,X,414,X,X,X,1214057,100,X,X,X,0
+Minnesota,2017,44815,Clothing accessories stores,4481,448,44,5,0,Total,0,All establishments,X,X,118,X,X,X,94436,100,X,X,X,0
+Minnesota,2017,448150,Clothing accessories stores,4481,448,44,6,0,Total,0,All establishments,X,X,118,X,X,X,94436,100,X,X,X,0
+Minnesota,2017,44819,Other clothing stores,4481,448,44,5,0,Total,0,All establishments,X,X,210,X,X,X,288648,100,X,X,X,0
+Minnesota,2017,448190,Other clothing stores,4481,448,44,6,0,Total,0,All establishments,X,X,210,X,X,X,288648,100,X,X,X,0
+Minnesota,2017,4482,Shoe stores,4482,448,44,4,0,Total,0,All establishments,X,X,392,X,X,X,521933,100,X,X,X,0
+Minnesota,2017,44821,Shoe stores,4482,448,44,5,0,Total,0,All establishments,X,X,392,X,X,X,521933,100,X,X,X,0
+Minnesota,2017,448210,Shoe stores,4482,448,44,6,0,Total,0,All establishments,X,X,392,X,X,X,521933,100,X,X,X,0
+Minnesota,2017,4483,"Jewelry, luggage, and leather goods stores",4483,448,44,4,0,Total,0,All establishments,X,X,323,X,X,X,423553,100,X,X,X,0
+Minnesota,2017,44831,Jewelry stores,4483,448,44,5,0,Total,0,All establishments,X,X,309,X,X,X,385754,100,X,X,X,0
+Minnesota,2017,448310,Jewelry stores,4483,448,44,6,0,Total,0,All establishments,X,X,309,X,X,X,385754,100,X,X,X,0
+Minnesota,2017,44832,Luggage and leather goods stores,4483,448,44,5,0,Total,0,All establishments,X,X,14,X,X,X,37799,100,X,X,X,0
+Minnesota,2017,448320,Luggage and leather goods stores,4483,448,44,6,0,Total,0,All establishments,X,X,14,X,X,X,37799,100,X,X,X,0
+Minnesota,2017,451,"Sporting goods, hobby, musical instrument, and book stores",null,451,44,3,0,Total,0,All establishments,X,X,966,X,X,X,1886936,100,X,X,X,0
+Minnesota,2017,4511,"Sporting goods, hobby, and musical instrument stores",4511,451,44,4,0,Total,0,All establishments,X,X,873,X,X,X,1749270,100,X,X,X,0
+Minnesota,2017,45111,Sporting goods stores,4511,451,44,5,0,Total,0,All establishments,X,X,513,X,X,X,1268173,100,X,X,X,0
+Minnesota,2017,451110,Sporting goods stores,4511,451,44,6,0,Total,0,All establishments,X,X,513,X,X,X,1268173,100,X,X,X,0
+Minnesota,2017,45112,"Hobby, toy, and game stores",4511,451,44,5,0,Total,0,All establishments,X,X,177,X,X,X,286396,100,X,X,X,0
+Minnesota,2017,451120,"Hobby, toy, and game stores",4511,451,44,6,0,Total,0,All establishments,X,X,177,X,X,X,286396,100,X,X,X,0
+Minnesota,2017,45113,"Sewing, needlework, and piece goods stores",4511,451,44,5,0,Total,0,All establishments,X,X,114,X,X,X,105347,100,X,X,X,0
+Minnesota,2017,451130,"Sewing, needlework, and piece goods stores",4511,451,44,6,0,Total,0,All establishments,X,X,114,X,X,X,105347,100,X,X,X,0
+Minnesota,2017,45114,Musical instrument and supplies stores,4511,451,44,5,0,Total,0,All establishments,X,X,69,X,X,X,89354,100,X,X,X,0
+Minnesota,2017,451140,Musical instrument and supplies stores,4511,451,44,6,0,Total,0,All establishments,X,X,69,X,X,X,89354,100,X,X,X,0
+Minnesota,2017,4512,Book stores and news dealers,4512,451,44,4,0,Total,0,All establishments,X,X,93,X,X,X,137666,100,X,X,X,0
+Minnesota,2017,45121,Book stores and news dealers,4512,451,44,5,0,Total,0,All establishments,X,X,93,X,X,X,137666,100,X,X,X,0
+Minnesota,2017,451211,Book stores,4512,451,44,6,0,Total,0,All establishments,X,X,89,X,X,X,136543,100,X,X,X,0
+Minnesota,2017,451212,News dealers and newsstands,4512,451,44,6,0,Total,0,All establishments,X,X,4,X,X,X,1123,100,X,X,X,0
+Minnesota,2017,452,General merchandise stores,null,452,44,3,0,Total,0,All establishments,X,X,815,X,X,X,13364962,100,X,X,X,0
+Minnesota,2017,4522,Department stores,4522,452,44,4,0,Total,0,All establishments,X,X,104,X,X,X,1326913,100,X,X,X,0
+Minnesota,2017,45221,Department stores,4522,452,44,5,0,Total,0,All establishments,X,X,104,X,X,X,1326913,100,X,X,X,0
+Minnesota,2017,452210,Department stores,4522,452,44,6,0,Total,0,All establishments,X,X,104,X,X,X,1326913,100,X,X,X,0
+Minnesota,2017,4523,"General merchandise stores, including warehouse clubs and supercenters",4523,452,44,4,0,Total,0,All establishments,X,X,711,X,X,X,12038049,100,X,X,X,0
+Minnesota,2017,45231,"General merchandise stores, including warehouse clubs and supercenters",4523,452,44,5,0,Total,0,All establishments,X,X,711,X,X,X,12038049,100,X,X,X,0
+Minnesota,2017,452311,Warehouse clubs and supercenters,4523,452,44,6,0,Total,0,All establishments,X,X,176,X,X,X,10468080,100,X,X,X,0
+Minnesota,2017,452319,All other general merchandise stores,4523,452,44,6,0,Total,0,All establishments,X,X,535,X,X,X,1569969,100,X,X,X,0
+Minnesota,2017,453,Miscellaneous store retailers,null,453,44,3,0,Total,0,All establishments,X,X,1905,X,X,X,1603063,100,X,X,X,0
+Minnesota,2017,4531,Florists,4531,453,44,4,0,Total,0,All establishments,X,X,281,X,X,X,101221,100,X,X,X,0
+Minnesota,2017,45311,Florists,4531,453,44,5,0,Total,0,All establishments,X,X,281,X,X,X,101221,100,X,X,X,0
+Minnesota,2017,453110,Florists,4531,453,44,6,0,Total,0,All establishments,X,X,281,X,X,X,101221,100,X,X,X,0
+Minnesota,2017,4532,"Office supplies, stationery, and gift stores",4532,453,44,4,0,Total,0,All establishments,X,X,457,X,X,X,423944,100,X,X,X,0
+Minnesota,2017,45321,Office supplies and stationery stores,4532,453,44,5,0,Total,0,All establishments,X,X,88,X,X,X,160120,100,X,X,X,0
+Minnesota,2017,453210,Office supplies and stationery stores,4532,453,44,6,0,Total,0,All establishments,X,X,88,X,X,X,160120,100,X,X,X,0
+Minnesota,2017,45322,"Gift, novelty, and souvenir stores",4532,453,44,5,0,Total,0,All establishments,X,X,369,X,X,X,263824,100,X,X,X,0
+Minnesota,2017,453220,"Gift, novelty, and souvenir stores",4532,453,44,6,0,Total,0,All establishments,X,X,369,X,X,X,263824,100,X,X,X,0
+Minnesota,2017,4533,Used merchandise stores,4533,453,44,4,0,Total,0,All establishments,X,X,397,X,X,X,315596,100,X,X,X,0
+Minnesota,2017,45331,Used merchandise stores,4533,453,44,5,0,Total,0,All establishments,X,X,397,X,X,X,315596,100,X,X,X,0
+Minnesota,2017,453310,Used merchandise stores,4533,453,44,6,0,Total,0,All establishments,X,X,397,X,X,X,315596,100,X,X,X,0
+Minnesota,2017,4539,Other miscellaneous store retailers,4539,453,44,4,0,Total,0,All establishments,X,X,770,X,X,X,762302,100,X,X,X,0
+Minnesota,2017,45391,Pet and pet supplies stores,4539,453,44,5,0,Total,0,All establishments,X,X,147,X,X,X,276585,100,X,X,X,0
+Minnesota,2017,453910,Pet and pet supplies stores,4539,453,44,6,0,Total,0,All establishments,X,X,147,X,X,X,276585,100,X,X,X,0
+Minnesota,2017,45392,Art dealers,4539,453,44,5,0,Total,0,All establishments,X,X,69,X,X,X,24872,100,X,X,X,0
+Minnesota,2017,453920,Art dealers,4539,453,44,6,0,Total,0,All establishments,X,X,69,X,X,X,24872,100,X,X,X,0
+Minnesota,2017,45393,Manufactured (mobile) home dealers,4539,453,44,5,0,Total,0,All establishments,X,X,28,X,X,X,57410,100,X,X,X,0
+Minnesota,2017,453930,Manufactured (mobile) home dealers,4539,453,44,6,0,Total,0,All establishments,X,X,28,X,X,X,57410,100,X,X,X,0
+Minnesota,2017,45399,All other miscellaneous store retailers,4539,453,44,5,0,Total,0,All establishments,X,X,526,X,X,X,403435,100,X,X,X,0
+Minnesota,2017,453991,Tobacco stores,4539,453,44,6,0,Total,0,All establishments,X,X,158,X,X,X,147174,100,X,X,X,0
+Minnesota,2017,453998,All other miscellaneous store retailers (except tobacco stores),4539,453,44,6,0,Total,0,All establishments,X,X,368,X,X,X,256261,100,X,X,X,0
+Minnesota,2017,454,Nonstore retailers,null,454,44,3,0,Total,0,All establishments,X,X,1570,X,X,X,14877188,100,X,X,X,0
+Minnesota,2017,4541,Electronic shopping and mail-order houses,4541,454,44,4,0,Total,0,All establishments,X,X,726,X,X,X,13728355,100,X,X,X,0
+Minnesota,2017,45411,Electronic shopping and mail-order houses,4541,454,44,5,0,Total,0,All establishments,X,X,726,X,X,X,13728355,100,X,X,X,0
+Minnesota,2017,454110,Electronic shopping and mail-order houses,4541,454,44,6,0,Total,0,All establishments,X,X,726,X,X,X,13728355,100,X,X,X,0
+Minnesota,2017,4542,Vending machine operators,4542,454,44,4,0,Total,0,All establishments,X,X,73,X,X,X,133806,100,X,X,X,0
+Minnesota,2017,45421,Vending machine operators,4542,454,44,5,0,Total,0,All establishments,X,X,73,X,X,X,133806,100,X,X,X,0
+Minnesota,2017,454210,Vending machine operators,4542,454,44,6,0,Total,0,All establishments,X,X,73,X,X,X,133806,100,X,X,X,0
+Minnesota,2017,4543,Direct selling establishments,4543,454,44,4,0,Total,0,All establishments,X,X,771,X,X,X,1015027,100,X,X,X,0
+Minnesota,2017,45431,Fuel dealers,4543,454,44,5,0,Total,0,All establishments,X,X,166,X,X,X,508260,100,X,X,X,0
+Minnesota,2017,454310,Fuel dealers,4543,454,44,6,0,Total,0,All establishments,X,X,166,X,X,X,508260,100,X,X,X,0
+Minnesota,2017,45439,Other direct selling establishments,4543,454,44,5,0,Total,0,All establishments,X,X,605,X,X,X,506767,100,X,X,X,0
+Minnesota,2017,454390,Other direct selling establishments,4543,454,44,6,0,Total,0,All establishments,X,X,605,X,X,X,506767,100,X,X,X,0
+Minnesota,2017,61,Educational services,null,null,61,2,0,Total,0,All establishments,X,X,1408,X,X,X,1274922,100,X,X,X,0
+Minnesota,2017,611,Educational services,null,611,61,3,0,Total,0,All establishments,X,X,1408,X,X,X,1274922,100,X,X,X,0
+Minnesota,2017,6114,Business schools and computer and management training,6114,611,61,4,0,Total,0,All establishments,X,X,170,X,X,X,174083,100,X,X,X,0
+Minnesota,2017,61142,Computer training,6114,611,61,5,0,Total,0,All establishments,X,X,34,X,X,X,13756,100,X,X,X,0
+Minnesota,2017,611420,Computer training,6114,611,61,6,0,Total,0,All establishments,X,X,34,X,X,X,13756,100,X,X,X,0
+Minnesota,2017,61143,Professional and management development training,6114,611,61,5,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,611430,Professional and management development training,6114,611,61,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,6115,Technical and trade schools,6115,611,61,4,0,Total,0,All establishments,X,X,102,X,X,X,98158,100,X,X,X,0
+Minnesota,2017,61151,Technical and trade schools,6115,611,61,5,0,Total,0,All establishments,X,X,102,X,X,X,98158,100,X,X,X,0
+Minnesota,2017,611511,Cosmetology and barber schools,6115,611,61,6,0,Total,0,All establishments,X,X,20,X,X,X,16350,100,X,X,X,0
+Minnesota,2017,611512,Flight training,6115,611,61,6,0,Total,0,All establishments,X,X,11,X,X,X,7555,100,X,X,X,0
+Minnesota,2017,611513,Apprenticeship training,6115,611,61,6,0,Total,0,All establishments,X,X,30,X,X,X,43786,100,X,X,X,0
+Minnesota,2017,611519,Other technical and trade schools,6115,611,61,6,0,Total,0,All establishments,X,X,41,X,X,X,30467,100,X,X,X,0
+Minnesota,2017,6116,Other schools and instruction,6116,611,61,4,0,Total,0,All establishments,X,X,962,X,X,X,501644,100,X,X,X,0
+Minnesota,2017,61161,Fine arts schools,6116,611,61,5,0,Total,0,All establishments,X,X,295,X,X,X,128031,100,X,X,X,0
+Minnesota,2017,611610,Fine arts schools,6116,611,61,6,0,Total,0,All establishments,X,X,295,X,X,X,128031,100,X,X,X,0
+Minnesota,2017,61162,Sports and recreation instruction,6116,611,61,5,0,Total,0,All establishments,X,X,315,X,X,X,149768,100,X,X,X,0
+Minnesota,2017,611620,Sports and recreation instruction,6116,611,61,6,0,Total,0,All establishments,X,X,315,X,X,X,149768,100,X,X,X,0
+Minnesota,2017,61163,Language schools,6116,611,61,5,0,Total,0,All establishments,X,X,19,X,X,X,11395,100,X,X,X,0
+Minnesota,2017,611630,Language schools,6116,611,61,6,0,Total,0,All establishments,X,X,19,X,X,X,11395,100,X,X,X,0
+Minnesota,2017,61169,All other schools and instruction,6116,611,61,5,0,Total,0,All establishments,X,X,333,X,X,X,212450,100,X,X,X,0
+Minnesota,2017,611691,Exam preparation and tutoring,6116,611,61,6,0,Total,0,All establishments,X,X,119,X,X,X,82474,100,X,X,X,0
+Minnesota,2017,611692,Automobile driving schools,6116,611,61,6,0,Total,0,All establishments,X,X,56,X,X,X,11842,100,X,X,X,0
+Minnesota,2017,611699,All other miscellaneous schools and instruction,6116,611,61,6,0,Total,0,All establishments,X,X,158,X,X,X,118134,100,X,X,X,0
+Minnesota,2017,6117,Educational support services,6117,611,61,4,0,Total,0,All establishments,X,X,174,X,X,X,501037,100,X,X,X,0
+Minnesota,2017,61171,Educational support services,6117,611,61,5,0,Total,0,All establishments,X,X,174,X,X,X,501037,100,X,X,X,0
+Minnesota,2017,611710,Educational support services,6117,611,61,6,0,Total,0,All establishments,X,X,174,X,X,X,501037,100,X,X,X,0
+Minnesota,2017,62,Health care and social assistance,null,null,62,2,0,Total,0,All establishments,X,X,17066,X,X,X,50491047,100,X,X,X,0
+Minnesota,2017,621,Ambulatory health care services,null,621,62,3,0,Total,0,All establishments,X,X,8685,X,X,X,18403290,100,X,X,X,0
+Minnesota,2017,6211,Offices of physicians,6211,621,62,4,0,Total,0,All establishments,X,X,1571,X,X,X,7222962,100,X,X,X,0
+Minnesota,2017,62111,Offices of physicians,6211,621,62,5,0,Total,0,All establishments,X,X,1571,X,X,X,7222962,100,X,X,X,0
+Minnesota,2017,621111,Offices of physicians (except mental health specialists),6211,621,62,6,0,Total,0,All establishments,X,X,1452,X,X,X,7151728,100,X,X,X,0
+Minnesota,2017,621112,"Offices of physicians, mental health specialists",6211,621,62,6,0,Total,0,All establishments,X,X,119,X,X,X,71234,100,X,X,X,0
+Minnesota,2017,6212,Offices of dentists,6212,621,62,4,0,Total,0,All establishments,X,X,1982,X,X,X,2551663,100,X,X,X,0
+Minnesota,2017,62121,Offices of dentists,6212,621,62,5,0,Total,0,All establishments,X,X,1982,X,X,X,2551663,100,X,X,X,0
+Minnesota,2017,621210,Offices of dentists,6212,621,62,6,0,Total,0,All establishments,X,X,1982,X,X,X,2551663,100,X,X,X,0
+Minnesota,2017,6213,Offices of other health practitioners,6213,621,62,4,0,Total,0,All establishments,X,X,3155,X,X,X,1658857,100,X,X,X,0
+Minnesota,2017,62131,Offices of chiropractors,6213,621,62,5,0,Total,0,All establishments,X,X,1350,X,X,X,410331,100,X,X,X,0
+Minnesota,2017,621310,Offices of chiropractors,6213,621,62,6,0,Total,0,All establishments,X,X,1350,X,X,X,410331,100,X,X,X,0
+Minnesota,2017,62132,Offices of optometrists,6213,621,62,5,0,Total,0,All establishments,X,X,349,X,X,X,287765,100,X,X,X,0
+Minnesota,2017,621320,Offices of optometrists,6213,621,62,6,0,Total,0,All establishments,X,X,349,X,X,X,287765,100,X,X,X,0
+Minnesota,2017,62133,Offices of mental health practitioners (except physicians),6213,621,62,5,0,Total,0,All establishments,X,X,635,X,X,X,270859,100,X,X,X,0
+Minnesota,2017,621330,Offices of mental health practitioners (except physicians),6213,621,62,6,0,Total,0,All establishments,X,X,635,X,X,X,270859,100,X,X,X,0
+Minnesota,2017,62134,"Offices of physical, occupational and speech therapists, and audiologists",6213,621,62,5,0,Total,0,All establishments,X,X,440,X,X,X,378891,100,X,X,X,0
+Minnesota,2017,621340,"Offices of physical, occupational and speech therapists, and audiologists",6213,621,62,6,0,Total,0,All establishments,X,X,440,X,X,X,378891,100,X,X,X,0
+Minnesota,2017,62139,Offices of all other health practitioners,6213,621,62,5,0,Total,0,All establishments,X,X,381,X,X,X,311011,100,X,X,X,0
+Minnesota,2017,621391,Offices of podiatrists,6213,621,62,6,0,Total,0,All establishments,X,X,38,X,X,X,28928,100,X,X,X,0
+Minnesota,2017,621399,Offices of all other miscellaneous health practitioners,6213,621,62,6,0,Total,0,All establishments,X,X,343,X,X,X,282083,100,X,X,X,0
+Minnesota,2017,6214,Outpatient care centers,6214,621,62,4,0,Total,0,All establishments,X,X,886,X,X,X,4262564,100,X,X,X,0
+Minnesota,2017,62141,Family planning centers,6214,621,62,5,0,Total,0,All establishments,X,X,60,X,X,X,87464,100,X,X,X,0
+Minnesota,2017,621410,Family planning centers,6214,621,62,6,0,Total,0,All establishments,X,X,60,X,X,X,87464,100,X,X,X,0
+Minnesota,2017,62142,Outpatient mental health and substance abuse centers,6214,621,62,5,0,Total,0,All establishments,X,X,315,X,X,X,602616,100,X,X,X,0
+Minnesota,2017,621420,Outpatient mental health and substance abuse centers,6214,621,62,6,0,Total,0,All establishments,X,X,315,X,X,X,602616,100,X,X,X,0
+Minnesota,2017,62149,Other outpatient care centers,6214,621,62,5,0,Total,0,All establishments,X,X,511,X,X,X,3572484,100,X,X,X,0
+Minnesota,2017,621492,Kidney dialysis centers,6214,621,62,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,621493,Freestanding ambulatory surgical and emergency centers,6214,621,62,6,0,Total,0,All establishments,X,X,73,X,X,X,620733,100,X,X,X,0
+Minnesota,2017,621498,All other outpatient care centers,6214,621,62,6,0,Total,0,All establishments,X,X,213,X,X,X,920391,100,X,X,X,0
+Minnesota,2017,6215,Medical and diagnostic laboratories,6215,621,62,4,0,Total,0,All establishments,X,X,127,X,X,X,524551,100,X,X,X,0
+Minnesota,2017,62151,Medical and diagnostic laboratories,6215,621,62,5,0,Total,0,All establishments,X,X,127,X,X,X,524551,100,X,X,X,0
+Minnesota,2017,621511,Medical laboratories,6215,621,62,6,0,Total,0,All establishments,X,X,51,X,X,X,301323,100,X,X,X,0
+Minnesota,2017,621512,Diagnostic imaging centers,6215,621,62,6,0,Total,0,All establishments,X,X,76,X,X,X,223228,100,X,X,X,0
+Minnesota,2017,6216,Home health care services,6216,621,62,4,0,Total,0,All establishments,X,X,739,X,X,X,1529699,100,X,X,X,0
+Minnesota,2017,62161,Home health care services,6216,621,62,5,0,Total,0,All establishments,X,X,739,X,X,X,1529699,100,X,X,X,0
+Minnesota,2017,621610,Home health care services,6216,621,62,6,0,Total,0,All establishments,X,X,739,X,X,X,1529699,100,X,X,X,0
+Minnesota,2017,6219,Other ambulatory health care services,6219,621,62,4,0,Total,0,All establishments,X,X,225,X,X,X,652994,100,X,X,X,0
+Minnesota,2017,62191,Ambulance services,6219,621,62,5,0,Total,0,All establishments,X,X,86,X,X,X,279123,100,X,X,X,0
+Minnesota,2017,621910,Ambulance services,6219,621,62,6,0,Total,0,All establishments,X,X,86,X,X,X,279123,100,X,X,X,0
+Minnesota,2017,62199,All other ambulatory health care services,6219,621,62,5,0,Total,0,All establishments,X,X,139,X,X,X,373871,100,X,X,X,0
+Minnesota,2017,621991,Blood and organ banks,6219,621,62,6,0,Total,0,All establishments,X,X,30,X,X,X,186033,100,X,X,X,0
+Minnesota,2017,621999,All other miscellaneous ambulatory health care services,6219,621,62,6,0,Total,0,All establishments,X,X,109,X,X,X,187838,100,X,X,X,0
+Minnesota,2017,622,Hospitals,null,622,62,3,0,Total,0,All establishments,X,X,150,X,X,X,21576113,100,X,X,X,0
+Minnesota,2017,6221,General medical and surgical hospitals,6221,622,62,4,0,Total,0,All establishments,X,X,134,X,X,X,20819110,100,X,X,X,0
+Minnesota,2017,62211,General medical and surgical hospitals,6221,622,62,5,0,Total,0,All establishments,X,X,134,X,X,X,20819110,100,X,X,X,0
+Minnesota,2017,622110,General medical and surgical hospitals,6221,622,62,6,0,Total,0,All establishments,X,X,134,X,X,X,20819110,100,X,X,X,0
+Minnesota,2017,6221101,"General medical and surgical hospitals, government",6221,622,62,7,0,Total,0,All establishments,X,X,32,X,X,X,3232473,100,X,X,X,0
+Minnesota,2017,6221102,"General medical and surgical hospitals, except government",6221,622,62,7,0,Total,0,All establishments,X,X,102,X,X,X,17586637,100,X,X,X,0
+Minnesota,2017,6222,Psychiatric and substance abuse hospitals,6222,622,62,4,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,62221,Psychiatric and substance abuse hospitals,6222,622,62,5,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,622210,Psychiatric and substance abuse hospitals,6222,622,62,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,6222101,"Psychiatric and substance abuse hospitals, government",6222,622,62,7,0,Total,0,All establishments,X,X,9,X,X,X,177208,100,X,X,X,0
+Minnesota,2017,6223,Specialty (except psychiatric and substance abuse) hospitals,6223,622,62,4,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,62231,Specialty (except psychiatric and substance abuse) hospitals,6223,622,62,5,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,622310,Specialty (except psychiatric and substance abuse) hospitals,6223,622,62,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,6223102,"Specialty (except psychiatric and substance abuse) hospitals, except government",6223,622,62,7,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,623,Nursing and residential care facilities,null,623,62,3,0,Total,0,All establishments,X,X,4202,X,X,X,6291443,100,X,X,X,0
+Minnesota,2017,6231,Nursing care facilities (skilled nursing facilities),6231,623,62,4,0,Total,0,All establishments,X,X,371,X,X,X,1962987,100,X,X,X,0
+Minnesota,2017,62311,Nursing care facilities (skilled nursing facilities),6231,623,62,5,0,Total,0,All establishments,X,X,371,X,X,X,1962987,100,X,X,X,0
+Minnesota,2017,623110,Nursing care facilities (skilled nursing facilities),6231,623,62,6,0,Total,0,All establishments,X,X,371,X,X,X,1962987,100,X,X,X,0
+Minnesota,2017,6232,"Residential intellectual and developmental disability, mental health, and substance abuse facilities",6232,623,62,4,0,Total,0,All establishments,X,X,2818,X,X,X,2021640,100,X,X,X,0
+Minnesota,2017,62321,Residential intellectual and developmental disability facilities,6232,623,62,5,0,Total,0,All establishments,X,X,2523,X,X,X,1464232,100,X,X,X,0
+Minnesota,2017,623210,Residential intellectual and developmental disability facilities,6232,623,62,6,0,Total,0,All establishments,X,X,2523,X,X,X,1464232,100,X,X,X,0
+Minnesota,2017,62322,Residential mental health and substance abuse facilities,6232,623,62,5,0,Total,0,All establishments,X,X,295,X,X,X,557408,100,X,X,X,0
+Minnesota,2017,623220,Residential mental health and substance abuse facilities,6232,623,62,6,0,Total,0,All establishments,X,X,295,X,X,X,557408,100,X,X,X,0
+Minnesota,2017,6233,Continuing care retirement communities and assisted living facilities for the elderly,6233,623,62,4,0,Total,0,All establishments,X,X,823,X,X,X,2127225,100,X,X,X,0
+Minnesota,2017,62331,Continuing care retirement communities and assisted living facilities for the elderly,6233,623,62,5,0,Total,0,All establishments,X,X,823,X,X,X,2127225,100,X,X,X,0
+Minnesota,2017,623311,Continuing care retirement communities,6233,623,62,6,0,Total,0,All establishments,X,X,288,X,X,X,1264449,100,X,X,X,0
+Minnesota,2017,623312,Assisted living facilities for the elderly,6233,623,62,6,0,Total,0,All establishments,X,X,535,X,X,X,862776,100,X,X,X,0
+Minnesota,2017,6239,Other residential care facilities,6239,623,62,4,0,Total,0,All establishments,X,X,190,X,X,X,179591,100,X,X,X,0
+Minnesota,2017,62399,Other residential care facilities,6239,623,62,5,0,Total,0,All establishments,X,X,190,X,X,X,179591,100,X,X,X,0
+Minnesota,2017,623990,Other residential care facilities,6239,623,62,6,0,Total,0,All establishments,X,X,190,X,X,X,179591,100,X,X,X,0
+Minnesota,2017,624,Social assistance,null,624,62,3,0,Total,0,All establishments,X,X,4029,X,X,X,4220201,100,X,X,X,0
+Minnesota,2017,6241,Individual and family services,6241,624,62,4,0,Total,0,All establishments,X,X,1830,X,X,X,2115740,100,X,X,X,0
+Minnesota,2017,62411,Child and youth services,6241,624,62,5,0,Total,0,All establishments,X,X,232,X,X,X,216295,100,X,X,X,0
+Minnesota,2017,624110,Child and youth services,6241,624,62,6,0,Total,0,All establishments,X,X,232,X,X,X,216295,100,X,X,X,0
+Minnesota,2017,62412,Services for the elderly and persons with disabilities,6241,624,62,5,0,Total,0,All establishments,X,X,745,X,X,X,1020954,100,X,X,X,0
+Minnesota,2017,624120,Services for the elderly and persons with disabilities,6241,624,62,6,0,Total,0,All establishments,X,X,745,X,X,X,1020954,100,X,X,X,0
+Minnesota,2017,62419,Other individual and family services,6241,624,62,5,0,Total,0,All establishments,X,X,853,X,X,X,878491,100,X,X,X,0
+Minnesota,2017,624190,Other individual and family services,6241,624,62,6,0,Total,0,All establishments,X,X,853,X,X,X,878491,100,X,X,X,0
+Minnesota,2017,6242,"Community food and housing, and emergency and other relief services",6242,624,62,4,0,Total,0,All establishments,X,X,431,X,X,X,788448,100,X,X,X,0
+Minnesota,2017,62421,Community food services,6242,624,62,5,0,Total,0,All establishments,X,X,196,X,X,X,335599,100,X,X,X,0
+Minnesota,2017,624210,Community food services,6242,624,62,6,0,Total,0,All establishments,X,X,196,X,X,X,335599,100,X,X,X,0
+Minnesota,2017,62422,Community housing services,6242,624,62,5,0,Total,0,All establishments,X,X,210,X,X,X,362139,100,X,X,X,0
+Minnesota,2017,624221,Temporary shelters,6242,624,62,6,0,Total,0,All establishments,X,X,72,X,X,X,123404,100,X,X,X,0
+Minnesota,2017,624229,Other community housing services,6242,624,62,6,0,Total,0,All establishments,X,X,138,X,X,X,238735,100,X,X,X,0
+Minnesota,2017,62423,Emergency and other relief services,6242,624,62,5,0,Total,0,All establishments,X,X,25,X,X,X,90710,100,X,X,X,0
+Minnesota,2017,624230,Emergency and other relief services,6242,624,62,6,0,Total,0,All establishments,X,X,25,X,X,X,90710,100,X,X,X,0
+Minnesota,2017,6243,Vocational rehabilitation services,6243,624,62,4,0,Total,0,All establishments,X,X,326,X,X,X,452391,100,X,X,X,0
+Minnesota,2017,62431,Vocational rehabilitation services,6243,624,62,5,0,Total,0,All establishments,X,X,326,X,X,X,452391,100,X,X,X,0
+Minnesota,2017,624310,Vocational rehabilitation services,6243,624,62,6,0,Total,0,All establishments,X,X,326,X,X,X,452391,100,X,X,X,0
+Minnesota,2017,6244,Child day care services,6244,624,62,4,0,Total,0,All establishments,X,X,1442,X,X,X,863622,100,X,X,X,0
+Minnesota,2017,62441,Child day care services,6244,624,62,5,0,Total,0,All establishments,X,X,1442,X,X,X,863622,100,X,X,X,0
+Minnesota,2017,624410,Child day care services,6244,624,62,6,0,Total,0,All establishments,X,X,1442,X,X,X,863622,100,X,X,X,0
+Minnesota,2017,71,"Arts, entertainment, and recreation",null,null,71,2,0,Total,0,All establishments,X,X,3012,X,X,X,4161540,100,X,X,X,0
+Minnesota,2017,711,"Performing arts, spectator sports, and related industries",null,711,71,3,0,Total,0,All establishments,X,X,863,X,X,X,1853263,100,X,X,X,0
+Minnesota,2017,7111,Performing arts companies,7111,711,71,4,0,Total,0,All establishments,X,X,229,X,X,X,284228,100,X,X,X,0
+Minnesota,2017,71111,Theater companies and dinner theaters,7111,711,71,5,0,Total,0,All establishments,X,X,97,X,X,X,188862,100,X,X,X,0
+Minnesota,2017,711110,Theater companies and dinner theaters,7111,711,71,6,0,Total,0,All establishments,X,X,97,X,X,X,188862,100,X,X,X,0
+Minnesota,2017,71112,Dance companies,7111,711,71,5,0,Total,0,All establishments,X,X,27,X,X,X,7495,100,X,X,X,0
+Minnesota,2017,711120,Dance companies,7111,711,71,6,0,Total,0,All establishments,X,X,27,X,X,X,7495,100,X,X,X,0
+Minnesota,2017,71113,Musical groups and artists,7111,711,71,5,0,Total,0,All establishments,X,X,105,X,X,X,87871,100,X,X,X,0
+Minnesota,2017,711130,Musical groups and artists,7111,711,71,6,0,Total,0,All establishments,X,X,105,X,X,X,87871,100,X,X,X,0
+Minnesota,2017,7112,Spectator sports,7112,711,71,4,0,Total,0,All establishments,X,X,59,X,X,X,1115521,100,X,X,X,0
+Minnesota,2017,71121,Spectator sports,7112,711,71,5,0,Total,0,All establishments,X,X,59,X,X,X,1115521,100,X,X,X,0
+Minnesota,2017,711211,Sports teams and clubs,7112,711,71,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,711212,Racetracks,7112,711,71,6,0,Total,0,All establishments,X,X,18,X,X,X,64663,100,X,X,X,0
+Minnesota,2017,711219,Other spectator sports,7112,711,71,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,7113,"Promoters of performing arts, sports, and similar events",7113,711,71,4,0,Total,0,All establishments,X,X,217,X,X,X,327046,100,X,X,X,0
+Minnesota,2017,71131,"Promoters of performing arts, sports, and similar events with facilities",7113,711,71,5,0,Total,0,All establishments,X,X,99,X,X,X,244982,100,X,X,X,0
+Minnesota,2017,711310,"Promoters of performing arts, sports, and similar events with facilities",7113,711,71,6,0,Total,0,All establishments,X,X,99,X,X,X,244982,100,X,X,X,0
+Minnesota,2017,71132,"Promoters of performing arts, sports, and similar events without facilities",7113,711,71,5,0,Total,0,All establishments,X,X,118,X,X,X,82064,100,X,X,X,0
+Minnesota,2017,711320,"Promoters of performing arts, sports, and similar events without facilities",7113,711,71,6,0,Total,0,All establishments,X,X,118,X,X,X,82064,100,X,X,X,0
+Minnesota,2017,7114,"Agents and managers for artists, athletes, entertainers, and other public figures",7114,711,71,4,0,Total,0,All establishments,X,X,44,X,X,X,21193,100,X,X,X,0
+Minnesota,2017,71141,"Agents and managers for artists, athletes, entertainers, and other public figures",7114,711,71,5,0,Total,0,All establishments,X,X,44,X,X,X,21193,100,X,X,X,0
+Minnesota,2017,711410,"Agents and managers for artists, athletes, entertainers, and other public figures",7114,711,71,6,0,Total,0,All establishments,X,X,44,X,X,X,21193,100,X,X,X,0
+Minnesota,2017,7115,"Independent artists, writers, and performers",7115,711,71,4,0,Total,0,All establishments,X,X,314,X,X,X,105275,100,X,X,X,0
+Minnesota,2017,71151,"Independent artists, writers, and performers",7115,711,71,5,0,Total,0,All establishments,X,X,314,X,X,X,105275,100,X,X,X,0
+Minnesota,2017,711510,"Independent artists, writers, and performers",7115,711,71,6,0,Total,0,All establishments,X,X,314,X,X,X,105275,100,X,X,X,0
+Minnesota,2017,712,"Museums, historical sites, and similar institutions",null,712,71,3,0,Total,0,All establishments,X,X,202,X,X,X,268536,100,X,X,X,0
+Minnesota,2017,7121,"Museums, historical sites, and similar institutions",7121,712,71,4,0,Total,0,All establishments,X,X,202,X,X,X,268536,100,X,X,X,0
+Minnesota,2017,71211,Museums,7121,712,71,5,0,Total,0,All establishments,X,X,144,X,X,X,222733,100,X,X,X,0
+Minnesota,2017,712110,Museums,7121,712,71,6,0,Total,0,All establishments,X,X,144,X,X,X,222733,100,X,X,X,0
+Minnesota,2017,71212,Historical sites,7121,712,71,5,0,Total,0,All establishments,X,X,41,X,X,X,22527,100,X,X,X,0
+Minnesota,2017,712120,Historical sites,7121,712,71,6,0,Total,0,All establishments,X,X,41,X,X,X,22527,100,X,X,X,0
+Minnesota,2017,71213,Zoos and botanical gardens,7121,712,71,5,0,Total,0,All establishments,X,X,7,X,X,X,16051,100,X,X,X,0
+Minnesota,2017,712130,Zoos and botanical gardens,7121,712,71,6,0,Total,0,All establishments,X,X,7,X,X,X,16051,100,X,X,X,0
+Minnesota,2017,71219,Nature parks and other similar institutions,7121,712,71,5,0,Total,0,All establishments,X,X,10,X,X,X,7225,100,X,X,X,0
+Minnesota,2017,712190,Nature parks and other similar institutions,7121,712,71,6,0,Total,0,All establishments,X,X,10,X,X,X,7225,100,X,X,X,0
+Minnesota,2017,713,"Amusement, gambling, and recreation industries",null,713,71,3,0,Total,0,All establishments,X,X,1947,X,X,X,2039741,100,X,X,X,0
+Minnesota,2017,7131,Amusement parks and arcades,7131,713,71,4,0,Total,0,All establishments,X,X,52,X,X,X,94822,100,X,X,X,0
+Minnesota,2017,71312,Amusement arcades,7131,713,71,5,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,713120,Amusement arcades,7131,713,71,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,7132,Gambling industries,7132,713,71,4,0,Total,0,All establishments,X,X,46,X,X,X,306932,100,X,X,X,0
+Minnesota,2017,71329,Other gambling industries,7132,713,71,5,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,713290,Other gambling industries,7132,713,71,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,7139,Other amusement and recreation industries,7139,713,71,4,0,Total,0,All establishments,X,X,1849,X,X,X,1637987,100,X,X,X,0
+Minnesota,2017,71391,Golf courses and country clubs,7139,713,71,5,0,Total,0,All establishments,X,X,343,X,X,X,381358,100,X,X,X,0
+Minnesota,2017,713910,Golf courses and country clubs,7139,713,71,6,0,Total,0,All establishments,X,X,343,X,X,X,381358,100,X,X,X,0
+Minnesota,2017,71392,Skiing facilities,7139,713,71,5,0,Total,0,All establishments,X,X,12,X,X,X,38381,100,X,X,X,0
+Minnesota,2017,713920,Skiing facilities,7139,713,71,6,0,Total,0,All establishments,X,X,12,X,X,X,38381,100,X,X,X,0
+Minnesota,2017,71393,Marinas,7139,713,71,5,0,Total,0,All establishments,X,X,57,X,X,X,48492,100,X,X,X,0
+Minnesota,2017,713930,Marinas,7139,713,71,6,0,Total,0,All establishments,X,X,57,X,X,X,48492,100,X,X,X,0
+Minnesota,2017,71394,Fitness and recreational sports centers,7139,713,71,5,0,Total,0,All establishments,X,X,762,X,X,X,743066,100,X,X,X,0
+Minnesota,2017,713940,Fitness and recreational sports centers,7139,713,71,6,0,Total,0,All establishments,X,X,762,X,X,X,743066,100,X,X,X,0
+Minnesota,2017,71395,Bowling centers,7139,713,71,5,0,Total,0,All establishments,X,X,125,X,X,X,106656,100,X,X,X,0
+Minnesota,2017,713950,Bowling centers,7139,713,71,6,0,Total,0,All establishments,X,X,125,X,X,X,106656,100,X,X,X,0
+Minnesota,2017,71399,All other amusement and recreation industries,7139,713,71,5,0,Total,0,All establishments,X,X,550,X,X,X,320034,100,X,X,X,0
+Minnesota,2017,713990,All other amusement and recreation industries,7139,713,71,6,0,Total,0,All establishments,X,X,550,X,X,X,320034,100,X,X,X,0
+Minnesota,2017,72,Accommodation and food services,null,null,72,2,0,Total,0,All establishments,X,X,12022,X,X,X,14234262,100,X,X,X,0
+Minnesota,2017,721,Accommodation,null,721,72,3,0,Total,0,All establishments,X,X,1420,X,X,X,3881123,100,X,X,X,0
+Minnesota,2017,7211,Traveler accommodation,7211,721,72,4,0,Total,0,All establishments,X,X,1131,X,X,X,3725493,100,X,X,X,0
+Minnesota,2017,72111,Hotels (except casino hotels) and motels,7211,721,72,5,0,Total,0,All establishments,X,X,906,X,X,X,2080155,100,X,X,X,0
+Minnesota,2017,721110,Hotels (except casino hotels) and motels,7211,721,72,6,0,Total,0,All establishments,X,X,906,X,X,X,2080155,100,X,X,X,0
+Minnesota,2017,72112,Casino hotels,7211,721,72,5,0,Total,0,All establishments,X,X,14,X,X,X,1579838,100,X,X,X,0
+Minnesota,2017,721120,Casino hotels,7211,721,72,6,0,Total,0,All establishments,X,X,14,X,X,X,1579838,100,X,X,X,0
+Minnesota,2017,72119,Other traveler accommodation,7211,721,72,5,0,Total,0,All establishments,X,X,211,X,X,X,65500,100,X,X,X,0
+Minnesota,2017,721191,Bed-and-breakfast inns,7211,721,72,6,0,Total,0,All establishments,X,X,39,X,X,X,5637,100,X,X,X,0
+Minnesota,2017,721199,All other traveler accommodation,7211,721,72,6,0,Total,0,All establishments,X,X,172,X,X,X,59863,100,X,X,X,0
+Minnesota,2017,7212,RV (recreational vehicle) parks and recreational camps,7212,721,72,4,0,Total,0,All establishments,X,X,239,X,X,X,135322,100,X,X,X,0
+Minnesota,2017,72121,RV (recreational vehicle) parks and recreational camps,7212,721,72,5,0,Total,0,All establishments,X,X,239,X,X,X,135322,100,X,X,X,0
+Minnesota,2017,721211,RV (recreational vehicle) parks and campgrounds,7212,721,72,6,0,Total,0,All establishments,X,X,134,X,X,X,45172,100,X,X,X,0
+Minnesota,2017,721214,Recreational and vacation camps (except campgrounds),7212,721,72,6,0,Total,0,All establishments,X,X,105,X,X,X,90150,100,X,X,X,0
+Minnesota,2017,7213,Rooming and boarding houses,7213,721,72,4,0,Total,0,All establishments,X,X,50,X,X,X,20308,100,X,X,X,0
+Minnesota,2017,72131,Rooming and boarding houses,7213,721,72,5,0,Total,0,All establishments,X,X,50,X,X,X,20308,100,X,X,X,0
+Minnesota,2017,721310,Rooming and boarding houses,7213,721,72,6,0,Total,0,All establishments,X,X,50,X,X,X,20308,100,X,X,X,0
+Minnesota,2017,722,Food services and drinking places,null,722,72,3,0,Total,0,All establishments,X,X,10602,X,X,X,10353139,100,X,X,X,0
+Minnesota,2017,7223,Special food services,7223,722,72,4,0,Total,0,All establishments,X,X,994,X,X,X,1114879,100,X,X,X,0
+Minnesota,2017,72231,Food service contractors,7223,722,72,5,0,Total,0,All establishments,X,X,717,X,X,X,938554,100,X,X,X,0
+Minnesota,2017,722310,Food service contractors,7223,722,72,6,0,Total,0,All establishments,X,X,717,X,X,X,938554,100,X,X,X,0
+Minnesota,2017,72232,Caterers,7223,722,72,5,0,Total,0,All establishments,X,X,167,X,X,X,156959,100,X,X,X,0
+Minnesota,2017,722320,Caterers,7223,722,72,6,0,Total,0,All establishments,X,X,167,X,X,X,156959,100,X,X,X,0
+Minnesota,2017,72233,Mobile food services,7223,722,72,5,0,Total,0,All establishments,X,X,110,X,X,X,19366,100,X,X,X,0
+Minnesota,2017,722330,Mobile food services,7223,722,72,6,0,Total,0,All establishments,X,X,110,X,X,X,19366,100,X,X,X,0
+Minnesota,2017,7224,Drinking places (alcoholic beverages),7224,722,72,4,0,Total,0,All establishments,X,X,935,X,X,X,497721,100,X,X,X,0
+Minnesota,2017,72241,Drinking places (alcoholic beverages),7224,722,72,5,0,Total,0,All establishments,X,X,935,X,X,X,497721,100,X,X,X,0
+Minnesota,2017,722410,Drinking places (alcoholic beverages),7224,722,72,6,0,Total,0,All establishments,X,X,935,X,X,X,497721,100,X,X,X,0
+Minnesota,2017,7225,Restaurants and other eating places,7225,722,72,4,0,Total,0,All establishments,X,X,8673,X,X,X,8740539,100,X,X,X,0
+Minnesota,2017,72251,Restaurants and other eating places,7225,722,72,5,0,Total,0,All establishments,X,X,8673,X,X,X,8740539,100,X,X,X,0
+Minnesota,2017,722511,Full-service restaurants,7225,722,72,6,0,Total,0,All establishments,X,X,3880,X,X,X,4603093,100,X,X,X,0
+Minnesota,2017,722513,Limited-service restaurants,7225,722,72,6,0,Total,0,All establishments,X,X,3833,X,X,X,3569192,100,X,X,X,0
+Minnesota,2017,722514,"Cafeterias, grill buffets, and buffets",7225,722,72,6,0,Total,0,All establishments,X,X,62,X,X,X,65232,100,X,X,X,0
+Minnesota,2017,722515,Snack and nonalcoholic beverage bars,7225,722,72,6,0,Total,0,All establishments,X,X,898,X,X,X,503022,100,X,X,X,0
+Minnesota,2017,81,Other services (except public administration),null,null,81,2,0,Total,0,All establishments,X,X,11339,X,X,X,10077372,100,X,X,X,0
+Minnesota,2017,811,Repair and maintenance,null,811,81,3,0,Total,0,All establishments,X,X,4333,X,X,X,3525849,100,X,X,X,0
+Minnesota,2017,8111,Automotive repair and maintenance,8111,811,81,4,0,Total,0,All establishments,X,X,3105,X,X,X,2380489,100,X,X,X,0
+Minnesota,2017,81111,Automotive mechanical and electrical repair and maintenance,8111,811,81,5,0,Total,0,All establishments,X,X,1817,X,X,X,1259638,100,X,X,X,0
+Minnesota,2017,811111,General automotive repair,8111,811,81,6,0,Total,0,All establishments,X,X,1690,X,X,X,1209648,100,X,X,X,0
+Minnesota,2017,811112,Automotive exhaust system repair,8111,811,81,6,0,Total,0,All establishments,X,X,22,X,X,X,6159,100,X,X,X,0
+Minnesota,2017,811113,Automotive transmission repair,8111,811,81,6,0,Total,0,All establishments,X,X,63,X,X,X,27088,100,X,X,X,0
+Minnesota,2017,811118,Other automotive mechanical and electrical repair and maintenance,8111,811,81,6,0,Total,0,All establishments,X,X,42,X,X,X,16743,100,X,X,X,0
+Minnesota,2017,81112,"Automotive body, paint, interior, and glass repair",8111,811,81,5,0,Total,0,All establishments,X,X,885,X,X,X,882137,100,X,X,X,0
+Minnesota,2017,811121,"Automotive body, paint, and interior repair and maintenance",8111,811,81,6,0,Total,0,All establishments,X,X,767,X,X,X,764018,100,X,X,X,0
+Minnesota,2017,811122,Automotive glass replacement shops,8111,811,81,6,0,Total,0,All establishments,X,X,118,X,X,X,118119,100,X,X,X,0
+Minnesota,2017,81119,Other automotive repair and maintenance,8111,811,81,5,0,Total,0,All establishments,X,X,403,X,X,X,238714,100,X,X,X,0
+Minnesota,2017,811191,Automotive oil change and lubrication shops,8111,811,81,6,0,Total,0,All establishments,X,X,130,X,X,X,73131,100,X,X,X,0
+Minnesota,2017,811192,Car washes,8111,811,81,6,0,Total,0,All establishments,X,X,193,X,X,X,125851,100,X,X,X,0
+Minnesota,2017,811198,All other automotive repair and maintenance,8111,811,81,6,0,Total,0,All establishments,X,X,80,X,X,X,39732,100,X,X,X,0
+Minnesota,2017,8112,Electronic and precision equipment repair and maintenance,8112,811,81,4,0,Total,0,All establishments,X,X,203,X,X,X,350861,100,X,X,X,0
+Minnesota,2017,81121,Electronic and precision equipment repair and maintenance,8112,811,81,5,0,Total,0,All establishments,X,X,203,X,X,X,350861,100,X,X,X,0
+Minnesota,2017,811211,Consumer electronics repair and maintenance,8112,811,81,6,0,Total,0,All establishments,X,X,24,X,X,X,9985,100,X,X,X,0
+Minnesota,2017,811212,Computer and office machine repair and maintenance,8112,811,81,6,0,Total,0,All establishments,X,X,95,X,X,X,247828,100,X,X,X,0
+Minnesota,2017,811213,Communication equipment repair and maintenance,8112,811,81,6,0,Total,0,All establishments,X,X,26,X,X,X,14639,100,X,X,X,0
+Minnesota,2017,811219,Other electronic and precision equipment repair and maintenance,8112,811,81,6,0,Total,0,All establishments,X,X,58,X,X,X,78409,100,X,X,X,0
+Minnesota,2017,8113,Commercial and industrial machinery and equipment (except automotive and electronic) repair and maintenance,8113,811,81,4,0,Total,0,All establishments,X,X,521,X,X,X,639674,100,X,X,X,0
+Minnesota,2017,81131,Commercial and industrial machinery and equipment (except automotive and electronic) repair and maintenance,8113,811,81,5,0,Total,0,All establishments,X,X,521,X,X,X,639674,100,X,X,X,0
+Minnesota,2017,811310,Commercial and industrial machinery and equipment (except automotive and electronic) repair and maintenance,8113,811,81,6,0,Total,0,All establishments,X,X,521,X,X,X,639674,100,X,X,X,0
+Minnesota,2017,8114,Personal and household goods repair and maintenance,8114,811,81,4,0,Total,0,All establishments,X,X,504,X,X,X,154825,100,X,X,X,0
+Minnesota,2017,81141,Home and garden equipment and appliance repair and maintenance,8114,811,81,5,0,Total,0,All establishments,X,X,108,X,X,X,51106,100,X,X,X,0
+Minnesota,2017,811411,Home and garden equipment repair and maintenance,8114,811,81,6,0,Total,0,All establishments,X,X,34,X,X,X,10173,100,X,X,X,0
+Minnesota,2017,811412,Appliance repair and maintenance,8114,811,81,6,0,Total,0,All establishments,X,X,74,X,X,X,40933,100,X,X,X,0
+Minnesota,2017,81142,Reupholstery and furniture repair,8114,811,81,5,0,Total,0,All establishments,X,X,80,X,X,X,18353,100,X,X,X,0
+Minnesota,2017,811420,Reupholstery and furniture repair,8114,811,81,6,0,Total,0,All establishments,X,X,80,X,X,X,18353,100,X,X,X,0
+Minnesota,2017,81143,Footwear and leather goods repair,8114,811,81,5,0,Total,0,All establishments,X,X,14,X,X,X,2262,100,X,X,X,0
+Minnesota,2017,811430,Footwear and leather goods repair,8114,811,81,6,0,Total,0,All establishments,X,X,14,X,X,X,2262,100,X,X,X,0
+Minnesota,2017,81149,Other personal and household goods repair and maintenance,8114,811,81,5,0,Total,0,All establishments,X,X,302,X,X,X,83104,100,X,X,X,0
+Minnesota,2017,811490,Other personal and household goods repair and maintenance,8114,811,81,6,0,Total,0,All establishments,X,X,302,X,X,X,83104,100,X,X,X,0
+Minnesota,2017,812,Personal and laundry services,null,812,81,3,0,Total,0,All establishments,X,X,4463,X,X,X,2162968,100,X,X,X,0
+Minnesota,2017,8121,Personal care services,8121,812,81,4,0,Total,0,All establishments,X,X,2777,X,X,X,892474,100,X,X,X,0
+Minnesota,2017,81211,"Hair, nail, and skin care services",8121,812,81,5,0,Total,0,All establishments,X,X,2298,X,X,X,687064,100,X,X,X,0
+Minnesota,2017,812111,Barber shops,8121,812,81,6,0,Total,0,All establishments,X,X,54,X,X,X,9736,100,X,X,X,0
+Minnesota,2017,812112,Beauty salons,8121,812,81,6,0,Total,0,All establishments,X,X,1688,X,X,X,551789,100,X,X,X,0
+Minnesota,2017,812113,Nail salons,8121,812,81,6,0,Total,0,All establishments,X,X,556,X,X,X,125539,100,X,X,X,0
+Minnesota,2017,81219,Other personal care services,8121,812,81,5,0,Total,0,All establishments,X,X,479,X,X,X,205410,100,X,X,X,0
+Minnesota,2017,812191,Diet and weight reducing centers,8121,812,81,6,0,Total,0,All establishments,X,X,59,X,X,X,45881,100,X,X,X,0
+Minnesota,2017,812199,Other personal care services,8121,812,81,6,0,Total,0,All establishments,X,X,420,X,X,X,159529,100,X,X,X,0
+Minnesota,2017,8122,Death care services,8122,812,81,4,0,Total,0,All establishments,X,X,427,X,X,X,308089,100,X,X,X,0
+Minnesota,2017,81221,Funeral homes and funeral services,8122,812,81,5,0,Total,0,All establishments,X,X,310,X,X,X,263285,100,X,X,X,0
+Minnesota,2017,812210,Funeral homes and funeral services,8122,812,81,6,0,Total,0,All establishments,X,X,310,X,X,X,263285,100,X,X,X,0
+Minnesota,2017,81222,Cemeteries and crematories,8122,812,81,5,0,Total,0,All establishments,X,X,117,X,X,X,44804,100,X,X,X,0
+Minnesota,2017,812220,Cemeteries and crematories,8122,812,81,6,0,Total,0,All establishments,X,X,117,X,X,X,44804,100,X,X,X,0
+Minnesota,2017,8123,Drycleaning and laundry services,8123,812,81,4,0,Total,0,All establishments,X,X,335,X,X,X,411440,100,X,X,X,0
+Minnesota,2017,81231,Coin-operated laundries and drycleaners,8123,812,81,5,0,Total,0,All establishments,X,X,91,X,X,X,44442,100,X,X,X,0
+Minnesota,2017,812310,Coin-operated laundries and drycleaners,8123,812,81,6,0,Total,0,All establishments,X,X,91,X,X,X,44442,100,X,X,X,0
+Minnesota,2017,81232,Drycleaning and laundry services (except coin-operated),8123,812,81,5,0,Total,0,All establishments,X,X,211,X,X,X,99278,100,X,X,X,0
+Minnesota,2017,812320,Drycleaning and laundry services (except coin-operated),8123,812,81,6,0,Total,0,All establishments,X,X,211,X,X,X,99278,100,X,X,X,0
+Minnesota,2017,81233,Linen and uniform supply,8123,812,81,5,0,Total,0,All establishments,X,X,33,X,X,X,267720,100,X,X,X,0
+Minnesota,2017,812331,Linen supply,8123,812,81,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,812332,Industrial launderers,8123,812,81,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,8129,Other personal services,8129,812,81,4,0,Total,0,All establishments,X,X,924,X,X,X,550965,100,X,X,X,0
+Minnesota,2017,81291,Pet care (except veterinary) services,8129,812,81,5,0,Total,0,All establishments,X,X,371,X,X,X,113220,100,X,X,X,0
+Minnesota,2017,812910,Pet care (except veterinary) services,8129,812,81,6,0,Total,0,All establishments,X,X,371,X,X,X,113220,100,X,X,X,0
+Minnesota,2017,81292,Photofinishing,8129,812,81,5,0,Total,0,All establishments,X,X,10,X,X,X,44223,100,X,X,X,0
+Minnesota,2017,812921,Photofinishing laboratories (except one-hour),8129,812,81,6,0,Total,0,All establishments,X,X,D,X,X,X,D,D,X,X,X,D
+Minnesota,2017,81293,Parking lots and garages,8129,812,81,5,0,Total,0,All establishments,X,X,182,X,X,X,172814,100,X,X,X,0
+Minnesota,2017,812930,Parking lots and garages,8129,812,81,6,0,Total,0,All establishments,X,X,182,X,X,X,172814,100,X,X,X,0
+Minnesota,2017,81299,All other personal services,8129,812,81,5,0,Total,0,All establishments,X,X,361,X,X,X,220708,100,X,X,X,0
+Minnesota,2017,812990,All other personal services,8129,812,81,6,0,Total,0,All establishments,X,X,361,X,X,X,220708,100,X,X,X,0
+Minnesota,2017,813,"Religious, grantmaking, civic, professional, and similar organizations",null,813,81,3,0,Total,0,All establishments,X,X,2543,X,X,X,4388555,100,X,X,X,0
+Minnesota,2017,8132,Grantmaking and giving services,8132,813,81,4,0,Total,0,All establishments,X,X,398,X,X,X,2419610,100,X,X,X,0
+Minnesota,2017,81321,Grantmaking and giving services,8132,813,81,5,0,Total,0,All establishments,X,X,398,X,X,X,2419610,100,X,X,X,0
+Minnesota,2017,813211,Grantmaking foundations,8132,813,81,6,0,Total,0,All establishments,X,X,217,X,X,X,1480665,100,X,X,X,0
+Minnesota,2017,813212,Voluntary health organizations,8132,813,81,6,0,Total,0,All establishments,X,X,70,X,X,X,520685,100,X,X,X,0
+Minnesota,2017,813219,Other grantmaking and giving services,8132,813,81,6,0,Total,0,All establishments,X,X,111,X,X,X,418260,100,X,X,X,0
+Minnesota,2017,8133,Social advocacy organizations,8133,813,81,4,0,Total,0,All establishments,X,X,453,X,X,X,496070,100,X,X,X,0
+Minnesota,2017,81331,Social advocacy organizations,8133,813,81,5,0,Total,0,All establishments,X,X,453,X,X,X,496070,100,X,X,X,0
+Minnesota,2017,813311,Human rights organizations,8133,813,81,6,0,Total,0,All establishments,X,X,63,X,X,X,70037,100,X,X,X,0
+Minnesota,2017,813312,"Environment, conservation and wildlife organizations",8133,813,81,6,0,Total,0,All establishments,X,X,186,X,X,X,316117,100,X,X,X,0
+Minnesota,2017,813319,Other social advocacy organizations,8133,813,81,6,0,Total,0,All establishments,X,X,204,X,X,X,109916,100,X,X,X,0
+Minnesota,2017,8134,Civic and social organizations,8134,813,81,4,0,Total,0,All establishments,X,X,1015,X,X,X,808070,100,X,X,X,0
+Minnesota,2017,81341,Civic and social organizations,8134,813,81,5,0,Total,0,All establishments,X,X,1015,X,X,X,808070,100,X,X,X,0
+Minnesota,2017,813410,Civic and social organizations,8134,813,81,6,0,Total,0,All establishments,X,X,1015,X,X,X,808070,100,X,X,X,0
+Minnesota,2017,8139,"Business, professional, labor, political, and similar organizations",8139,813,81,4,0,Total,0,All establishments,X,X,677,X,X,X,664805,100,X,X,X,0
+Minnesota,2017,81391,Business associations,8139,813,81,5,0,Total,0,All establishments,X,X,384,X,X,X,361351,100,X,X,X,0
+Minnesota,2017,813910,Business associations,8139,813,81,6,0,Total,0,All establishments,X,X,384,X,X,X,361351,100,X,X,X,0
+Minnesota,2017,81392,Professional organizations,8139,813,81,5,0,Total,0,All establishments,X,X,139,X,X,X,218981,100,X,X,X,0
+Minnesota,2017,813920,Professional organizations,8139,813,81,6,0,Total,0,All establishments,X,X,139,X,X,X,218981,100,X,X,X,0
+Minnesota,2017,81399,"Other similar organizations (except business, professional, labor, and political organizations)",8139,813,81,5,0,Total,0,All establishments,X,X,154,X,X,X,84473,100,X,X,X,0
+Minnesota,2017,813990,"Other similar organizations (except business, professional, labor, and political organizations)",8139,813,81,6,0,Total,0,All establishments,X,X,154,X,X,X,84473,100,X,X,X,0
