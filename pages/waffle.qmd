@@ -21,7 +21,16 @@ mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
   select(naics2017, naics2017_label, sector, estab, napcsdol) |>
   mutate(estab = as.numeric(estab)) |>
   filter(!is.na(estab)) |>
-  mutate(napcsdol = as.numeric(napcsdol))
+  mutate(napcsdol = as.numeric(napcsdol)) |>
+  mutate(sector_label = case_when(
+           sector == 44 ~ "Retail Trade",
+           sector == 61 ~ "Educational Services",
+           sector == 62 ~ "Health Care and Social Assistance",
+           sector == 71 ~ "Arts, Entertainment and Recreation",
+           sector == 72 ~ "Accommodation and Food Services",
+           sector == 81 ~ "Personal and Laundry Services",
+           TRUE ~ as.character(sector)
+         ))
 
 # sector = NAICS economic sector 
 # estab =	Number of establishments
@@ -66,11 +75,11 @@ example |>
 
 ```{r}
 prop_eco <- mn_eco_industry |>
-  group_by(sector) |>
+  group_by(sector_label) |>
   summarize(total = sum(estab)) |>
   mutate(prop = (total * 100 / sum(total)) + 0.35)
 
-parts <- tibble(names = prop_eco$sector, vals = prop_eco$prop)
+parts <- tibble(names = prop_eco$sector_label, vals = prop_eco$prop)
 
 waffle(parts, 
        rows = 10, 
