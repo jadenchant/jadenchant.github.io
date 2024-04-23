@@ -18,11 +18,21 @@ mn_eco_industry_raw <- read_csv("https://jadenchant.github.io/data/mn_eco_indust
   clean_names()
 
 mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
-  select(naics2017, naics2017_label, sector, estab, napcsdol)
+  select(naics2017, naics2017_label, sector, estab, napcsdol) |>
+  mutate(estab = as.numeric(estab)) |>
+  filter(!is.na(estab)) |>
+  mutate(napcsdol = as.numeric(napcsdol))
 
 # sector = NAICS economic sector 
 # estab =	Number of establishments
 # napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
+
+# 44 Retail Trade
+# 61 Educational Services
+# 62 Health Care and Social Assistance
+# 71 Arts, Entertainment and Recreation
+# 72 Accommodation and Food Services
+# 81 Persoal and Laundry Services
 ```
 
 
@@ -54,6 +64,20 @@ example |>
 ```
 
 
+```{r}
+prop_eco <- mn_eco_industry |>
+  group_by(sector) |>
+  summarize(total = sum(estab)) |>
+  mutate(prop = (total * 100 / sum(total)) + 0.35)
+
+parts <- tibble(names = prop_eco$sector, vals = prop_eco$prop)
+
+waffle(parts, 
+       rows = 10, 
+       legend_pos = "bottom")
+
+# iron() combine 2 waffles
+```
 
 
 
