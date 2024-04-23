@@ -17,6 +17,19 @@ library(tidyverse)
 mn_eco_industry_raw <- read_csv("https://jadenchant.github.io/data/mn_eco_industry2017.csv") |>
   clean_names()
 
+# sector = NAICS economic sector 
+# estab =	Number of establishments
+# napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
+
+# 44 Retail Trade
+# 61 Educational Services
+# 62 Health Care and Social Assistance
+# 71 Arts, Entertainment and Recreation
+# 72 Accommodation and Food Services
+# 81 Personal and Laundry Services
+```
+
+```{r}
 mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
   select(naics2017, naics2017_label, sector, estab, napcsdol) |>
   mutate(estab = as.numeric(estab)) |>
@@ -31,17 +44,6 @@ mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
            sector == 81 ~ "Personal and Laundry Services",
            TRUE ~ as.character(sector)
          ))
-
-# sector = NAICS economic sector 
-# estab =	Number of establishments
-# napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
-
-# 44 Retail Trade
-# 61 Educational Services
-# 62 Health Care and Social Assistance
-# 71 Arts, Entertainment and Recreation
-# 72 Accommodation and Food Services
-# 81 Persoal and Laundry Services
 ```
 
 
@@ -82,8 +84,30 @@ prop_eco <- mn_eco_industry |>
 parts <- tibble(names = prop_eco$sector_label, vals = prop_eco$prop)
 
 waffle(parts, 
-       rows = 10, 
+       rows = 10,
+       size = 2,
+       pad = 0,
        legend_pos = "bottom")
+
+prop_eco |>
+  ggplot(
+    aes(fill = sector_label, values = prop)
+  ) +
+  geom_waffle(
+    n_rows = 10,
+    size = 0.33, 
+    colour = "white",
+    flip = FALSE,
+    
+  ) +
+  # scale_fill_manual(
+  #   name = NULL,
+  #   # values = c("#a40000", "#169948", "#ae6056"),
+  #   # labels = c("Fruit", "Salad", "Pizza")
+  # ) +
+  coord_equal() +
+  theme_minimal()+
+  theme_enhance_waffle()
 
 # iron() combine 2 waffles
 ```
