@@ -188,14 +188,16 @@ w1 <- waffle(full_parts,
        size = 2,
        pad = 0,
        colors = c("#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00", "#CA7902", "#9B2226"),
-       legend_pos = "right")
+       legend_pos = "right",
+       title = "Minnesota Economic Sales Proportion by Sector")
 
 w2 <- waffle(retail_parts, 
          rows = 10,
          size = 2,
          pad = 0,
          color = c("#461220", "#8c2f39", "#b23a48", "#fcb9b2", "#fed0bb", "#FFF1EB"),
-         legend_pos = "right")
+         legend_pos = "right",
+         title = "Retail Trade Economic Sales Proportion by Sub Sector")
 
 iron(w1, w2)
 ```
