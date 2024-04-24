@@ -100,12 +100,16 @@ prop_eco |>
     flip = FALSE,
     
   ) +
-  # scale_fill_manual(
-  #   name = NULL,
-  #   # values = c("#a40000", "#169948", "#ae6056"),
-  #   # labels = c("Fruit", "Salad", "Pizza")
-  # ) +
+  scale_fill_manual(
+    name = NULL,
+    values = c("#001219", "#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00", "#CA6702")
+  ) +
   coord_equal() +
+  labs(
+    title = "Minnesota Economic Industry",
+    subtitle = "Proportion of Establishments by Sector",
+    caption = "Source: U.S. Census Bureau"
+  ) +
   theme_minimal()+
   theme_enhance_waffle()
 
