@@ -166,6 +166,39 @@ retail |>
 
 
 
+```{r}
+retail_rm <- retail |>
+  filter(simplified_label != "Markets") |>
+  filter(simplified_label != "Operators") |>
+  filter(simplified_label != "Establishments")
+
+retail_parts <- tibble(names = retail_rm$simplified_label, vals = retail_rm$prop)
+
+prop_eco_napcsdol <- mn_eco_industry |>
+  group_by(sector_label) |>
+  summarize(total = sum(napcsdol)) |>
+  mutate(prop = (total * 100 / sum(total)) + 0.35)
+
+full_parts <- tibble(names = prop_eco_napcsdol$sector_label, vals = prop_eco_napcsdol$prop)
+```
+
+```{r}
+w1 <- waffle(full_parts,
+       rows = 10,
+       size = 2,
+       pad = 0,
+       colors = c("#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00", "#CA7902", "#9B2226"),
+       legend_pos = "right")
+
+w2 <- waffle(retail_parts, 
+         rows = 10,
+         size = 2,
+         pad = 0,
+         color = c("#461220", "#8c2f39", "#b23a48", "#fcb9b2", "#fed0bb", "#FFF1EB"),
+         legend_pos = "right")
+
+iron(w1, w2)
+```
 
 
 
