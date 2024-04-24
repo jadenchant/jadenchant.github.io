@@ -12,6 +12,7 @@ execute:
 library(waffle)
 library(magrittr)
 library(janitor)
+library(ggdark)
 library(tidyverse)
 
 mn_eco_industry_raw <- read_csv("https://jadenchant.github.io/data/mn_eco_industry2017.csv") |>
@@ -145,14 +146,13 @@ retail |>
   ) +
   geom_waffle(
     n_rows = 10,
-    size = 0.33, 
-    colour = "white",
+    size = 1.5, 
+    colour = "black",
     flip = FALSE,
-    
   ) +
   scale_fill_manual(
     name = NULL,
-    values = c("#001219", "#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00", "#CA6702")
+    values = c("#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00", "#CA7902", "#9B2226")
   ) +
   coord_equal() +
   labs(
@@ -160,9 +160,19 @@ retail |>
     subtitle = "Proportion of Sales by Sub Sector",
     caption = "Source: U.S. Census Bureau"
   ) +
-  theme_minimal()+
+  dark_theme_minimal(base_size = 14)+
   theme_enhance_waffle()
 ```
+
+
+
+
+
+
+
+
+
+
 
 
 
