@@ -117,8 +117,52 @@ prop_eco |>
 ```
 
 
+```{r}
+retail <- mn_eco_industry |>
+  filter(sector_label == "Retail Trade") |>
+  mutate(simplified_label = tolower(naics2017_label)) |>
+  mutate(simplified_label = ifelse(grepl("stores", simplified_label), "Stores", simplified_label),
+         simplified_label = ifelse(grepl("dealers", simplified_label), "Dealers", simplified_label),
+         simplified_label = ifelse(grepl("markets", simplified_label), "Markets", simplified_label),
+         simplified_label = ifelse(grepl("retailers", simplified_label), "Retailers", simplified_label),
+         simplified_label = ifelse(grepl("stations", simplified_label), "Stations", simplified_label),
+         simplified_label = ifelse(grepl("establishments", simplified_label), "Establishments", simplified_label),
+         simplified_label = ifelse(grepl("houses", simplified_label), "Houses", simplified_label),
+         simplified_label = ifelse(grepl("centers", simplified_label), "Centers", simplified_label),
+         simplified_label = ifelse(grepl("operators", simplified_label), "Operators", simplified_label),
+         simplified_label = ifelse(grepl("retail trade", simplified_label), "Retailers", simplified_label),
+         simplified_label = ifelse(grepl("florists", simplified_label), "Stores", simplified_label)) |>
+  group_by(simplified_label) |>
+  summarize(total = sum(napcsdol)) |>
+  mutate(prop = (total * 100 / sum(total)) + 0.35)
+```
 
 
+```{r}
+retail |>
+  ggplot(
+    aes(fill = simplified_label, values = prop)
+  ) +
+  geom_waffle(
+    n_rows = 10,
+    size = 0.33, 
+    colour = "white",
+    flip = FALSE,
+    
+  ) +
+  scale_fill_manual(
+    name = NULL,
+    values = c("#001219", "#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00", "#CA6702")
+  ) +
+  coord_equal() +
+  labs(
+    title = "Minnesota Retail Economic Sales",
+    subtitle = "Proportion of Sales by Sub Sector",
+    caption = "Source: U.S. Census Bureau"
+  ) +
+  theme_minimal()+
+  theme_enhance_waffle()
+```
 
 
 
