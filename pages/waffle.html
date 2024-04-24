@@ -292,13 +292,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estab)) <span class="sc">|&gt;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> (total <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">sum</span>(total)) <span class="sc">+</span> <span class="fl">0.35</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> prop_eco<span class="sc">$</span>sector_label, <span class="at">vals =</span> prop_eco<span class="sc">$</span>prop)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">waffle</span>(parts, </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">rows =</span> <span class="dv">10</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">2</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">pad =</span> <span class="dv">0</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend_pos =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> prop_eco<span class="sc">$</span>sector_label, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">vals =</span> prop_eco<span class="sc">$</span>prop)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">waffle</span>(parts, </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">rows =</span> <span class="dv">10</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">pad =</span> <span class="dv">4</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend_pos =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Minnesota Economic Industry Proportion by Sector"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -326,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Minnesota Economic Industry"</span>,</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Proportion of Establishments by Sector"</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: U.S. Census Bureau"</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: U.S. Census Bureau 2017"</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dark_theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)<span class="sc">+</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_enhance_waffle</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -376,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Minnesota Retail Economic Sales"</span>,</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Proportion of Sales by Sub Sector"</span>,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: U.S. Census Bureau"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: U.S. Census Bureau 2017"</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dark_theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)<span class="sc">+</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_enhance_waffle</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -394,33 +396,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(simplified_label <span class="sc">!=</span> <span class="st">"Operators"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(simplified_label <span class="sc">!=</span> <span class="st">"Establishments"</span>)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>retail_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> retail_rm<span class="sc">$</span>simplified_label, <span class="at">vals =</span> retail_rm<span class="sc">$</span>prop)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>prop_eco_napcsdol <span class="ot">&lt;-</span> mn_eco_industry <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sector_label) <span class="sc">|&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(napcsdol)) <span class="sc">|&gt;</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> (total <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">sum</span>(total)) <span class="sc">+</span> <span class="fl">0.35</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>full_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> prop_eco_napcsdol<span class="sc">$</span>sector_label, <span class="at">vals =</span> prop_eco_napcsdol<span class="sc">$</span>prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>prop_eco_napcsdol <span class="ot">&lt;-</span> mn_eco_industry <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sector_label) <span class="sc">|&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(napcsdol)) <span class="sc">|&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> (total <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">sum</span>(total)) <span class="sc">+</span> <span class="fl">0.35</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>full_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> prop_eco_napcsdol<span class="sc">$</span>sector_label, <span class="at">vals =</span> prop_eco_napcsdol<span class="sc">$</span>prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">waffle</span>(full_parts,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">rows =</span> <span class="dv">10</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">2</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">pad =</span> <span class="dv">0</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#0A9396"</span>, <span class="st">"#94D2BD"</span>, <span class="st">"#E9D8A6"</span>, <span class="st">"#EE9B00"</span>, <span class="st">"#CA7902"</span>, <span class="st">"#9B2226"</span>),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend_pos =</span> <span class="st">"right"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Minnesota Economic Sales Proportion by Sector"</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>w2 <span class="ot">&lt;-</span> <span class="fu">waffle</span>(retail_parts, </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">rows =</span> <span class="dv">10</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">size =</span> <span class="dv">2</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">pad =</span> <span class="dv">0</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"#461220"</span>, <span class="st">"#8c2f39"</span>, <span class="st">"#b23a48"</span>, <span class="st">"#fcb9b2"</span>, <span class="st">"#fed0bb"</span>, <span class="st">"#FFF1EB"</span>),</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend_pos =</span> <span class="st">"right"</span>,</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Retail Trade Economic Sales Proportion by Sub Sector"</span>)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(w1, w2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>retail_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> retail_rm<span class="sc">$</span>simplified_label, <span class="at">vals =</span> retail_rm<span class="sc">$</span>prop)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>full_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> prop_eco_napcsdol<span class="sc">$</span>sector_label, <span class="at">vals =</span> prop_eco_napcsdol<span class="sc">$</span>prop)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">waffle</span>(full_parts,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">rows =</span> <span class="dv">10</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">pad =</span> <span class="dv">0</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#0A9396"</span>, <span class="st">"#94D2BD"</span>, <span class="st">"#E9D8A6"</span>, <span class="st">"#EE9B00"</span>, <span class="st">"#CA7902"</span>, <span class="st">"#9B2226"</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend_pos =</span> <span class="st">"right"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Minnesota Economic Sales Proportion by Sector"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>w2 <span class="ot">&lt;-</span> <span class="fu">waffle</span>(retail_parts, </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">rows =</span> <span class="dv">10</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">size =</span> <span class="dv">2</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">pad =</span> <span class="dv">0</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"#461220"</span>, <span class="st">"#8c2f39"</span>, <span class="st">"#b23a48"</span>, <span class="st">"#fcb9b2"</span>, <span class="st">"#fed0bb"</span>, <span class="st">"#FFF1EB"</span>),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend_pos =</span> <span class="st">"right"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Retail Trade Economic Sales Proportion by Sub Sector"</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">iron</span>(w1, w2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
