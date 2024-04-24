@@ -47,7 +47,6 @@ mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
          ))
 ```
 
-
 ```{r}
 example <- tibble(
   parts = factor(rep(month.abb[1:3], 3), levels=month.abb[1:3]),
@@ -75,23 +74,22 @@ example |>
   theme_enhance_waffle()
 ```
 
-
 ```{r}
 prop_eco <- mn_eco_industry |>
   group_by(sector_label) |>
   summarize(total = sum(estab)) |>
   mutate(prop = (total * 100 / sum(total)) + 0.35)
 
-parts <- tibble(names = prop_eco$sector_label, vals = prop_eco$prop)
+parts <- tibble(names = prop_eco$sector_label, 
+                vals = prop_eco$prop)
 
 waffle(parts, 
        rows = 10,
        size = 2,
-       pad = 0,
-       legend_pos = "bottom")
+       pad = 4,
+       legend_pos = "bottom",
+       title = "Minnesota Economic Industry Proportion by Sector")
 ```
-
-
 
 ```{r}
 prop_eco |>
@@ -112,12 +110,11 @@ geom_waffle(
   labs(
     title = "Minnesota Economic Industry",
     subtitle = "Proportion of Establishments by Sector",
-    caption = "Source: U.S. Census Bureau"
+    caption = "Source: U.S. Census Bureau 2017"
   ) +
   dark_theme_minimal(base_size = 14)+
   theme_enhance_waffle()
 ```
-
 
 ```{r}
 retail <- mn_eco_industry |>
@@ -139,7 +136,6 @@ retail <- mn_eco_industry |>
   mutate(prop = (total * 100 / sum(total)) + 0.35)
 ```
 
-
 ```{r}
 retail |>
   ggplot(
@@ -159,22 +155,17 @@ retail |>
   labs(
     title = "Minnesota Retail Economic Sales",
     subtitle = "Proportion of Sales by Sub Sector",
-    caption = "Source: U.S. Census Bureau"
+    caption = "Source: U.S. Census Bureau 2017"
   ) +
   dark_theme_minimal(base_size = 14)+
   theme_enhance_waffle()
 ```
-
-
-
 
 ```{r}
 retail_rm <- retail |>
   filter(simplified_label != "Markets") |>
   filter(simplified_label != "Operators") |>
   filter(simplified_label != "Establishments")
-
-retail_parts <- tibble(names = retail_rm$simplified_label, vals = retail_rm$prop)
 
 prop_eco_napcsdol <- mn_eco_industry |>
   group_by(sector_label) |>
@@ -185,6 +176,10 @@ full_parts <- tibble(names = prop_eco_napcsdol$sector_label, vals = prop_eco_nap
 ```
 
 ```{r}
+retail_parts <- tibble(names = retail_rm$simplified_label, vals = retail_rm$prop)
+
+full_parts <- tibble(names = prop_eco_napcsdol$sector_label, vals = prop_eco_napcsdol$prop)
+
 w1 <- waffle(full_parts,
        rows = 10,
        size = 2,
