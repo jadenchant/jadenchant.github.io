@@ -89,7 +89,11 @@ waffle(parts,
        size = 2,
        pad = 0,
        legend_pos = "bottom")
+```
 
+
+
+```{r}
 prop_eco |>
   ggplot(
     aes(fill = sector_label, values = prop)
@@ -112,8 +116,6 @@ geom_waffle(
   ) +
   dark_theme_minimal(base_size = 14)+
   theme_enhance_waffle()
-
-# iron() combine 2 waffles
 ```
 
 
