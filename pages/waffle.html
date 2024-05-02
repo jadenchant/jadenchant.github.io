@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -237,6 +237,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>This section includes an application of the <a href="https://github.com/hrbrmstr/waffle">waffle package</a> which is used to make waffle and pictograph charts in R. The pictograph portion was not working when I created this.</p>
+</section>
+<section id="variable-names-for-mn-economic-industry-dataset-2017" class="level2">
+<h2 class="anchored" data-anchor-id="variable-names-for-mn-economic-industry-dataset-2017">Variable Names for MN Economic Industry Dataset 2017</h2>
+<p>sector = NAICS economic sector estab = Number of establishments napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)</p>
+<p>44 Retail Trade 61 Educational Services 62 Health Care and Social Assistance 71 Arts, Entertainment and Recreation 72 Accommodation and Food Services 81 Personal and Laundry Services</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mn_eco_industry <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(mn_eco_industry_raw) <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(naics2017, naics2017_label, sector, estab, napcsdol) <span class="sc">|&gt;</span></span>
@@ -253,6 +261,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>           <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(sector)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="example-waffle-chart" class="level2">
+<h2 class="anchored" data-anchor-id="example-waffle-chart">Example Waffle Chart</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>example <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">parts =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(month.abb[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">3</span>), <span class="at">levels=</span>month.abb[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]),</span>
@@ -286,6 +297,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="mn-economic-industry-sectors-2017" class="level2">
+<h2 class="anchored" data-anchor-id="mn-economic-industry-sectors-2017">MN Economic Industry Sectors 2017</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prop_eco <span class="ot">&lt;-</span> mn_eco_industry <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sector_label) <span class="sc">|&gt;</span></span>
@@ -340,6 +354,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="mn-economic-industry-retail-subsectors-2017" class="level2">
+<h2 class="anchored" data-anchor-id="mn-economic-industry-retail-subsectors-2017">MN Economic Industry Retail Subsectors 2017</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>retail <span class="ot">&lt;-</span> mn_eco_industry <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sector_label <span class="sc">==</span> <span class="st">"Retail Trade"</span>) <span class="sc">|&gt;</span></span>
@@ -403,6 +420,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>full_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> prop_eco_napcsdol<span class="sc">$</span>sector_label, <span class="at">vals =</span> prop_eco_napcsdol<span class="sc">$</span>prop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="iron-function" class="level2">
+<h2 class="anchored" data-anchor-id="iron-function">Iron Function</h2>
+<p>The <code>iron</code> function is used to combine 2 or more waffle charts without using a facet.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>retail_parts <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> retail_rm<span class="sc">$</span>simplified_label, <span class="at">vals =</span> retail_rm<span class="sc">$</span>prop)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -433,8 +454,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The waffle package is very useful in showing simple proportions.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
