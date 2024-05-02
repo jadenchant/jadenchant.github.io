@@ -36,16 +36,16 @@ This section includes an application of the [waffle package](https://github.com/
 
 ## Variable Names for MN Economic Industry Dataset 2017
 
-sector = NAICS economic sector
-estab =	Number of establishments
+sector = NAICS economic sector\n
+estab =	Number of establishments\n
 napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
 
-44 Retail Trade
-61 Educational Services
-62 Health Care and Social Assistance
-71 Arts, Entertainment and Recreation
-72 Accommodation and Food Services
-81 Personal and Laundry Services
+44 Retail Trade\n
+61 Educational Services\n
+62 Health Care and Social Assistance\n
+71 Arts, Entertainment and Recreation\n
+72 Accommodation and Food Services\n
+81 Personal and Laundry Services\n
 
 
 ```{r}
