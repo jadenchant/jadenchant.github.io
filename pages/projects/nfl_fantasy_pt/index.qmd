@@ -28,79 +28,73 @@ library(tidyverse)
 set.seed(12345)
 ```
 
+## Cleaning Dataset
+
+```{r}
+#| eval: false
+
+nfl <- bind_rows(nfl_2018, nfl_2019, nfl_2020, nfl_2021, nfl_2022) %>%
+  # Height conversion
+  mutate(HT = Ht....3) %>%
+  mutate(FT = ifelse(str_detect(HT, "May"), 5, 6)) %>%
+  mutate(IN = as.numeric(str_extract(HT, "[0-9]+"))) %>%
+  mutate(HeightInch = IN + (12 * FT)) %>%
+
+  # Changing col names
+  mutate(Weight= Wt.) %>%
+  mutate(TD = TD...4) %>%
+  mutate(GamesStarted  = GS...5) %>%
+  mutate(PPR = PPR...6) %>%
+  mutate(FanPt = FantPt...15) %>%
+  mutate(CatchPercent =  `Ctch%`) %>%
+  mutate(GamesPlayed = G) %>%
+  mutate(NumTargets = Tgt) %>%
+  mutate(NumReceptions = Rec) %>%
+  mutate(Position = Pos) %>%
+
+  # Create new col
+  mutate(FanPtNextSeason = NA) %>%
+
+  # Convert WR/QB position into WR
+  mutate(Position = if_else(Position == "WR/QB", "WR", Position)) %>%
+
+  # Choose second team if player played on 2 teams
+  mutate(Team = gsub("^.+,(.+)", "\\1", Team)) %>%
+
+  # Selecting columns used in analysis
+  select(Player, Season, Age, BMI, Weight, HeightInch, GamesPlayed, GamesStarted, NumTargets, NumReceptions, CatchPercent, Position, FanPt, FanPtNextSeason)
 
 
-```{r, include=FALSE}
-#| include: false
+# Getting Fantasy Points for the next season and putting it in a row with current season
+for(i in 1:590) {
+  name <- nfl$Player[i]
+  season <- nfl$Season[i]
 
-# nfl_2018 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2018.csv")
-# nfl_2019 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2019.csv")
-# nfl_2020 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2020.csv")
-# nfl_2021 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2021.csv")
-# nfl_2022 <- read_csv("~/Stats 272 F23/Project/Ben_Jaden/data/nfl_wr_te_2022.csv")
+  # Finding next season score
+  for(j in 1:590) {
+    if(nfl$Player[j] == name && nfl$Season[j] == season + 1) {
+      nfl$FanPtNextSeason[i] = nfl$FanPt[j]
+    }
+  }
+}
 
-# nfl <- bind_rows(nfl_2018, nfl_2019, nfl_2020, nfl_2021, nfl_2022) %>%
-#   # Height conversion
-#   mutate(HT = Ht....3) %>%
-#   mutate(FT = ifelse(str_detect(HT, "May"), 5, 6)) %>%
-#   mutate(IN = as.numeric(str_extract(HT, "[0-9]+"))) %>%
-#   mutate(HeightInch = IN + (12 * FT)) %>%
-#   
-#   # Changing col names
-#   mutate(Weight= Wt.) %>%
-#   mutate(TD = TD...4) %>%
-#   mutate(GamesStarted  = GS...5) %>%
-#   mutate(PPR = PPR...6) %>%
-#   mutate(FanPt = FantPt...15) %>%
-#   mutate(CatchPercent =  `Ctch%`) %>%
-#   mutate(GamesPlayed = G) %>%
-#   mutate(NumTargets = Tgt) %>%
-#   mutate(NumReceptions = Rec) %>%
-#   mutate(Position = Pos) %>%
-#   
-#   # Create new col
-#   mutate(FanPtNextSeason = NA) %>%
-#   
-#   # Convert WR/QB position into WR
-#   mutate(Position = if_else(Position == "WR/QB", "WR", Position)) %>%
-#   
-#   # Choose second team if player played on 2 teams
-#   mutate(Team = gsub("^.+,(.+)", "\\1", Team)) %>%
-#   
-#   # Selecting columns used in analysis
-#   select(Player, Season, Age, BMI, Weight, HeightInch, GamesPlayed, GamesStarted, NumTargets, NumReceptions, CatchPercent, Position, FanPt, FanPtNextSeason)
-# 
-# 
-# # Getting Fantasy Points for the next season and putting it in a row with current season
-# for(i in 1:590) {
-#   name <- nfl$Player[i]
-#   season <- nfl$Season[i]
-#   
-#   # Finding next season score
-#   for(j in 1:590) {
-#     if(nfl$Player[j] == name && nfl$Season[j] == season + 1) {
-#       nfl$FanPtNextSeason[i] = nfl$FanPt[j]
-#     }
-#   }
-# }
-# 
-# # Dropping players that don't have 2 consecutive seasons
-# nfl <- nfl %>%
-#   drop_na()
-# 
-# # 290/590 observations
-# 
-# nfl <- nfl %>%
-#   mutate(FanPtNextSeason_Center = FanPtNextSeason - median(FanPtNextSeason)) %>%
-#   mutate(Age_Center = Age - median(Age)) %>%
-#   mutate(GamesPlayed_Center = GamesPlayed - median(GamesPlayed)) %>%
-#   mutate(BMI_Center = BMI - median(BMI)) %>%
-#   mutate(NumTargets_Center = NumTargets - median(NumTargets)) %>%
-#   mutate(NumReceptions_Center = NumReceptions - median(NumReceptions)) %>%
-#   mutate(CatchPercent_Center = CatchPercent - median(CatchPercent)) %>%
-#   mutate(GamesStarted_Center = GamesStarted - median(GamesStarted)) %>%
-#   mutate(Weight_Center = Weight - median(Weight)) %>%
-#   mutate(HeightInch_Center = HeightInch - median(HeightInch))
+# Dropping players that don't have 2 consecutive seasons
+nfl <- nfl %>%
+  drop_na()
+
+# 290/590 observations
+
+nfl <- nfl %>%
+  mutate(FanPtNextSeason_Center = FanPtNextSeason - median(FanPtNextSeason)) %>%
+  mutate(Age_Center = Age - median(Age)) %>%
+  mutate(GamesPlayed_Center = GamesPlayed - median(GamesPlayed)) %>%
+  mutate(BMI_Center = BMI - median(BMI)) %>%
+  mutate(NumTargets_Center = NumTargets - median(NumTargets)) %>%
+  mutate(NumReceptions_Center = NumReceptions - median(NumReceptions)) %>%
+  mutate(CatchPercent_Center = CatchPercent - median(CatchPercent)) %>%
+  mutate(GamesStarted_Center = GamesStarted - median(GamesStarted)) %>%
+  mutate(Weight_Center = Weight - median(Weight)) %>%
+  mutate(HeightInch_Center = HeightInch - median(HeightInch))
 ```
 
 
@@ -363,6 +357,8 @@ FanStats_center_data <- nfl %>%
 ```
 
 ```{r}
+#| include: false
+
 # Final Model
 ggplot(step_model_data, aes(x = fitted, y = FanPtNextSeason))+
   geom_point()+
@@ -380,7 +376,9 @@ ggplot(FanStats_center_data, aes(x = fitted, y = FanPtNextSeason))+
   geom_point()+
   geom_abline(intercept = 0, slope = 1, color="red")+
   labs(title="Predicted vs. Actual Fantasy Points Next Season (Onfield Statistics)", x="Predicted Fantasy Points Next Season", y="Fantasy Points Next Season")
+```
 
+```{r}
 # Final with point labels
 ggplot(step_model_data, aes(x = fitted, y = FanPtNextSeason))+
   geom_point()+

@@ -18,7 +18,7 @@ library(tidyverse)
 mn_eco_industry_raw <- read_csv("https://jadenchant.github.io/data/mn_eco_industry2017.csv") |>
   clean_names()
 
-# sector = NAICS economic sector 
+# sector = NAICS economic sector
 # estab =	Number of establishments
 # napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
 
@@ -29,6 +29,24 @@ mn_eco_industry_raw <- read_csv("https://jadenchant.github.io/data/mn_eco_indust
 # 72 Accommodation and Food Services
 # 81 Personal and Laundry Services
 ```
+
+## Intro
+
+This section includes an application of the [waffle package](https://github.com/hrbrmstr/waffle) which is used to make waffle and pictograph charts in R. The pictograph portion was not working when I created this.
+
+## Variable Names for MN Economic Industry Dataset 2017
+
+sector = NAICS economic sector
+estab =	Number of establishments
+napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)
+
+44 Retail Trade
+61 Educational Services
+62 Health Care and Social Assistance
+71 Arts, Entertainment and Recreation
+72 Accommodation and Food Services
+81 Personal and Laundry Services
+
 
 ```{r}
 mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
@@ -46,6 +64,8 @@ mn_eco_industry <- clean_names(mn_eco_industry_raw) |>
            TRUE ~ as.character(sector)
          ))
 ```
+
+## Example Waffle Chart
 
 ```{r}
 example <- tibble(
@@ -73,6 +93,8 @@ example |>
   theme_minimal()+
   theme_enhance_waffle()
 ```
+
+## MN Economic Industry Sectors 2017
 
 ```{r}
 prop_eco <- mn_eco_industry |>
@@ -115,6 +137,8 @@ geom_waffle(
   dark_theme_minimal(base_size = 14)+
   theme_enhance_waffle()
 ```
+
+## MN Economic Industry Retail Subsectors 2017
 
 ```{r}
 retail <- mn_eco_industry |>
@@ -175,6 +199,10 @@ prop_eco_napcsdol <- mn_eco_industry |>
 full_parts <- tibble(names = prop_eco_napcsdol$sector_label, vals = prop_eco_napcsdol$prop)
 ```
 
+## Iron Function
+
+The `iron` function is used to combine 2 or more waffle charts without using a facet.
+
 ```{r}
 retail_parts <- tibble(names = retail_rm$simplified_label, vals = retail_rm$prop)
 
@@ -198,6 +226,17 @@ w2 <- waffle(retail_parts,
 
 iron(w1, w2)
 ```
+
+
+The waffle package is very useful in showing simple proportions.
+
+
+
+
+
+
+
+
 
 
 
