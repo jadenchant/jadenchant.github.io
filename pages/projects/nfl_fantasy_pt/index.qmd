@@ -276,7 +276,6 @@ summary(step_model)
 ```{r}
 #| message: false
 #| output: false
-#| echo: false
 
 # Stepwise Center Model
 full_center_model <- lm(FanPtNextSeason_Center ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
@@ -301,7 +300,8 @@ summary(FanStats_center_model)
 
 ## Confidence intervals
 ```{r}
-#| echo: false
+#| message: false
+#| output: false
 
 # Game Statistics
 signif(confint(FanStats_center_model), digits = 3)
@@ -323,7 +323,8 @@ summary(step_center_model)
 
 ## Multicollinearity
 ```{r}
-#| echo: false
+#| message: false
+#| output: false
 
 signif(vif(full_center_model), digits = 3)
 
@@ -339,7 +340,6 @@ signif(vif(FanStats_center_model), digits = 3)
 ```{r}
 #| message: false
 #| output: false
-#| echo: false
 
 # Changing centered FanPtNextSeason to not centered for easier graph interpretation
 full_center_model <- lm(FanPtNextSeason ~ Age_Center + GamesPlayed_Center + BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + GamesStarted_Center + Weight_Center + HeightInch_Center, nfl)
