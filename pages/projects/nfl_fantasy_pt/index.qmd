@@ -104,8 +104,10 @@ nfl <- nfl %>%
 nfl <- read_csv("https://jadenchant.github.io/data/nfl.csv")
 ```
 
-## EDA
+<!-- ## EDA -->
 ```{r}
+#| include: false
+
 # Age
 ggplot(nfl, aes(Age))+
   geom_histogram(bins = 15)
@@ -184,6 +186,8 @@ ggplot(nfl, aes(FanPtNextSeason)) +
 ```
 
 ```{r}
+#| include: false
+
 # Age and FanPtNextSeason
 ggplot(nfl, aes(Age, FanPtNextSeason))+
   geom_smooth(method = "lm")+

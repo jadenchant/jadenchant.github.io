@@ -228,7 +228,7 @@ iron(w1, w2)
 ```
 
 
-The waffle package is very useful in showing simple proportions.
+The waffle package is very useful in showing simple proportions. Other than that, it is not very useful for more complex data visualizations.
 
 
 
