@@ -221,7 +221,7 @@ corrplot(corr, type="upper")
 ```
 
 
-## Variable Selection
+<!-- ## Variable Selection -->
 ```{r}
 #| message: false
 #| output: false
@@ -253,7 +253,7 @@ Subsets %>%
 ```
 
 
-## Extra Models
+<!-- ## Extra Models -->
 ```{r}
 #| message: false
 #| output: false
@@ -272,7 +272,7 @@ summary(step_model)
 ```
 
 
-## Centered Models
+<!-- ## Centered Models -->
 ```{r}
 #| message: false
 #| output: false
@@ -301,6 +301,8 @@ summary(FanStats_center_model)
 
 ## Confidence intervals
 ```{r}
+#| echo: false
+
 # Game Statistics
 signif(confint(FanStats_center_model), digits = 3)
 summary(FanStats_center_model)
@@ -321,6 +323,8 @@ summary(step_center_model)
 
 ## Multicollinearity
 ```{r}
+#| echo: false
+
 signif(vif(full_center_model), digits = 3)
 
 signif(vif(step_center_model), digits = 3)
