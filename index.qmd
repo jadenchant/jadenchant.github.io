@@ -6,6 +6,8 @@ about:
   image: img/jaden.jpg
   image-shape: round
   links:
+    - icon: box-arrow-up-right
+      href: https://jadenchant.com/
     - icon: linkedin
       href: https://www.linkedin.com/in/jaden-chant/
     - icon: github
@@ -17,6 +19,7 @@ about:
 ## Jaden Chant
 
 Current CS and Math Student @ St. Olaf College
+Concentrating in Statistics and Data Science
 
 :::
 
