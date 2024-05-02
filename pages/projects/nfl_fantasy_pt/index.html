@@ -284,181 +284,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- ## Variable Selection -->
 <!-- ## Extra Models -->
 <!-- ## Centered Models -->
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stepwise Center Model</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>full_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason_Center <span class="sc">~</span> Age_Center <span class="sc">+</span> GamesPlayed_Center <span class="sc">+</span> BMI_Center <span class="sc">+</span> NumTargets_Center <span class="sc">+</span> NumReceptions_Center <span class="sc">+</span> CatchPercent_Center <span class="sc">+</span> GamesStarted_Center <span class="sc">+</span> Weight_Center <span class="sc">+</span> HeightInch_Center, nfl)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full_center_model)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>zero_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason_Center <span class="sc">~</span> <span class="dv">1</span>, nfl)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>step_center_model <span class="ot">&lt;-</span> <span class="fu">step</span>(zero_center_model, <span class="at">direction =</span> <span class="st">"both"</span>, <span class="at">scope =</span> <span class="fu">formula</span>(full_center_model))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_center_model)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Physical Player Center Model</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>body_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason_Center <span class="sc">~</span> Age_Center <span class="sc">+</span> BMI_Center <span class="sc">+</span> Weight_Center <span class="sc">+</span> HeightInch_Center, nfl)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(body_center_model)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Game Statistics Center Model</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>FanStats_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason_Center <span class="sc">~</span> GamesPlayed_Center <span class="sc">+</span> NumTargets_Center <span class="sc">+</span> NumReceptions_Center <span class="sc">+</span> CatchPercent_Center <span class="sc">+</span> GamesStarted_Center, nfl)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(FanStats_center_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="confidence-intervals" class="level2">
 <h2 data-anchor-id="confidence-intervals">Confidence intervals</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                      2.5 % 97.5 %
-(Intercept)          -8.540  4.010
-GamesPlayed_Center   -6.600 -0.963
-NumTargets_Center    -0.943  1.260
-NumReceptions_Center -0.419  2.750
-CatchPercent_Center  -2.150  0.573
-GamesStarted_Center  -4.080  0.825</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = FanPtNextSeason_Center ~ GamesPlayed_Center + NumTargets_Center + 
-    NumReceptions_Center + CatchPercent_Center + GamesStarted_Center, 
-    data = nfl)
-Residuals:
-     Min       1Q   Median       3Q      Max 
--102.003  -30.625   -3.243   28.436  154.445 
-Coefficients:
-                     Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)           -2.2692     3.1881  -0.712  0.47718   
-GamesPlayed_Center    -3.7818     1.4318  -2.641  0.00872 **
-NumTargets_Center      0.1582     0.5595   0.283  0.77762   
-NumReceptions_Center   1.1675     0.8062   1.448  0.14866   
-CatchPercent_Center   -0.7900     0.6927  -1.140  0.25505   
-GamesStarted_Center   -1.6273     1.2458  -1.306  0.19252   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-Residual standard error: 41.91 on 284 degrees of freedom
-Multiple R-squared:  0.4118,    Adjusted R-squared:  0.4014 
-F-statistic: 39.76 on 5 and 284 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                   2.5 % 97.5 %
-(Intercept)        14.00  59.70
-Age_Center         -3.27   0.67
-BMI_Center         10.90 109.00
-Weight_Center     -14.40  -2.23
-HeightInch_Center   8.38  79.40</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = FanPtNextSeason_Center ~ Age_Center + BMI_Center + 
-    Weight_Center + HeightInch_Center, data = nfl)
-Residuals:
-     Min       1Q   Median       3Q      Max 
--106.610  -37.936   -4.379   28.652  177.810 
-Coefficients:
-                  Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)         36.829     11.622   3.169  0.00170 **
-Age_Center          -1.302      1.001  -1.300  0.19477   
-BMI_Center          59.738     24.826   2.406  0.01676 * 
-Weight_Center       -8.294      3.081  -2.692  0.00753 **
-HeightInch_Center   43.866     18.031   2.433  0.01560 * 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-Residual standard error: 48.19 on 285 degrees of freedom
-Multiple R-squared:  0.2194,    Adjusted R-squared:  0.2085 
-F-statistic: 20.03 on 4 and 285 DF,  p-value: 1.5e-14</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                       2.5 % 97.5 %
-(Intercept)          -14.300 28.300
-Age_Center            -4.440 -0.980
-GamesPlayed_Center    -7.190 -1.550
-BMI_Center           -33.100 53.100
-NumTargets_Center     -1.160  0.984
-NumReceptions_Center  -0.284  2.790
-CatchPercent_Center   -1.710  0.972
-GamesStarted_Center   -2.090  2.930
-Weight_Center         -7.140  3.630
-HeightInch_Center    -22.000 40.600</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = FanPtNextSeason_Center ~ Age_Center + GamesPlayed_Center + 
-    BMI_Center + NumTargets_Center + NumReceptions_Center + CatchPercent_Center + 
-    GamesStarted_Center + Weight_Center + HeightInch_Center, 
-    data = nfl)
-Residuals:
-    Min      1Q  Median      3Q     Max 
--96.958 -28.198  -2.581  23.185 154.157 
-Coefficients:
-                     Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)           6.99996   10.82847   0.646  0.51852   
-Age_Center           -2.70968    0.87859  -3.084  0.00225 **
-GamesPlayed_Center   -4.36783    1.43164  -3.051  0.00250 **
-BMI_Center            9.96998   21.88946   0.455  0.64912   
-NumTargets_Center    -0.08711    0.54432  -0.160  0.87296   
-NumReceptions_Center  1.25317    0.78081   1.605  0.10963   
-CatchPercent_Center  -0.36696    0.68003  -0.540  0.58989   
-GamesStarted_Center   0.41783    1.27597   0.327  0.74357   
-Weight_Center        -1.75252    2.73575  -0.641  0.52231   
-HeightInch_Center     9.29523   15.90165   0.585  0.55932   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-Residual standard error: 40.52 on 280 degrees of freedom
-Multiple R-squared:  0.4577,    Adjusted R-squared:  0.4403 
-F-statistic: 26.26 on 9 and 280 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      2.5 % 97.5 %
-(Intercept)          -4.220  7.020
-Weight_Center        -0.564 -0.179
-GamesPlayed_Center   -6.570 -1.600
-Age_Center           -4.330 -1.150
-NumReceptions_Center  0.929  1.320</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = FanPtNextSeason_Center ~ Weight_Center + GamesPlayed_Center + 
-    Age_Center + NumReceptions_Center, data = nfl)
-Residuals:
-    Min      1Q  Median      3Q     Max 
--97.837 -27.942  -2.885  23.270 153.838 
-Coefficients:
-                     Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)           1.40211    2.85589   0.491 0.623838    
-Weight_Center        -0.37131    0.09775  -3.799 0.000178 ***
-GamesPlayed_Center   -4.08451    1.26166  -3.237 0.001349 ** 
-Age_Center           -2.74210    0.80671  -3.399 0.000772 ***
-NumReceptions_Center  1.12363    0.09873  11.381  &lt; 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-Residual standard error: 40.37 on 285 degrees of freedom
-Multiple R-squared:  0.4522,    Adjusted R-squared:  0.4445 
-F-statistic: 58.81 on 4 and 285 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Game Statistics</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">confint</span>(FanStats_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(FanStats_center_model)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Physical Player Statistics</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">confint</span>(body_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(body_center_model)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Full</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">confint</span>(full_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full_center_model)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Stepwise</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">confint</span>(step_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(step_center_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="multicollinearity" class="level2">
 <h2 data-anchor-id="multicollinearity">Multicollinearity</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>          Age_Center   GamesPlayed_Center           BMI_Center 
-                1.24                 1.41               343.00 
-   NumTargets_Center NumReceptions_Center  CatchPercent_Center 
-               80.80                79.90                 4.92 
- GamesStarted_Center        Weight_Center    HeightInch_Center 
-                2.04               974.00               306.00 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       Weight_Center   GamesPlayed_Center           Age_Center 
-                1.25                 1.10                 1.05 
-NumReceptions_Center 
-                1.29 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       Age_Center        BMI_Center     Weight_Center HeightInch_Center 
-             1.14            312.00            874.00            278.00 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  GamesPlayed_Center    NumTargets_Center NumReceptions_Center 
-                1.32                79.90                79.70 
- CatchPercent_Center  GamesStarted_Center 
-                4.78                 1.81 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">vif</span>(full_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">vif</span>(step_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">vif</span>(body_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">signif</span>(<span class="fu">vif</span>(FanStats_center_model), <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="comparing-predicted-fantasy-points-and-actual" class="level2">
 <h2 data-anchor-id="comparing-predicted-fantasy-points-and-actual">Comparing Predicted Fantasy Points and Actual</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Final with point labels</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(step_model_data, <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> FanPtNextSeason))<span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Predicted vs. Actual Fantasy Points Next Season"</span>, <span class="at">x=</span><span class="st">"Predicted Fantasy Points Next Season"</span>, <span class="at">y=</span><span class="st">"Fantasy Points Next Season"</span>)<span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(fitted, FanPtNextSeason, <span class="at">label =</span> <span class="fu">paste</span>(Player, Season <span class="sc">+</span> <span class="dv">1</span>)))    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing centered FanPtNextSeason to not centered for easier graph interpretation</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>full_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason <span class="sc">~</span> Age_Center <span class="sc">+</span> GamesPlayed_Center <span class="sc">+</span> BMI_Center <span class="sc">+</span> NumTargets_Center <span class="sc">+</span> NumReceptions_Center <span class="sc">+</span> CatchPercent_Center <span class="sc">+</span> GamesStarted_Center <span class="sc">+</span> Weight_Center <span class="sc">+</span> HeightInch_Center, nfl)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(full_center_model)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>zero_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason <span class="sc">~</span> <span class="dv">1</span>, nfl)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>step_center_model <span class="ot">&lt;-</span> <span class="fu">step</span>(zero_center_model, <span class="at">direction =</span> <span class="st">"both"</span>, <span class="at">scope =</span> <span class="fu">formula</span>(full_center_model))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add fitted data to step model data</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>step_model_data <span class="ot">&lt;-</span> nfl <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(step_center_model))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>body_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason <span class="sc">~</span> Age_Center <span class="sc">+</span> BMI_Center <span class="sc">+</span> Weight_Center <span class="sc">+</span> HeightInch_Center, nfl)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>body_center_data <span class="ot">&lt;-</span> nfl <span class="sc">%&gt;%</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(body_center_model))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>FanStats_center_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(FanPtNextSeason <span class="sc">~</span> GamesPlayed_Center <span class="sc">+</span> NumTargets_Center <span class="sc">+</span> NumReceptions_Center <span class="sc">+</span> CatchPercent_Center <span class="sc">+</span> GamesStarted_Center, nfl)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>FanStats_center_data <span class="ot">&lt;-</span> nfl <span class="sc">%&gt;%</span> </span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(FanStats_center_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Final with point labels</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(step_model_data, <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> FanPtNextSeason))<span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Predicted vs. Actual Fantasy Points Next Season"</span>, <span class="at">x=</span><span class="st">"Predicted Fantasy Points Next Season"</span>, <span class="at">y=</span><span class="st">"Fantasy Points Next Season"</span>)<span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(fitted, FanPtNextSeason, <span class="at">label =</span> <span class="fu">paste</span>(Player, Season <span class="sc">+</span> <span class="dv">1</span>)))    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -471,20 +381,20 @@ NumReceptions_Center
 <section id="outliers-cooks-distance" class="level2">
 <h2 data-anchor-id="outliers-cooks-distance">Outliers (Cook’s Distance)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diag_step_model <span class="ot">&lt;-</span> <span class="fu">ls.diag</span>(step_center_model)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>step_model_data <span class="ot">&lt;-</span> nfl <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cooks =</span> diag_step_model<span class="sc">$</span>cooks) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PredictedFanPtNextSeason =</span> <span class="fu">fitted</span>(step_center_model))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>step_model_data <span class="sc">%&gt;%</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cooks <span class="sc">&gt;</span> <span class="dv">4</span><span class="sc">/</span>(<span class="dv">290</span> <span class="sc">-</span> <span class="dv">5</span> <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NumTarg =</span> NumTargets_Center, <span class="at">NumRec =</span> NumReceptions_Center, <span class="at">GamesStarted =</span> GamesStarted_Center, <span class="at">Age =</span> Age_Center) <span class="sc">%&gt;%</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Season, FanPtNextSeason, PredictedFanPtNextSeason, NumTarg, NumRec, GamesStarted, Age, Position, cooks) <span class="sc">%&gt;%</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cooks)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating a table</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>diag_step_model <span class="ot">&lt;-</span> <span class="fu">ls.diag</span>(step_center_model)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>step_model_data <span class="ot">&lt;-</span> nfl <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cooks =</span> diag_step_model<span class="sc">$</span>cooks) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PredictedFanPtNextSeason =</span> <span class="fu">fitted</span>(step_center_model))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>step_model_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cooks <span class="sc">&gt;</span> <span class="dv">4</span><span class="sc">/</span>(<span class="dv">290</span> <span class="sc">-</span> <span class="dv">5</span> <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NumTarg =</span> NumTargets_Center, <span class="at">NumRec =</span> NumReceptions_Center, <span class="at">GamesStarted =</span> GamesStarted_Center, <span class="at">Age =</span> Age_Center) <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Player, Season, FanPtNextSeason, PredictedFanPtNextSeason, NumTarg, NumRec, GamesStarted, Age, Position, cooks) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cooks)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating a table</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">

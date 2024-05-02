@@ -244,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="variable-names-for-mn-economic-industry-dataset-2017" class="level2">
 <h2 class="anchored" data-anchor-id="variable-names-for-mn-economic-industry-dataset-2017">Variable Names for MN Economic Industry Dataset 2017</h2>
 <p>sector = NAICS economic sector estab = Number of establishments napcsdol = Sales, value of shipments, or revenue of NAPCS collection code ($1,000)</p>
-<p>44 Retail Trade 61 Educational Services 62 Health Care and Social Assistance 71 Arts, Entertainment and Recreation 72 Accommodation and Food Services 81 Personal and Laundry Services</p>
+<p>44 Retail Trade Educational Services Health Care and Social Assistance Arts, Entertainment and Recreation Accommodation and Food Services Personal and Laundry Services</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mn_eco_industry <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(mn_eco_industry_raw) <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(naics2017, naics2017_label, sector, estab, napcsdol) <span class="sc">|&gt;</span></span>
