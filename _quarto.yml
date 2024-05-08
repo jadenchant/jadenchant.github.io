@@ -19,7 +19,7 @@ website:
 
   sidebar:
     - id: miniproj
-      title: "Mini Project"
+      title: "DSII Mini Projects"
       contents:
         - href: pages/maps/us_states.qmd
           text: "Maps: US States"
@@ -30,7 +30,7 @@ website:
         - href: pages/str.qmd
           text: "RegEx"
         - href: pages/waffle.qmd
-          text: "Waffle"
+          text: "Waffle Chart"
 
   page-footer: 
     center:
