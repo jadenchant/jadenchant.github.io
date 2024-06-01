@@ -2,6 +2,7 @@
 title: "NFL Fantasy Point Prediction"
 description: "Predicting NFL Fantasy Football Points Based on Player Measurables and On-Field Statistics"
 author: "Ben Gusdal and Jaden Chant"
+image: img/fantasyfootball.jpg
 categories:
   - Stats2
 about:
