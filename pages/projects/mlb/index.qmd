@@ -2,7 +2,7 @@
 title: "MLB MVP, ROY, and Cy Young"
 description: "MLB Most Valuable Player, Rookie of the Year, and Cy Young Award Winners Over Time"
 author: "Henry Gliedman and Jaden Chant"
-image: img/mlb.jpg
+image: mlb.jpg
 categories:
   - DSII
 about:

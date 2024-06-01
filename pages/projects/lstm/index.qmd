@@ -2,7 +2,7 @@
 title: "Long Short Term Memory on IMDB Reviews"
 description: "Machine Learning Long Short Term Memory on IMDB Reviews and Sentiment"
 author: "Jaden Chant"
-image: ~/img/lstmepoc.jpg
+image: epoc.png
 categories:
   - ADM
 about:
