@@ -1,0 +1,26 @@
+---
+title: "MLB MVP, ROY, and Cy Young"
+description: "MLB Most Valuable Player, Rookie of the Year, and Cy Young Award Winners Over Time"
+author: "Henry Gliedman and Jaden Chant"
+categories:
+  - DSII
+about:
+  template: solana
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: FALSE
+---
+
+[Link To The Shiny App](https://jadenchant.shinyapps.io/mlb-stats/)
+
+[Link To The GitHub Repository](https://github.com/jadenchant/DSII-MLB/tree/main)
+
+There are three major awards given out in Major League Baseball each year. The Most Valuable Player Award given to the best player. The Rookie of The Year given to the best first year player, and the Cy Young Award given to the best pitcher. All of these awards are voted on by a council of sports writers labeled the Baseball Writers Association of America, or the BWAA. Each year two players are given each award. One player from the National League, and one player from the American League.     The purpose of this shiny app is to provide an interactive experience for users to view the statistics of these award winners over history. All in an attempt to increase understanding of both how statistical trends have shifted throughout history among the best baseball players, and also how increased importance into statistics over time has altered voting trends, and what writers feel makes up an MVP. Note that definitions of all of our statistics can be found at the bottom of this page.
+
+The MVP award or most valuable player is Major League Baseball's way of recognizing the best overall player in each league in each given season. A player can be awarded up to 420 voting points from the writers of the BWAA. A large majority of the time the MVP award is given to the "most valuable" hitter, but it is possible for a pitcher to win. Play around with the different leagues, and pitching stats to get the most out of our application. 
+
+The Rookie of the Year Award is given to recognize Major League Baseball's best first year player in each league. A player can receive up to 150 Vote_PTS in a given year, meaning they won 100% of the first place voting share. This award operates very similarly to the MVP where it is commonplace for a position player to win, but it is possible for a pitcher to get ROTY if they have an amazing season on the mound.
+
+The Cy Young Award is given out to each leagues best overall pitcher. This award can be won by a relief pitcher, but a large majority of the time it is won by a starter. A starting pitcher being the player who starts the game and pitches a large majority of the innings. A player can be awarded up to 210 Voting Points in a season making up 100% of the first place share. Some interesting pieces to our Cy Young charts would be to view the trends of Earned Run Average (ERA), Wins, and Walks (BB). Each of these statistics do a good job of visualizing how pitching has changed in the past century, and what voters care about. 
+

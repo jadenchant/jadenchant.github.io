@@ -19,16 +19,16 @@ website:
 
   sidebar:
     - id: miniproj
-      title: "DSII Mini Projects"
+      title: "Mini Projects"
       contents:
         - href: pages/maps/us_states.qmd
           text: "Maps: US States"
         - href: pages/maps/wisconsin_districs.qmd
           text: "Maps: Wisconsin Districts"
         - href: pages/simulation.qmd
-          text: "Simulation"
+          text: "Airbnb Simulation"
         - href: pages/str.qmd
-          text: "RegEx"
+          text: "IMDB Reviews Sentiment Analysis"
         - href: pages/waffle.qmd
           text: "Waffle Chart"
 
