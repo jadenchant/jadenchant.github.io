@@ -5,6 +5,7 @@ author: "Jaden Chant"
 image: epoc.png
 categories:
   - ADM
+  - Machine Learning
 about:
   template: solana
 editor_options: 
