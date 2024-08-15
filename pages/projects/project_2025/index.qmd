@@ -3,7 +3,7 @@ title: "Project 2025 Sentiment Analysis"
 description: "Project 2025 Sentiment Analysis"
 author: "Jaden Chant"
 categories:
-  - Sentiment Analysis
+  - Dataset
   - Python
 about:
   template: solana
@@ -16,12 +16,107 @@ execute:
 ```{r}
 #| include: FALSE
 
+library(textdata)
+library(yardstick)
+library(tidytext)
+library(ggdark)
 library(tidyverse)
 ```
 
+[Link to Project 2025 Website](https://www.project2025.org/)
 
+[Link to Project 2025 Data](https://www.kaggle.com/datasets/jadenc4/project-2025/data)
+
+[Link to Data Collection and Cleaning](https://github.com/jadenchant/jadenchant.github.io/blob/main/pages/projects/project_2025/pdf_conversion.py)
+
+
+## Get Data from Project 2025 Website
+
+Data collected from the Project 2025 website. [Here](https://github.com/jadenchant/jadenchant.github.io/blob/main/pages/projects/project_2025/pdf_conversion.py) is the python file used to collect and clean the data.
 
 ```{r}
-project2025 <- read_csv("https://jadenchant.github.io/data/project2025.csv")
+project2025 <- read_csv("https://jadenchant.github.io/data/project2025.csv") |>
+  mutate(id = row_number()) |>
+  select(id, section_name, chapter, chapter_name, subsection_name, authors, text) |>
+  mutate(word_count = str_count(text, "\\S+"))
 ```
+
+## Bing Sentiment Analysis
+
+```{r}
+bing_sentiment <- get_sentiments("bing")
+
+tokenized <- project2025 |>
+  mutate(text = as.character(text)) |>
+  unnest_tokens(word, text)
+
+bing_sentiment_count <- tokenized |>
+  inner_join(bing_sentiment, by = "word") |>
+  group_by(id, sentiment) |>
+  summarize(count = n()) |>
+  pivot_wider(names_from = sentiment, values_from = count, values_fill = 0) |>
+  rename(bing_positive = positive, bing_negative = negative)
+  
+result <- left_join(project2025, bing_sentiment_count, by = "id") |>
+  mutate(bing_pred_sentiment = as.factor(ifelse(bing_positive > bing_negative, "positive", "negative"))) |>
+  mutate(bing_pred_val = bing_positive / (bing_positive + bing_negative))
+```
+
+## Afinn Sentiment Analysis
+
+```{r}
+afinn_sentiment <- get_sentiments("afinn")
+
+afinn_sentiment_count <- tokenized |>
+  inner_join(afinn_sentiment, by = "word") |>
+  group_by(id) |>
+  summarize(
+    afinn_positive = sum(value[value > 0], na.rm = TRUE),
+    afinn_negative = sum(abs(value[value < 0]), na.rm = TRUE),
+    afinn_total = sum(value, na.rm = TRUE))
+
+result <- left_join(project2025, afinn_sentiment_count, by = "id") |>
+  mutate(afinn_pred_sentiment = as.factor(ifelse(afinn_positive > afinn_negative, "positive", "negative"))) |>
+  mutate(afinn_pred_val = afinn_positive / (afinn_positive + afinn_negative))
+```
+
+```{r}
+result_long <- result |>
+  pivot_longer(cols = c(bing_positive, bing_negative), 
+               names_to = "Sentiment", values_to = "Count") |>
+  mutate(Sentiment = ifelse(Sentiment == "bing_positive", "Positive", "Negative"))
+
+ggplot(result_long, aes(x = id, y = Count, color = Sentiment)) +
+  geom_line() +
+  labs(title = "Sentiment Analysis Throughout the Playbook", 
+       subtitle = "(Bing Lexicon)",
+       x = "Project 2025 Playbook", 
+       y = "Sentiment Count", 
+       color = "Sentiment Type") +
+  scale_color_manual(values = c("Positive" = "#0a8754", "Negative" = "#AA0E3D")) +
+  dark_theme_gray(base_size = 12) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+ggplot(result_long, aes(x = id, y = bing_pred_val, color = bing_pred_val)) +
+  geom_line() +
+  scale_color_gradient2(low = muted("#AA0E3D"), high = "#0a8754", 
+                        midpoint = 0.5, name = "Sentiment Percentage") +
+  labs(title = "Sentiment Analysis Throughout the Playbook", 
+       subtitle = "(Bing Lexicon)",
+       x = "Project 2025 Playbook", 
+       y = "Sentiment Percentage") +
+  dark_theme_gray(base_size = 12) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+```
+
+
+
+
+
+
+
+
+
 
