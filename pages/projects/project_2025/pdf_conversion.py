@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-
 from pypdf import PdfReader
+import unicodedata
 
 chapter_pdf_names = ["P2025-NOTE", "FOREWORD"] + [f"CHAPTER-{str(i).zfill(2)}" for i in range(1, 31)] + ["AFTERWORD"]
 
@@ -166,17 +166,52 @@ for i in range(len(non_chapters)):
         table[i][4] = author_names[i]
 
 
-for row in table:
-  print(row)
+# df = pd.DataFrame(table, columns=["section_name", "chapter", "chapter_name", "subsection_name", "authors", "text"])
 
-pdf = PdfReader("./data/2025_MandateForLeadership_" + "FOREWORD" + ".pdf")
-
-# length = len(pdf.pages)
-
-page = pdf.pages[1]
-text = page.extract_text()[6:].strip()
-lines = text.split("\n")
+# for row in table:
+#   print(row)
 
 
-# for line in lines[1:]:
-#     print(line)
+
+def normalize_text(text):
+    normalized_text = unicodedata.normalize('NFKD', text)
+    ascii_text = normalized_text.encode('ascii', 'ignore').decode('ascii')
+    return ascii_text
+
+def get_chapter_text(pdf_name: str, sp: int = 1, ep: int = -1) -> str:
+
+    pdf = PdfReader("./data/2025_MandateForLeadership_" + pdf_name + ".pdf")
+
+    fulltext = ""
+
+    if ep == -1:
+        ep = len(pdf.pages)
+
+    for p in range(sp - 1, ep):
+        page = pdf.pages[p]
+        # text = page.extract_text()[2:].strip()
+        text = page.extract_text().strip()
+
+        # dash_position = text.find("-", end = 8)
+
+        # text = text[:dash_position]
+
+        text = normalize_text(text)
+
+        split_text = text.split("\n")
+
+        fulltext += "\n".join(split_text[1:])
+
+    endnotes_position = fulltext.find('ENDNOTES')
+
+    if endnotes_position != -1:
+        fulltext = fulltext[:endnotes_position]
+
+    return fulltext
+
+# print(get_chapter_text(chapter_pdf_names[9], ep = 11))
+
+example_text = get_chapter_text(chapter_pdf_names[9], ep = 11)
+
+with open("test.txt", "w", encoding = "utf-8") as text_file:
+    text_file.write(example_text)
