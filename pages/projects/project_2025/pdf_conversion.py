@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from pypdf import PdfReader
+import re
 import unicodedata
 
 chapter_pdf_names = ["P2025-NOTE", "FOREWORD"] + [f"CHAPTER-{str(i).zfill(2)}" for i in range(1, 31)] + ["AFTERWORD"]
@@ -53,6 +54,13 @@ chapter_names = [
 ]
 
 has_subchapter = [8, 23, 26, 27]
+
+subchapter_pages = [
+    [1,11], [12, 17],
+    [1,7], [8, 14],
+    [1, 31], [32, 59],
+    [1,8], [9, 15]
+]
 
 subchapter_names = [
     "U.S. Agency for Global Media",
@@ -111,6 +119,65 @@ author_names = [
     "Edwin J. Feulner"
 ]
 
+def normalize_text(text):
+    normalized_text = unicodedata.normalize('NFKD', text)
+    ascii_text = normalized_text.encode('ascii', 'ignore').decode('ascii')
+    return ascii_text
+
+def remove_tab_patterns(text):
+    pattern = r'(\/[a-zA-Z]+\.tab)+'
+    cleaned_text = re.sub(pattern, '', text)
+    return cleaned_text
+
+def remove_bullet_points(text):
+    pattern = r' l(?=[A-Z])'
+    cleaned_text = re.sub(pattern, '', text)
+    return cleaned_text
+
+def convert_dash(text):
+    pattern = r'—'
+    cleaned_text = re.sub(pattern, "-", text)
+    return cleaned_text
+
+def convert_parenth(text):
+    pattern1 = r'“'
+    pattern2 = r'”'
+    cleaned_text = re.sub(pattern1, "\"", text)
+    cleaned_text2 = re.sub(pattern2, "\"", cleaned_text)
+    return cleaned_text2
+
+
+def get_chapter_text(pdf_name: str, sp: int = 1, ep: int = -1) -> str:
+
+    pdf = PdfReader("./data/2025_MandateForLeadership_" + pdf_name + ".pdf")
+
+    fulltext = ""
+
+    if ep == -1:
+        ep = len(pdf.pages)
+
+    for p in range(sp - 1, ep):
+        page = pdf.pages[p]
+        text = page.extract_text().strip()
+
+        text = convert_dash(text)
+        text = convert_parenth(text)
+
+        text = normalize_text(text)
+        text = remove_tab_patterns(text)
+        text = remove_bullet_points(text)
+
+        split_text = text.split("\n")
+
+        fulltext += "\n".join(split_text[1:]) + "\n"
+
+    endnotes_position = fulltext.find('ENDNOTES')
+
+    if endnotes_position != -1:
+        fulltext = fulltext[:endnotes_position]
+
+    return fulltext
+
 # Data Structure
 # section name | chapter # | chapter name | subsection name | author/s | text
 
@@ -143,11 +210,16 @@ for i in range(2, len(table) - 1):
         table[i][4] = author_names[a]
         a += 1
 
+    if table[i][5] is None: 
+        table[i][5] = get_chapter_text(chapter_pdf_names[chapter + 1])
+
     if chapter in has_subchapter:
         has_subchapter.pop(0)
 
         table[i][3] = subchapter_names[sub]
+        table[i][5] = get_chapter_text(chapter_pdf_names[chapter + 1], subchapter_pages[sub][0], subchapter_pages[sub][1])
         table[i+1][3] = subchapter_names[sub+1]
+        table[i+1][5] = get_chapter_text(chapter_pdf_names[chapter + 1], subchapter_pages[sub+1][0], subchapter_pages[sub+1][1])
         sub += 2
     else:
         chapter += 1
@@ -160,58 +232,14 @@ for i in range(len(non_chapters)):
         table[tbl_index][0] = "Afterword"
         table[tbl_index][2] = chapter_names[len(chapter_names) - 1]
         table[tbl_index][4] = author_names[len(author_names) - 1]
+        table[tbl_index][5] = get_chapter_text(chapter_pdf_names[len(chapter_pdf_names) - 1])
     else:
         table[i][0] = "Introduction"
         table[i][2] = chapter_names[i]
         table[i][4] = author_names[i]
+        table[i][5] = get_chapter_text(chapter_pdf_names[i])
 
 
-# df = pd.DataFrame(table, columns=["section_name", "chapter", "chapter_name", "subsection_name", "authors", "text"])
+df = pd.DataFrame(table, columns=["section_name", "chapter", "chapter_name", "subsection_name", "authors", "text"])
 
-# for row in table:
-#   print(row)
-
-
-
-def normalize_text(text):
-    normalized_text = unicodedata.normalize('NFKD', text)
-    ascii_text = normalized_text.encode('ascii', 'ignore').decode('ascii')
-    return ascii_text
-
-def get_chapter_text(pdf_name: str, sp: int = 1, ep: int = -1) -> str:
-
-    pdf = PdfReader("./data/2025_MandateForLeadership_" + pdf_name + ".pdf")
-
-    fulltext = ""
-
-    if ep == -1:
-        ep = len(pdf.pages)
-
-    for p in range(sp - 1, ep):
-        page = pdf.pages[p]
-        # text = page.extract_text()[2:].strip()
-        text = page.extract_text().strip()
-
-        # dash_position = text.find("-", end = 8)
-
-        # text = text[:dash_position]
-
-        text = normalize_text(text)
-
-        split_text = text.split("\n")
-
-        fulltext += "\n".join(split_text[1:])
-
-    endnotes_position = fulltext.find('ENDNOTES')
-
-    if endnotes_position != -1:
-        fulltext = fulltext[:endnotes_position]
-
-    return fulltext
-
-# print(get_chapter_text(chapter_pdf_names[9], ep = 11))
-
-example_text = get_chapter_text(chapter_pdf_names[9], ep = 11)
-
-with open("test.txt", "w", encoding = "utf-8") as text_file:
-    text_file.write(example_text)
+df.to_csv("project2025.csv", encoding = "utf-8")

@@ -1,0 +1,15 @@
+---
+title: "Project 2025 Sentiment Analysis"
+description: "Project 2025 Sentiment Analysis"
+author: "Jaden Chant"
+categories:
+  - Sentiment Analysis
+  - Python
+about:
+  template: solana
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: FALSE
+---
+
