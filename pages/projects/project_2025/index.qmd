@@ -13,3 +13,15 @@ execute:
   warning: FALSE
 ---
 
+```{r}
+#| include: FALSE
+
+library(tidyverse)
+```
+
+
+
+```{r}
+project2025 <- read_csv("https://jadenchant.github.io/data/project2025.csv")
+```
+

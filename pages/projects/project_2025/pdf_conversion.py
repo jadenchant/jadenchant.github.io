@@ -243,3 +243,5 @@ for i in range(len(non_chapters)):
 df = pd.DataFrame(table, columns=["section_name", "chapter", "chapter_name", "subsection_name", "authors", "text"])
 
 df.to_csv("project2025.csv", encoding = "utf-8")
+
+# Manually move extra lines CH 23 and CH 27
