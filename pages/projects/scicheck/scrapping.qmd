@@ -1,0 +1,119 @@
+---
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: FALSE
+---
+
+```{r}
+#| include: false
+
+library(stringr)
+library(rvest)
+library(httr)
+library(tidyverse)
+```
+
+
+```{r}
+#| eval: false
+
+
+num_pages <- 60
+
+get_links <- function(page) {
+  search_url <- str_c("https://www.factcheck.org/scicheck/page/", 1, "/")
+
+  robotstxt::paths_allowed(search_url)
+  
+  search_html <- read_html(search_url)
+  
+  main <- search_html |> html_elements("main")
+  
+  links <- main |> html_elements("a") |> html_attr("href") |> unique()
+  
+  return(links)
+}
+
+# all_links <- map(1:num_pages, get_links()) |> unlist()
+```
+
+
+
+```{r}
+#| eval: false
+
+url <- "https://www.factcheck.org/2024/08/trump-misleads-on-the-cost-of-electric-vehicle-chargers/"
+
+print(url)
+  
+robotstxt::paths_allowed(url)
+
+html <- read_html(url)
+
+# Header metadata
+header <- html |> html_elements("header")
+
+title <- header |> html_elements("h1") |> html_text()
+
+subheader <- header |> html_elements("p")
+
+author <- subheader[1] |> html_elements("a") |> html_text() |> paste(collapse = ", ")
+
+date <- subheader[2] |> html_elements("time") |> html_text()
+
+# Footer Metadata
+footer <- html |> html_elements("article") |> html_elements("footer")
+
+categories <- footer |> html_elements(".categories") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+
+tags <- footer |> html_elements(".post_tag") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+
+issue <- footer |> html_elements(".issue") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+
+people <- footer |> html_elements(".person") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+
+misconceptions <- footer |> html_elements(".misconceptions") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+
+location <- footer |> html_elements(".location") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+
+# Article
+article <- html |> 
+  html_elements("article") |>
+  html_elements(".entry-content") |>
+  html_text2()
+
+print(article)
+
+test <- tibble(
+  title = title,
+  author = author,
+  date = date,
+  categories = ifelse(categories == "", NA, categories),
+  tags = ifelse(tags == "", NA, tags),
+  issue = ifelse(issue == "", NA, issue),
+  people = ifelse(people == "", NA, people),
+  misconceptions = ifelse(misconceptions == "", NA, misconceptions),
+  location = ifelse(location == "", NA, location),
+  article = article)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

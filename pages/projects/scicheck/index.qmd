@@ -1,0 +1,15 @@
+---
+title: "SciCheck Articles"
+description: "FactCheck.org's SciCheck Articles"
+author: "Jaden Chant"
+categories:
+  - Dataset
+  - Scrapping
+about:
+  template: solana
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: FALSE
+---
+
