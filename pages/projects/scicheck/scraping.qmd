@@ -182,8 +182,3 @@ scicheck |> write_csv("./pages/projects/scicheck/factcheck_scicheck.csv")
 
 
 
-
-
-
-
-
