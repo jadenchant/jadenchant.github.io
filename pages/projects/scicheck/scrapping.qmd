@@ -14,19 +14,34 @@ library(httr)
 library(tidyverse)
 ```
 
-
+## Get All Links from SciCheck
 ```{r}
 #| eval: false
-
 
 num_pages <- 60
 
 get_links <- function(page) {
-  search_url <- str_c("https://www.factcheck.org/scicheck/page/", 1, "/")
+  search_url <- str_c("https://www.factcheck.org/scicheck/page/", page, "/")
+  
+  print(search_url)
 
   robotstxt::paths_allowed(search_url)
   
-  search_html <- read_html(search_url)
+  Sys.sleep(2)
+  
+  search_html <- tryCatch({
+    read_html(search_url)
+  }, error = function(e) {
+    print("Error with read_html, trying read_html_live")
+    print(e)
+    tryCatch({
+      read_html_live(search_url)
+    }, error = function(e) {
+      print("Error with read_html_live")
+      print(e)
+      return(NA)
+    })
+  })
   
   main <- search_html |> html_elements("main")
   
@@ -34,76 +49,131 @@ get_links <- function(page) {
   
   return(links)
 }
-
-# all_links <- map(1:num_pages, get_links()) |> unlist()
 ```
 
+```{r}
+#| eval: false
+
+all_links <- lapply(1:num_pages, get_links) |> unlist()
+
+tibble(link = all_links) |> write_csv("./pages/projects/scicheck/data/factcheck_scicheck_links.csv")
+```
+
+## Get all article data
+```{r}
+#| eval: false
+
+get_article_data <- function(url) {
+  print(url)
+    
+  robotstxt::paths_allowed(url)
+  
+  Sys.sleep(2)
+  
+  html <- tryCatch({
+    read_html(url)
+  }, error = function(e) {
+    print("Error with read_html, trying read_html_live")
+    print(e)
+    tryCatch({
+      read_html_live(url)
+    }, error = function(e) {
+      print("Error with read_html_live")
+      print(e)
+      return(NA)
+    })
+  })
+  
+  # Header metadata
+  header <- html |> html_elements("header")
+  
+  title <- header |> html_elements("h1") |> html_text()
+  
+  subheader <- header |> html_elements("p")
+  
+  author <- subheader[1] |> html_elements("a") |> html_text() |> paste(collapse = ", ")
+  
+  date <- subheader[2] |> html_elements("time") |> html_text()
+  
+  # Footer Metadata
+  footer <- html |> html_elements("article") |> html_elements("footer")
+  
+  categories <- footer |> html_elements(".categories") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+  
+  tags <- footer |> html_elements(".post_tag") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+  
+  issue <- footer |> html_elements(".issue") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+  
+  people <- footer |> html_elements(".person") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+  
+  misconceptions <- footer |> html_elements(".misconceptions") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+  
+  location <- footer |> html_elements(".location") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
+  
+  # Article
+  article <- html |> 
+  html_elements("article") |>
+  html_elements(".entry-content") |>
+  html_text2()
+
+  # Remove Spanish translation option
+  em <- html |> 
+    html_elements("article") |>
+    html_elements(".entry-content") |>
+    html_elements("em") |>
+    html_text2() |>
+    first()
+  
+  if(!is.na(em) && str_detect(article, "español")) {
+    article <- article |> 
+      str_remove(em)
+  }
+  
+  row <- tibble(
+    title = as.character(title),
+    author = as.character(author),
+    date = as.character(date),
+    url = as.character(url),
+    categories = as.character(ifelse(categories == "", NA, categories)),
+    tags = as.character(ifelse(tags == "", NA, tags)),
+    issue = as.character(ifelse(issue == "", NA, issue)),
+    people = as.character(ifelse(people == "", NA, people)),
+    misconceptions = as.character(ifelse(misconceptions == "", NA, misconceptions)),
+    location = as.character(ifelse(location == "", NA, location)),
+    article = as.character(article))
+  
+  return(row)
+}
+```
 
 
 ```{r}
 #| eval: false
 
-url <- "https://www.factcheck.org/2024/08/trump-misleads-on-the-cost-of-electric-vehicle-chargers/"
+links <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_links.csv")
 
-print(url)
+split_links <- split(links, cut(seq(nrow(links)), breaks = 6, labels = FALSE))
+
+for(i in 1:length(split_links)) {
+  scicheck <- tibble() |>
+    bind_rows(lapply(split_links[[i]]$link, get_article_data))
   
-robotstxt::paths_allowed(url)
+  scicheck |> write_csv(str_c("./pages/projects/scicheck/data/factcheck_scicheck_", i, ".csv"))
+}
 
-html <- read_html(url)
+scicheck1 <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_1.csv")
+scicheck2 <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_2.csv")
+scicheck3 <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_3.csv")
+scicheck4 <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_4.csv")
+scicheck5 <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_5.csv")
+scicheck6 <- read_csv("./pages/projects/scicheck/data/factcheck_scicheck_6.csv")
 
-# Header metadata
-header <- html |> html_elements("header")
+scicheck <- tibble() |>
+  bind_rows(scicheck1, scicheck2, scicheck3, scicheck4, scicheck5, scicheck6) |>
+  mutate(date = as.Date(date, format = "%B %d, %Y"))
 
-title <- header |> html_elements("h1") |> html_text()
-
-subheader <- header |> html_elements("p")
-
-author <- subheader[1] |> html_elements("a") |> html_text() |> paste(collapse = ", ")
-
-date <- subheader[2] |> html_elements("time") |> html_text()
-
-# Footer Metadata
-footer <- html |> html_elements("article") |> html_elements("footer")
-
-categories <- footer |> html_elements(".categories") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
-
-tags <- footer |> html_elements(".post_tag") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
-
-issue <- footer |> html_elements(".issue") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
-
-people <- footer |> html_elements(".person") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
-
-misconceptions <- footer |> html_elements(".misconceptions") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
-
-location <- footer |> html_elements(".location") |> html_elements("li") |> html_text2() |> paste(collapse = ", ")
-
-# Article
-article <- html |> 
-  html_elements("article") |>
-  html_elements(".entry-content") |>
-  html_text2()
-
-print(article)
-
-test <- tibble(
-  title = title,
-  author = author,
-  date = date,
-  categories = ifelse(categories == "", NA, categories),
-  tags = ifelse(tags == "", NA, tags),
-  issue = ifelse(issue == "", NA, issue),
-  people = ifelse(people == "", NA, people),
-  misconceptions = ifelse(misconceptions == "", NA, misconceptions),
-  location = ifelse(location == "", NA, location),
-  article = article)
-
+scicheck |> write_csv("./pages/projects/scicheck/factcheck_scicheck.csv")
 ```
-
-
-
-
-
-
 
 
 
