@@ -57,7 +57,7 @@ bing_sentiment_count <- tokenized |>
   pivot_wider(names_from = sentiment, values_from = count, values_fill = 0) |>
   rename(bing_positive = positive, bing_negative = negative)
   
-result <- left_join(project2025, bing_sentiment_count, by = "id") |>
+bing_result <- left_join(project2025, bing_sentiment_count, by = "id") |>
   mutate(bing_pred_sentiment = as.factor(ifelse(bing_positive > bing_negative, "positive", "negative"))) |>
   mutate(bing_pred_val = bing_positive / (bing_positive + bing_negative))
 ```
@@ -81,7 +81,7 @@ result <- left_join(project2025, afinn_sentiment_count, by = "id") |>
 ```
 
 ```{r}
-result_long <- result |>
+result_long <- bing_result |>
   pivot_longer(cols = c(bing_positive, bing_negative), 
                names_to = "Sentiment", values_to = "Count") |>
   mutate(Sentiment = ifelse(Sentiment == "bing_positive", "Positive", "Negative"))
@@ -100,7 +100,7 @@ ggplot(result_long, aes(x = id, y = Count, color = Sentiment)) +
 
 ggplot(result_long, aes(x = id, y = bing_pred_val, color = bing_pred_val)) +
   geom_line() +
-  scale_color_gradient2(low = muted("#AA0E3D"), high = "#0a8754", 
+  scale_color_gradient2(low = "#AA0E3D", high = "#0a8754", 
                         midpoint = 0.5, name = "Sentiment Percentage") +
   labs(title = "Sentiment Analysis Throughout the Playbook", 
        subtitle = "(Bing Lexicon)",
