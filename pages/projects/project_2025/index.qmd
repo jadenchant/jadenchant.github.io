@@ -4,6 +4,7 @@ description: "Project 2025 Sentiment Analysis"
 author: "Jaden Chant"
 categories:
   - Dataset
+  - Scraping
   - Python
 about:
   template: solana
