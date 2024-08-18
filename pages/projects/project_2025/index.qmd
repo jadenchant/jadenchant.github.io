@@ -26,7 +26,7 @@ library(tidyverse)
 
 [Link to Project 2025 Website](https://www.project2025.org/)
 
-[Link to Project 2025 Data](https://www.kaggle.com/datasets/jadenc4/project-2025/data)
+[Link to Project 2025 Data](https://www.kaggle.com/datasets/jadenc4/project-2025)
 
 [Link to Data Collection and Cleaning](https://github.com/jadenchant/jadenchant.github.io/blob/main/pages/projects/project_2025/pdf_conversion.py)
 

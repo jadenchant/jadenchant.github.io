@@ -4,7 +4,7 @@ description: "FactCheck.org's SciCheck Articles"
 author: "Jaden Chant"
 categories:
   - Dataset
-  - Scrapping
+  - Scraping
 about:
   template: solana
 editor_options: 
@@ -21,6 +21,10 @@ library(rvest)
 library(httr)
 library(tidyverse)
 ```
+
+[Link to FactCheck.org SciCheck Articles](https://www.factcheck.org/scicheck/)
+
+[Link to FactCheck.org SciCheck Articles Data](https://www.kaggle.com/datasets/jadenc4/factchecks-scicheck-article-dataset)
 
 ## Get All Links from SciCheck
 ```{r}
