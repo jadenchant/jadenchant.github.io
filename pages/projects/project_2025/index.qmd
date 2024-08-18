@@ -65,19 +65,19 @@ bing_result <- left_join(project2025, bing_sentiment_count, by = "id") |>
 ## Afinn Sentiment Analysis
 
 ```{r}
-afinn_sentiment <- get_sentiments("afinn")
-
-afinn_sentiment_count <- tokenized |>
-  inner_join(afinn_sentiment, by = "word") |>
-  group_by(id) |>
-  summarize(
-    afinn_positive = sum(value[value > 0], na.rm = TRUE),
-    afinn_negative = sum(abs(value[value < 0]), na.rm = TRUE),
-    afinn_total = sum(value, na.rm = TRUE))
-
-result <- left_join(project2025, afinn_sentiment_count, by = "id") |>
-  mutate(afinn_pred_sentiment = as.factor(ifelse(afinn_positive > afinn_negative, "positive", "negative"))) |>
-  mutate(afinn_pred_val = afinn_positive / (afinn_positive + afinn_negative))
+# afinn_sentiment <- get_sentiments("afinn")
+# 
+# afinn_sentiment_count <- tokenized |>
+#   inner_join(afinn_sentiment, by = "word") |>
+#   group_by(id) |>
+#   summarize(
+#     afinn_positive = sum(value[value > 0], na.rm = TRUE),
+#     afinn_negative = sum(abs(value[value < 0]), na.rm = TRUE),
+#     afinn_total = sum(value, na.rm = TRUE))
+# 
+# result <- left_join(project2025, afinn_sentiment_count, by = "id") |>
+#   mutate(afinn_pred_sentiment = as.factor(ifelse(afinn_positive > afinn_negative, "positive", "negative"))) |>
+#   mutate(afinn_pred_val = afinn_positive / (afinn_positive + afinn_negative))
 ```
 
 ```{r}
