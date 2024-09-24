@@ -184,11 +184,28 @@ scicheck <- tibble() |>
   bind_rows(scicheck1, scicheck2, scicheck3, scicheck4, scicheck5, scicheck6) |>
   mutate(date = as.Date(date, format = "%B %d, %Y"))
 
-scicheck |> write_csv("./pages/projects/scicheck/factcheck_scicheck.csv")
+scicheck |> write_csv("./data/factcheck_scicheck.csv")
 ```
 
 
 
+```{r}
+#| eval: false
+
+scicheck <- read_csv("./data/factcheck_scicheck.csv")
+
+added_links <- tibble(link = get_links(1)) |>
+  select(link) |>
+  filter(!link %in% scicheck$url)
+
+new_scicheck <- tibble() |>
+  bind_rows(lapply(added_links$link, get_article_data)) |>
+  mutate(date = as.Date(date, format = "%B %d, %Y"))
+
+combined_scicheck <- scicheck |> bind_rows(new_scicheck)
+
+combined_scicheck |> arrange(date) |> write_csv("./data/factcheck_scicheck.csv")
+```
 
 
 
