@@ -16,6 +16,9 @@ jobs:
 
       - name: Install libudunits2
         run: sudo apt-get install -y libudunits2-dev
+        
+      - name: update
+        run: sudo apt-get update
 
       - name: Install libproj
         run: sudo apt-get install -y libproj-dev
