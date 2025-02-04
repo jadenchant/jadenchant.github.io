@@ -1,0 +1,21 @@
+---
+title: "CDC Reportable Diseases"
+description: "CDC Reportable Diseases "
+author: "Jaden Chant"
+categories:
+  - Dataset
+  - Scraping
+  - Python
+about:
+  template: solana
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: FALSE
+---
+
+[Link to CDC Reportable Diseases Website](https://ndc.services.cdc.gov/search-results-year/)
+
+[Link to CDC Reportable Diseases Data](https://www.kaggle.com/datasets/jadenc4/cdc-reportable-diseases/data)
+
+[Link to Data Collection and Cleaning](https://github.com/jadenchant/jadenchant.github.io/blob/main/pages/projects/cdc/reportable_diseases.py)
