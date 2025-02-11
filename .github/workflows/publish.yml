@@ -32,7 +32,7 @@ jobs:
         run: sudo apt-get install -y libfftw3-dev
 
       - name: Install libfont
-        run: sudo apt-get install libfontconfig1-dev libfreetype6-dev
+        run: sudo apt-get install libfontconfig1-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
