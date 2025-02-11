@@ -31,6 +31,9 @@ jobs:
       - name: Install libfftw3
         run: sudo apt-get install -y libfftw3-dev
 
+      - name: Install libfont
+        run: sudo apt-get install libfontconfig1-dev libfreetype6-dev
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
