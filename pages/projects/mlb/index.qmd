@@ -4,7 +4,7 @@ description: "MLB Most Valuable Player, Rookie of the Year, and Cy Young Award W
 author: "Henry Gliedman and Jaden Chant"
 image: mlb.jpg
 categories:
-  - DSII
+  - DS II
   - Linear Regression
 about:
   template: solana

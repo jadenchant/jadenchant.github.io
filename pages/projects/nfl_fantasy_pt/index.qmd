@@ -4,7 +4,7 @@ description: "Predicting NFL Fantasy Football Points Based on Player Measurables
 author: "Ben Gusdal and Jaden Chant"
 image: fantasyfootballpred.jpg
 categories:
-  - Stats2
+  - Stats II
   - Linear Regression
 about:
   template: solana

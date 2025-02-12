@@ -4,7 +4,6 @@ description: "Machine Learning Long Short Term Memory on IMDB Reviews and Sentim
 author: "Jaden Chant"
 image: epoc.png
 categories:
-  - ADM
   - Machine Learning
 about:
   template: solana
