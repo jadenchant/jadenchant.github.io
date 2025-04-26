@@ -4,4 +4,8 @@ Run `quarto render` to build
 
 CI using Github Actions
 
-Run `renv::init()` then `2` to update `renv.lock` file
+Start R by using `R` in terminal
+
+First run `renv::update()`
+
+Then run `renv::init()` then `2` to update `renv.lock` file
