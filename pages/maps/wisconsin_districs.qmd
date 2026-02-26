@@ -58,6 +58,7 @@ Wisconsin District 3 had 2 democrats running for the house seat.
 ```{r}
 #| message: false
 #| warning: false
+#| eval: false
 
 src <- "http://cdmaps.polisci.ucla.edu/shp/districts113.zip"
 dest_zip <- tempfile(fileext = ".zip")
@@ -72,6 +73,8 @@ dsn_districts <- file.path(extract_dir, "districtShapes")
 districts <- st_read(dsn = dsn_districts, layer = "districts113") |>
   mutate(DISTRICT = parse_number(as.character(DISTRICT)))
 
+districts <- st_read()
+
 wi_shp <- districts |>
   filter(STATENAME == "Wisconsin")
 ```
@@ -80,6 +83,7 @@ wi_shp <- districts |>
 ```{r}
 #| message: false
 #| warning: false
+#| eval: false
 
 wi_merged <- wi_shp |>
   st_transform(4326) |>
