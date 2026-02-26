@@ -58,8 +58,9 @@ Wisconsin District 3 had 2 democrats running for the house seat.
 ```{r}
 #| message: false
 #| warning: false
+#| eval: false
 
-districts <- st_read("https://jadenchant.github.io/data/districts113.shp")
+districts <- st_read("https://jadenchant.github.io/data/districts113/districts113.shp")
 
 wi_shp <- districts |>
   filter(STATENAME == "Wisconsin")
@@ -69,6 +70,7 @@ wi_shp <- districts |>
 ```{r}
 #| message: false
 #| warning: false
+#| eval: false
 
 wi_merged <- wi_shp |>
   st_transform(4326) |>
