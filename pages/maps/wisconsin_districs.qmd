@@ -58,12 +58,16 @@ Wisconsin District 3 had 2 democrats running for the house seat.
 ```{r}
 #| message: false
 #| warning: false
-#| eval: false
+#| include: false
 
-districts <- st_read("https://jadenchant.github.io/data/districts113.zip")
+# url <- "https://jadenchant.github.io/data/districts113.zip"
+# districts <- st_read(paste0("/vsizip/vsicurl/", url))
 
-wi_shp <- districts |>
-  filter(STATENAME == "Wisconsin")
+
+# wi_shp <- districts |>
+#   filter(STATENAME == "Wisconsin")
+
+# st_write(wi_shp, "~/data/wisconsin_districts.gpkg", delete_dsn = TRUE)
 ```
 
 
@@ -72,22 +76,26 @@ wi_shp <- districts |>
 #| warning: false
 #| eval: false
 
-wi_merged <- wi_shp |>
+districts <- st_read("~/jadenchant.github.io/data/wisconsin_districts.gpkg")
+
+wi_merged <- districts |>
   st_transform(4326) |>
   inner_join(wi_results, by = c("DISTRICT" = "district"))
 
 wi <- ggplot(data = wi_merged, aes(fill = winner)) +
-  annotation_map_tile(zoom = 6, type = "osm", progress = "none") + 
-  geom_sf(alpha = 0.5) +
-  scale_fill_manual("Winner", values = c("blue", "red")) + 
-  geom_sf_label(aes(label = DISTRICT)) + 
+  annotation_map_tile(zoom = 7, type = "cartodark", progress = "none") + 
+  geom_sf(alpha = 0.4, color = "white", size = 0.2) +
+  scale_fill_manual("Winner", values = c("Democrat" = "#2E5B88", "Republican" = "#8B1A1A")) + 
+  geom_sf_text(aes(label = DISTRICT), color = "white", fontface = "bold", check_overlap = TRUE) + 
   ggtitle("Wisconsin House Winners by District") +
-  labs(x = element_blank(), y = element_blank())+
+  labs(x = NULL, y = NULL) +
   dark_theme_gray(base_size = 12) + 
   theme(
-        axis.ticks = element_blank(), 
-        axis.text = element_blank(), 
-        plot.margin = unit(c(0.2, 0.7, 0, 1.5), "cm"))
+    axis.ticks = element_blank(), 
+    axis.text = element_blank(), 
+    panel.grid = element_blank(),
+    plot.margin = unit(c(0.2, 0.7, 0, 1.5), "cm")
+  )
 
 wi
 
@@ -96,8 +104,3 @@ wi_results |>
 ```
 
 The map shows the winners of the 2016 House elections in Wisconsin. The district shapes are very irregular. District 4 is extremely small when compared to district 7. There are 2 districts where there isn't even a republican running. The races where republicans have won the district, they have won by a small margin. However, the margin is not as small as the North Carolina districts that we looked at in class.
-
-
-
-
-
