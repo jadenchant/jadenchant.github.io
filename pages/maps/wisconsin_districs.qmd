@@ -75,7 +75,7 @@ Wisconsin District 3 had 2 democrats running for the house seat.
 #| message: false
 #| warning: false
 
-districts <- st_read("~/jadenchant.github.io/data/wisconsin_districts.gpkg")
+districts <- st_read("https://jadenchant.github.io/data/wisconsin_districts.gpkg")
 
 wi_merged <- districts |>
   st_transform(4326) |>
